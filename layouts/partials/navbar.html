@@ -1,0 +1,140 @@
+<style>
+    /* Style the navbar */
+    #navbar {
+        /*overflow: hidden;*/
+        background-color: #fff;
+        z-index: 10;
+        box-shadow: 0 3px 3px -3px rgba(0, 0, 0, .4);
+    }
+
+    /* Navbar links */
+    #navbar a {
+        float: left;
+        display: block;
+        color: #000;
+        text-align: center;
+        padding: 14px;
+        text-decoration: none;
+    }
+
+    #navbar a.active {
+        color: #000;
+        font-weight: 800;
+        text-decoration: underline;
+
+    }
+
+    /* Page content */
+    .content {
+        padding: 16px;
+    }
+
+    /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+    .sticky+.content {
+        padding-top: 60px;
+    }
+</style>
+
+<div id="navbar">
+    <a href="#home">Home</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+</div>
+
+<script>
+    window.onload = function () {
+        const navSections = document.querySelectorAll('section[id]');
+        let hasNavClick = false;
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function () { stickyNav(); navOnScroll(); };
+
+        // Get the navbar
+        var navbar = document.getElementById("navbar");
+
+        // Get the offset position of the navbar
+        var sticky = navbar.offsetTop;
+
+        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function stickyNav() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+
+        function isElementInViewport(el) {
+
+            // Special bonus for those using jQuery
+            if (typeof jQuery === "function" && el instanceof jQuery) {
+                el = el[0];
+            }
+
+            var rect = el.getBoundingClientRect();
+
+            return (
+                rect.top >= 0 &&
+                /*rect.left >= 0 &&*/
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)/* or $(window).height() */
+                /*rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+            );
+        }
+        function navOnScroll() {
+            //check what section we're on
+            if (!hasNavClick) {
+                var currentScroll = window.pageYOffset;
+                var currentSection;
+                navSections.forEach(section => {
+                    let sectionOffset = section.offsetTop;
+                    let sectionHalfSize = section.clientHeight / 2.5;
+                    if ((sectionOffset - sectionHalfSize) < currentScroll) {
+                        currentSection = section;
+                        return
+                    }
+
+                })
+                if (currentSection) {
+                    let id = currentSection.getAttribute("id");
+                    let navItem = document.querySelector("#navbar a[href='#" + id + "']");
+                    activateNavItem(navItem);
+                    title = currentSection.querySelector(".title");
+                    event.preventDefault();
+                    history.pushState({}, '', currentSection.href);
+                }
+            }
+            else {
+                hasNavClick = false;
+            }
+
+            // activateNavItem(navItem);
+        }
+
+        function activateNavItem(navItem) {
+            const currentlyActive = document.querySelector("#navbar a.active");
+            if (currentlyActive != navItem) {
+                if (typeof (currentlyActive) != 'undefined' && currentlyActive != null) {
+                    currentlyActive.classList.remove('active');
+                }
+                navItem.classList.add('active');
+            }
+        }
+
+        //On click navigation
+        var navItems = document.querySelectorAll('#navbar a');
+        for (i = 0; i < navItems.length; i++) {
+            navItems[i].addEventListener('click', function (e) {
+                activateNavItem(this);
+                hasNavClick = true;
+            })
+        }
+    }
+
+
+</script>
