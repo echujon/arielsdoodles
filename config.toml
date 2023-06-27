@@ -31,6 +31,13 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
 ## Site Parameters
 ## -----------------------------------------------
 
-[Params]
-
 [Params.social]
+  email = "arielchujonart@gmail.com"
+  facebook = "https://www.facebook.com/arielchujonart"
+  instagram = "https://www.instagram.com/ariel_chujon_art"
+  reddit = "https://www.reddit.com/u/arielsdoodles"
+
+[Params.asset]
+  fontawesome_css = ["css/fontawesome-all.min.css"]
+  fontawesome_js = ["js/fontawesome-all.min.js"]
+  arielsdoodles_cs = ["css/arielsdoodles.css"]
