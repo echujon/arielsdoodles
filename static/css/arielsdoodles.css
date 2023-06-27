@@ -1,10 +1,14 @@
 @font-face {
-    font-family: 'ArielsDoodles-Selima';
-    src: url(../webfonts/selima.woff2) format('woff2'), url(../webfonts/selima.tff) format("truetype")
+    font-family: 'providence_sansregular';
+    src: url('../webfonts/providence_sans_regular-webfont.woff2') format('woff2'),
+         url('../webfonts/providence_sans_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 .doodles-font {
-    font-family: 'Providence Sans Pro';
+    font-family: 'providence_sansregular';
     font-weight: 300;
     color: #000000d1;
 
