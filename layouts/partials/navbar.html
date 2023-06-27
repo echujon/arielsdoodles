@@ -5,6 +5,7 @@
         background-color: #fff;
         z-index: 10;
         box-shadow: 0 3px 3px -3px rgba(0, 0, 0, .4);
+        height: 6vh;
     }
 
     /* Navbar links */
@@ -15,13 +16,6 @@
         text-align: center;
         padding: 14px;
         text-decoration: none;
-    }
-
-    #navbar a.active {
-        color: #000;
-        font-weight: 800;
-        text-decoration: underline;
-
     }
 
     /* Page content */
@@ -40,13 +34,68 @@
     .sticky+.content {
         padding-top: 60px;
     }
+
+    /* Styles for the dropdown */
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+        float: left;
+        display: block;
+        color: #000;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    #dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        top: 50px;
+    }
+
+    #dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .show {
+        display: block;
+    }
+
+    #navbar a.active,
+    .dropbtn.active {
+        color: #000;
+        font-weight: 800;
+        text-decoration: underline;
+
+    }
 </style>
 
-<div id="navbar">
+<nav class="doodles-font" id="navbar">
     <a href="#home">Home</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#contact">Contact</a>
-</div>
+    <div class="dropdown">
+        <div class="dropbtn" id="dropdown-chooser" onclick="toggleDropdown()">Portfolio <i class="fa fa-caret-down"></i>
+        </div>
+        <div class="dropdown-content" id="dropdown-content">
+            <a href="#cats">Cat Art</a>
+            <a href="#chalkart">Chalk Art</a>
+            <a href="#pets">Pet Potraits</a>
+        </div>
+        <a href="#contact">Contact</a>
+</nav>
 
 <script>
     window.onload = function () {
@@ -57,6 +106,9 @@
 
         // Get the navbar
         var navbar = document.getElementById("navbar");
+
+        //Get dropdown 
+        var dropdown = document.getElementById("dropdown-chooser");
 
         // Get the offset position of the navbar
         var sticky = navbar.offsetTop;
@@ -91,6 +143,7 @@
             if (!hasNavClick) {
                 var currentScroll = window.pageYOffset;
                 var currentSection;
+                toggleDropdown(true);
                 navSections.forEach(section => {
                     let sectionOffset = section.offsetTop;
                     let sectionHalfSize = section.clientHeight / 2.5;
@@ -106,7 +159,7 @@
                     activateNavItem(navItem);
                     title = currentSection.querySelector(".title");
                     event.preventDefault();
-                    history.pushState({}, '', currentSection.href);
+                    //history.pushState({}, '', currentSection.href);
                 }
             }
             else {
@@ -117,11 +170,22 @@
         }
 
         function activateNavItem(navItem) {
-            const currentlyActive = document.querySelector("#navbar a.active");
+            let currentlyActive = document.querySelector("#navbar a.active");
+            let hasCurrentDropDown = false;
+            let navItemHasDropDown = false;
+            if (currentlyActive != null && currentlyActive.parentNode.id == 'dropdown-content')
+                hasCurrentDropDown = true;
+            if (navItem.parentNode.id == 'dropdown-content')
+                navItemHasDropDown = true;
             if (currentlyActive != navItem) {
                 if (typeof (currentlyActive) != 'undefined' && currentlyActive != null) {
                     currentlyActive.classList.remove('active');
+                    if (hasCurrentDropDown && !navItemHasDropDown)
+                        dropdown.classList.remove('active');
+
                 }
+                if (!hasCurrentDropDown && navItemHasDropDown)
+                    dropdown.classList.add('active');
                 navItem.classList.add('active');
             }
         }
@@ -131,10 +195,21 @@
         for (i = 0; i < navItems.length; i++) {
             navItems[i].addEventListener('click', function (e) {
                 activateNavItem(this);
+                toggleDropdown(true)
                 hasNavClick = true;
             })
         }
     }
 
+    function toggleDropdown(forceDisplay = false) {
+        let dropdownContent = document.getElementById("dropdown-content");
+        if (forceDisplay || dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        }
+
+        else {
+            dropdownContent.style.display = "block";
+        }
+    }
 
 </script>

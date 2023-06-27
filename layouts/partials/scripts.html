@@ -1,4 +1,3 @@
-
 {{ $jQuery := resources.Get "js/jquery.min.js" }}
 {{ $scrollex := resources.Get "js/jquery.scrollex.min.js" }}
 {{ $scrolly := resources.Get "js/jquery.scrolly.min.js" }}
@@ -7,9 +6,9 @@
 {{ $util := resources.Get "js/util.js" }}
 {{ $main := resources.Get "js/main.js" }}
 {{ $demo := resources.Get "js/demo.js" }}
-
-{{ $js := slice $jQuery $scrollex $scrolly $browser $breakpoints $util $main $demo | resources.Concat "js/bundle.js" | minify }}
+{{ $arielsdoodles := resources.Get "js/arielsdoodles.js" }}
+{{ $js := slice $jQuery $scrollex $scrolly $browser $breakpoints $util $demo $main $arielsdoodles | resources.Concat
+"js/bundle.js" | minify }}
 
 <!-- Scripts -->
 <script src='{{ $js.RelPermalink }}'></script>
-

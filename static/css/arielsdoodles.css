@@ -4,9 +4,35 @@
 }
 
 .doodles-font {
-    font-family: 'ArielsDoodles-Selima';
+    font-family: 'Providence Sans Pro';
     font-weight: 300;
     color: #000000d1;
 
 }
 
+.logo-title img {
+    float:left;
+    width: 150px;
+    height: 150px;
+}
+
+.logo-title h1 {
+    position: relative;
+    top: 18px;
+    left: 10px;
+}
+
+.logo-image {
+    width: 100%;
+    height: 100%;
+}
+
+.modal .title.doodles-font {
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+.modal .inner .backward:before {
+    content: '\f105';
+    right: 0;
+}

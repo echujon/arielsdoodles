@@ -2,7 +2,10 @@
 <section id="home" class="banner {{ .style }}">
   <div class="content">
     {{ with .title }}
-    <h1 class="title doodles-font">{{ . }}</h1>
+    <div class="logo-title">
+
+      <h1 class="title doodles-font"><img class="logo-image" src="{{.logo}}" />{{ .text }}</h1>
+    </div>
     {{ end }} {{ with .subtitle }}
     <p class="major">{{ . | safeHTML }}</p>
     {{ end }} {{ with .content }}

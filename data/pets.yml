@@ -1,0 +1,77 @@
+title: "Pet Portraits"
+style: "style1 medium lightbox  onscroll-fade-in"
+id: "pets"
+content: |
+  This is a <strong>Gallery</strong> element. It can behave as a lightbox (when given the <code>lightbox</code> class), and you can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional <code>onload</code> or <code>onscroll</code> transition modifier (<a href="#reference-gallery">details</a>).
+pictures:
+  - title: "May Cat"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/May.png"
+    thumb: "images/gallery/thumbs/01.jpg"
+    button: "Details"
+
+  - title: "June Cat"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/June.png"
+    thumb: "images/gallery/thumbs/02.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/July.png"
+    thumb: "images/gallery/thumbs/03.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/September.png"
+    thumb: "images/gallery/thumbs/04.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/October.png"
+    thumb: "images/gallery/thumbs/05.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/November.png"
+    thumb: "images/gallery/thumbs/06.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/December.png"
+    thumb: "images/gallery/thumbs/07.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/08.jpg"
+    thumb: "images/gallery/thumbs/08.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/09.jpg"
+    thumb: "images/gallery/thumbs/09.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/10.jpg"
+    thumb: "images/gallery/thumbs/10.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/11.jpg"
+    thumb: "images/gallery/thumbs/11.jpg"
+    button: "Details"
+
+  - title: "Title"
+    content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/12.jpg"
+    thumb: "images/gallery/thumbs/12.jpg"
+    button: "Details"
