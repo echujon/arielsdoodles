@@ -3,8 +3,7 @@
   <div class="content">
     {{ with .title }}
     <div class="logo-title">
-
-      <h1 class="title doodles-font"><img class="logo-image" src="{{.logo}}" />{{ .text }}</h1>
+      <h1 class="title doodles-font">{{ .text }}</h1>
     </div>
     {{ end }} {{ with .subtitle }}
     <p class="major">{{ . | safeHTML }}</p>
@@ -13,7 +12,7 @@
     {{ end }} {{ with .button }}
     <ul class="actions stacked">
       <li>
-        <a href="{{ .link }}" class="button primary large wide smooth-scroll-middle">{{ .label }}</a>
+        <a href="{{ .link }}" class="button {{.style}} primary large wide smooth-scroll-middle">{{ .label }}</a>
       </li>
     </ul>
     {{ end }}

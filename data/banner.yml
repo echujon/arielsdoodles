@@ -2,10 +2,11 @@
 style: "banner onload-image-fade-in onload-content-fade-right style2 fullscreen orient-center content-align-center image-position-center"
 title:
   text: "Ariel's Doodles"
-  logo: "images/logo.svg"
+  #logo: "images/logo.svg"
 subtitle: |
-  Hi I'm Ariel and I'm an artist. I love to make cute <a href="#cats">cat art</a>
+  Hi, I'm Ariel and I love making art.
 button:
-  label: "Get Started"
-  link: "#portfolio"
+  label: "Check it out!"
+  link: "#cats"
+  style: "doodles-font"
 image: "images/background.png"
