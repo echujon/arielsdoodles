@@ -1,10 +1,12 @@
 <article>
-    <a href="{{ .image }}" class="image">
+    <a index={{.index}} href="{{ .image }}" class="image">
         <img src="{{ .thumb }}" alt="" />
     </a>
     <div class="caption doodles-font">
         <h3>{{ .title }}</h3>
-        <p>{{ .content }}</p>
+        {{with .content}}
+        <p>{{ . }}</p>
+        {{end}}
         <ul class="actions fixed">
             <li><span class="button small">{{ .button }}</span></li>
         </ul>

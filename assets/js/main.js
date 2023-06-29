@@ -205,44 +205,79 @@
       clearInterval(this._gallery_moveIntervalId);
     });
 
-  // Lightbox.
+  //Lightbox.
+  var $uniqueGallery = null,
+    $lastImgIndex = null;
+  function addImage(el, event) {
+    var $a = $(el),
+      $gallery = $a.parents(".gallery"),
+      $modal = $gallery.children(".modal"),
+      $modalImg = $modal.find("img"),
+      $modalTitle = $modal.find("span.title"),
+      href = $a.attr("href"),
+      $title = $a.next(".caption").find("h3").text();
+    $uniqueGallery = $gallery;
+    $lastImgIndex = Number($uniqueGallery.find("a").last().attr("index"));
+    if ($a.length > 0) $index = $a.attr("index");
+    // Not an image? Bail.
+    if (!href.match(/\.(jpg|gif|png|mp4|webp|avif)$/)) return;
+
+    // Locked? Bail.
+    if ($modal[0]._locked) return;
+
+    // Lock.
+    $modal[0]._locked = true;
+
+    // Set src.
+    $modalImg.attr("src", href);
+    $modalTitle.text($title);
+    // Set visible.
+    $modal.addClass("visible");
+
+    // Focus.
+    $modal.focus();
+
+    // Delay.
+    setTimeout(function () {
+      // Unlock.
+      $modal[0]._locked = false;
+    }, 600);
+  }
+  var $index = null;
   $(".gallery.lightbox")
     .on("click", "a", function (event) {
-      var $a = $(this),
-        $gallery = $a.parents(".gallery"),
-        $modal = $gallery.children(".modal"),
-        $modalImg = $modal.find("img"),
-        $modalTitle = $modal.find("span.title"),
-        href = $a.attr("href"),
-        $title = $a.next(".caption").find("h3").text();
-
-      // Not an image? Bail.
-      if (!href.match(/\.(jpg|gif|png|mp4|webp|avif)$/)) return;
-
       // Prevent default.
       event.preventDefault();
       event.stopPropagation();
-
-      // Locked? Bail.
-      if ($modal[0]._locked) return;
-
-      // Lock.
-      $modal[0]._locked = true;
-
-      // Set src.
-      $modalImg.attr("src", href);
-      $modalTitle.text($title);
-      // Set visible.
-      $modal.addClass("visible");
-
-      // Focus.
-      $modal.focus();
-
-      // Delay.
-      setTimeout(function () {
-        // Unlock.
-        $modal[0]._locked = false;
-      }, 600);
+      addImage(this);
+    })
+    .on("click", ".inner .backward", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if ($index != null) {
+        let $i = Number($index);
+        if ($i == 0) {
+          $i = $lastImgIndex;
+        } else $i = $i - 1;
+        let el = $uniqueGallery.find("[index= " + $i + "]");
+        addImage(el);
+      }
+    })
+    .on("click", ".inner .forward", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if ($index != null) {
+        let $i = Number($index);
+        if ($lastImgIndex == $i) {
+          $i = 0;
+        } else $i = $i + 1;
+        let el = $uniqueGallery.find("[index= " + $i + "]");
+        addImage(el, event);
+      }
+    })
+    .on("click", ".modal .inner > img", function (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
     })
     .on("click", ".modal", function (event) {
       var $modal = $(this),
@@ -285,7 +320,7 @@
       if (event.keyCode == 27) $modal.trigger("click");
     })
     .prepend(
-      '<div class="modal" tabIndex="-1"><div class="inner"><img src="" /><span class="title doodles-font"/></div></div>'
+      '<div class="modal" tabIndex="-1"><div class="inner"><div class="backward"/><div class="forward"/><img src="" /><span class="title doodles-font"/></div></div>'
     )
     .find("img")
     .on("load", function (event) {

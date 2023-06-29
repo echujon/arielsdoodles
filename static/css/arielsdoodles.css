@@ -36,7 +36,9 @@
     font-size: 1.25rem;
 }
 
-.modal .inner .backward:before {
-    content: '\f105';
-    right: 0;
+.gallery article {
+   margin-left: .1rem; 
+}
+.inner > img {
+    background-color: #969696;
 }

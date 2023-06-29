@@ -1,0 +1,46 @@
+.inner{
+    > .backward, > .forward {
+        display: block;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+        text-transform: none !important;
+        font-family: 'Font Awesome 5 Pro';
+        font-weight: 900;
+
+        cursor: pointer;
+        position: absolute;
+        top: 41%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 5rem;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        -webkit-user-select: none;
+  }
+   > .backward {
+        left: 0;   
+        &:before {
+            content: '\f104';
+            left: 0;
+            
+        }
+    }
+    > .forward {
+        right: 0;   
+        &:before {
+            content: '\f105';
+            right: 0;
+            
+        }
+    }
+  
+}

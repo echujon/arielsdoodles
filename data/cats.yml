@@ -1,9 +1,40 @@
-title: "Cat Art"
-style: "style1 medium lightbox  onscroll-fade-in"
+title:
+  text: "Cat Art"
+  style: "doodles-font"
+style: "style2 medium lightbox  onscroll-fade-in"
 id: "cats"
-content: |
-  This is a <strong>Gallery</strong> element. It can behave as a lightbox (when given the <code>lightbox</code> class), and you can customize its <span class="demo-controls">appearance with a number of modifiers</span>, as well as assign it an optional <code>onload</code> or <code>onscroll</code> transition modifier (<a href="#reference-gallery">details</a>).
+content: DnD Fantasy Kitties and my 2021 Calendar Cats.
 pictures:
+  - title: "Barbarian Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Barbarian.png"
+    thumb: "images/gallery/fulls/cats/DnD/Barbarian.png"
+    button: "Details"
+
+  - title: "Bard Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Bard.png"
+    thumb: "images/gallery/fulls/cats/DnD/Bard.png"
+    button: "Details"
+
+  - title: "Ranger Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Ranger.png"
+    thumb: "images/gallery/fulls/cats/DnD/Ranger.png"
+    button: "Details"
+
+  - title: "Rogue Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Rogue.png"
+    thumb: "images/gallery/fulls/cats/DnD/Rogue.png"
+    button: "Details"
+
+  - title: "Wizard Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Wizard.png"
+    thumb: "images/gallery/fulls/cats/DnD/Wizard.png"
+    button: "Details"
+
   - title: "January Kitty"
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "images/gallery/fulls/cats/January.png"
@@ -44,6 +75,12 @@ pictures:
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "images/gallery/fulls/cats/July.png"
     thumb: "images/gallery/fulls/cats/July.png"
+    button: "Details"
+
+  - title: "August Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/August.png"
+    thumb: "images/gallery/fulls/cats/August.png"
     button: "Details"
 
   - title: "September Kitty"
