@@ -85,7 +85,7 @@
 </style>
 
 <nav class="doodles-font" id="navbar">
-    <a href="#home">Home</a>
+    <a href="#home" class="active">Home</a>
     <div class="dropdown">
         <div class="dropbtn" id="dropdown-chooser" onclick="toggleDropdown()">Portfolio <i class="fa fa-caret-down"></i>
         </div>
@@ -102,7 +102,8 @@
         const navSections = document.querySelectorAll('section[id]');
         let hasNavClick = false;
         // When the user scrolls the page, execute myFunction
-        window.onscroll = function () { stickyNav(); navOnScroll(); };
+
+        window.onscroll = function () { stickyNav(); /*navOnScroll();*/ };
 
         // Get the navbar
         var navbar = document.getElementById("navbar");
@@ -112,7 +113,6 @@
 
         // Get the offset position of the navbar
         var sticky = navbar.offsetTop;
-
         // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
         function stickyNav() {
             if (window.pageYOffset >= sticky) {
@@ -121,6 +121,14 @@
                 navbar.classList.remove("sticky");
             }
         }
+
+        window.addEventListener("hashchange", function () {
+            if (window.location.hash != null) {
+                let id = window.location.hash;
+                let navItem = document.querySelector("#navbar a[href='" + id + "']");
+                activateNavItem(navItem);
+            }
+        });
 
         function isElementInViewport(el) {
 
@@ -138,7 +146,7 @@
                 /*rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
             );
         }
-        function navOnScroll() {
+        /*function navOnScroll() {
             //check what section we're on
             if (!hasNavClick) {
                 var currentScroll = window.pageYOffset;
@@ -167,7 +175,7 @@
             }
 
             // activateNavItem(navItem);
-        }
+        }*/
 
         function activateNavItem(navItem) {
             let currentlyActive = document.querySelector("#navbar a.active");
