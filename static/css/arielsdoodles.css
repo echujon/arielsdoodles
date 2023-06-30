@@ -42,3 +42,10 @@
 .inner > img {
     background-color: #969696;
 }
+
+#contact {
+    margin-top: 1rem;
+}
+#contact img {
+    position: inherit;
+}
