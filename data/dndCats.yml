@@ -1,0 +1,36 @@
+title:
+  text: "DnD Fantasy Kitties"
+  style: "doodles-font"
+style: "style2 medium lightbox  onscroll-fade-in"
+id: "dndCats"
+content: This are kitties inspired by the fantasy game Dungeons & Dragons.
+pictures:
+  - title: "Barbarian Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Barbarian.png"
+    thumb: "images/gallery/fulls/cats/DnD/Barbarian.png"
+    button: "Details"
+
+  - title: "Bard Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Bard.png"
+    thumb: "images/gallery/fulls/cats/DnD/Bard.png"
+    button: "Details"
+
+  - title: "Ranger Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Ranger.png"
+    thumb: "images/gallery/fulls/cats/DnD/Ranger.png"
+    button: "Details"
+
+  - title: "Rogue Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Rogue.png"
+    thumb: "images/gallery/fulls/cats/DnD/Rogue.png"
+    button: "Details"
+
+  - title: "Wizard Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/cats/DnD/Wizard.png"
+    thumb: "images/gallery/fulls/cats/DnD/Wizard.png"
+    button: "Details"
