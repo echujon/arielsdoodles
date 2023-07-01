@@ -92,13 +92,15 @@
         <div class="dropdown-content" id="dropdown-content">
             <a href="#cats">Calendar Cats</a>
             <a href="#dndCats">DnD Cats</a>
+            <a href="#pets">Pet Portraits</a>
+
         </div>
         <a href="#contact">Contact</a>
         <a href="https://www.etsy.com/shop/ArielsDoodles">Store</a>
 </nav>
 
 <script>
-    const navSections = document.querySelectorAll('section[id]');
+    const navSections = null;
     let hasNavClick = false;
     // When the user scrolls the page, execute myFunction
 
@@ -109,7 +111,6 @@
 
     //Get dropdown 
     var dropdown = document.getElementById("dropdown-chooser");
-
     // Get the offset position of the navbar
     var sticky = navbar.offsetTop;
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position

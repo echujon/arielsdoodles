@@ -489,10 +489,6 @@
 		}
 	}
 
-	.gallery article:nth-of-type(even) {
-		background-color: rgb(172, 187, 236);
-	}
-
 	.gallery.lightbox {
 		.modal {
 			@include vendor('display', 'flex');

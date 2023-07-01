@@ -214,8 +214,8 @@
       $modal = $gallery.children(".modal"),
       $modalImg = $modal.find("img"),
       $modalTitle = $modal.find("span.title"),
-      href = $a.attr("href"),
-      $title = $a.next(".caption").find("h3").text();
+      $imageIndex = (Number($a.attr("index")) + 1) % 2 == 0 ? "even" : "odd";
+    (href = $a.attr("href")), ($title = $a.next(".caption").find("h3").text());
     $uniqueGallery = $gallery;
     $lastImgIndex = Number($uniqueGallery.find("a").last().attr("index"));
     if ($a.length > 0) $index = $a.attr("index");
@@ -230,6 +230,7 @@
 
     // Set src.
     $modalImg.attr("src", href);
+    $modalImg.attr("index", $imageIndex);
     $modalTitle.text($title);
     // Set visible.
     $modal.addClass("visible");

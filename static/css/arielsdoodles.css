@@ -53,3 +53,7 @@
 #contact img {
     position: inherit;
 }
+
+#dndCats .gallery article:nth-of-type(even), #dndCats .inner > img[index='even'] {
+    background-color: rgb(172, 187, 236);
+}
