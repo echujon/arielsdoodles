@@ -208,7 +208,7 @@
   //Lightbox.
   var $uniqueGallery = null,
     $lastImgIndex = null;
-  function addImage(el, event) {
+  function addImage(el, needLock = false) {
     var $a = $(el),
       $gallery = $a.parents(".gallery"),
       $modal = $gallery.children(".modal"),
@@ -226,7 +226,7 @@
     if ($modal[0]._locked) return;
 
     // Lock.
-    $modal[0]._locked = true;
+    if (needLock) $modal[0]._locked = true;
 
     // Set src.
     $modalImg.attr("src", href);
@@ -238,10 +238,12 @@
     $modal.focus();
 
     // Delay.
-    setTimeout(function () {
-      // Unlock.
-      $modal[0]._locked = false;
-    }, 600);
+    if (needLock) {
+      setTimeout(function () {
+        // Unlock.
+        $modal[0]._locked = false;
+      }, 400);
+    }
   }
   var $index = null;
   $(".gallery.lightbox")
@@ -249,7 +251,7 @@
       // Prevent default.
       event.preventDefault();
       event.stopPropagation();
-      addImage(this);
+      addImage(this, true);
     })
     .on("click", ".inner .backward", function (event) {
       event.preventDefault();
@@ -272,7 +274,7 @@
           $i = 0;
         } else $i = $i + 1;
         let el = $uniqueGallery.find("[index= " + $i + "]");
-        addImage(el, event);
+        addImage(el);
       }
     })
     .on("click", ".modal .inner > img", function (event) {

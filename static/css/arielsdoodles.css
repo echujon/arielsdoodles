@@ -14,6 +14,10 @@
 
 }
 
+.doodles-bold {
+    font-weight: 500;
+}
+
 .logo-title img {
     float:left;
     width: 150px;

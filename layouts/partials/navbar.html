@@ -98,115 +98,113 @@
 </nav>
 
 <script>
-    window.onload = function () {
-        const navSections = document.querySelectorAll('section[id]');
-        let hasNavClick = false;
-        // When the user scrolls the page, execute myFunction
+    const navSections = document.querySelectorAll('section[id]');
+    let hasNavClick = false;
+    // When the user scrolls the page, execute myFunction
 
-        window.onscroll = function () { stickyNav(); /*navOnScroll();*/ };
+    window.onscroll = function () { stickyNav(); /*navOnScroll();*/ };
 
-        // Get the navbar
-        var navbar = document.getElementById("navbar");
+    // Get the navbar
+    var navbar = document.getElementById("navbar");
 
-        //Get dropdown 
-        var dropdown = document.getElementById("dropdown-chooser");
+    //Get dropdown 
+    var dropdown = document.getElementById("dropdown-chooser");
 
-        // Get the offset position of the navbar
-        var sticky = navbar.offsetTop;
-        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-        function stickyNav() {
-            if (window.pageYOffset >= sticky) {
-                navbar.classList.add("sticky")
-            } else {
-                navbar.classList.remove("sticky");
-            }
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function stickyNav() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+
+    window.addEventListener("hashchange", function () {
+        if (window.location.hash != null) {
+            let id = window.location.hash;
+            let navItem = document.querySelector("#navbar a[href='" + id + "']");
+            activateNavItem(navItem);
+        }
+    });
+
+    function isElementInViewport(el) {
+
+        // Special bonus for those using jQuery
+        if (typeof jQuery === "function" && el instanceof jQuery) {
+            el = el[0];
         }
 
-        window.addEventListener("hashchange", function () {
-            if (window.location.hash != null) {
-                let id = window.location.hash;
-                let navItem = document.querySelector("#navbar a[href='" + id + "']");
-                activateNavItem(navItem);
-            }
-        });
+        var rect = el.getBoundingClientRect();
 
-        function isElementInViewport(el) {
-
-            // Special bonus for those using jQuery
-            if (typeof jQuery === "function" && el instanceof jQuery) {
-                el = el[0];
-            }
-
-            var rect = el.getBoundingClientRect();
-
-            return (
-                rect.top >= 0 &&
-                /*rect.left >= 0 &&*/
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)/* or $(window).height() */
-                /*rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
-            );
-        }
-        /*function navOnScroll() {
-            //check what section we're on
-            if (!hasNavClick) {
-                var currentScroll = window.pageYOffset;
-                var currentSection;
-                toggleDropdown(true);
-                navSections.forEach(section => {
-                    let sectionOffset = section.offsetTop;
-                    let sectionHalfSize = section.clientHeight / 2.5;
-                    if ((sectionOffset - sectionHalfSize) < currentScroll) {
-                        currentSection = section;
-                        return
-                    }
-
-                })
-                if (currentSection) {
-                    let id = currentSection.getAttribute("id");
-                    let navItem = document.querySelector("#navbar a[href='#" + id + "']");
-                    activateNavItem(navItem);
-                    title = currentSection.querySelector(".title");
-                    event.preventDefault();
-                    //history.pushState({}, '', currentSection.href);
+        return (
+            rect.top >= 0 &&
+            /*rect.left >= 0 &&*/
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)/* or $(window).height() */
+            /*rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+        );
+    }
+    /*function navOnScroll() {
+        //check what section we're on
+        if (!hasNavClick) {
+            var currentScroll = window.pageYOffset;
+            var currentSection;
+            toggleDropdown(true);
+            navSections.forEach(section => {
+                let sectionOffset = section.offsetTop;
+                let sectionHalfSize = section.clientHeight / 2.5;
+                if ((sectionOffset - sectionHalfSize) < currentScroll) {
+                    currentSection = section;
+                    return
                 }
-            }
-            else {
-                hasNavClick = false;
-            }
 
-            // activateNavItem(navItem);
-        }*/
-
-        function activateNavItem(navItem) {
-            let currentlyActive = document.querySelector("#navbar a.active");
-            let hasCurrentDropDown = false;
-            let navItemHasDropDown = false;
-            if (currentlyActive != null && currentlyActive.parentNode.id == 'dropdown-content')
-                hasCurrentDropDown = true;
-            if (navItem.parentNode.id == 'dropdown-content')
-                navItemHasDropDown = true;
-            if (currentlyActive != navItem) {
-                if (typeof (currentlyActive) != 'undefined' && currentlyActive != null) {
-                    currentlyActive.classList.remove('active');
-                    if (hasCurrentDropDown && !navItemHasDropDown)
-                        dropdown.classList.remove('active');
-
-                }
-                if (!hasCurrentDropDown && navItemHasDropDown)
-                    dropdown.classList.add('active');
-                navItem.classList.add('active');
-            }
-        }
-
-        //On click navigation
-        var navItems = document.querySelectorAll('#navbar a');
-        for (i = 0; i < navItems.length; i++) {
-            navItems[i].addEventListener('click', function (e) {
-                activateNavItem(this);
-                toggleDropdown(true)
-                hasNavClick = true;
             })
+            if (currentSection) {
+                let id = currentSection.getAttribute("id");
+                let navItem = document.querySelector("#navbar a[href='#" + id + "']");
+                activateNavItem(navItem);
+                title = currentSection.querySelector(".title");
+                event.preventDefault();
+                //history.pushState({}, '', currentSection.href);
+            }
         }
+        else {
+            hasNavClick = false;
+        }
+
+        // activateNavItem(navItem);
+    }*/
+
+    function activateNavItem(navItem) {
+        let currentlyActive = document.querySelector("#navbar a.active");
+        let hasCurrentDropDown = false;
+        let navItemHasDropDown = false;
+        if (currentlyActive != null && currentlyActive.parentNode.id == 'dropdown-content')
+            hasCurrentDropDown = true;
+        if (navItem.parentNode.id == 'dropdown-content')
+            navItemHasDropDown = true;
+        if (currentlyActive != navItem) {
+            if (typeof (currentlyActive) != 'undefined' && currentlyActive != null) {
+                currentlyActive.classList.remove('active');
+                if (hasCurrentDropDown && !navItemHasDropDown)
+                    dropdown.classList.remove('active');
+
+            }
+            if (!hasCurrentDropDown && navItemHasDropDown)
+                dropdown.classList.add('active');
+            navItem.classList.add('active');
+        }
+    }
+
+    //On click navigation
+    var navItems = document.querySelectorAll('#navbar a');
+    for (i = 0; i < navItems.length; i++) {
+        navItems[i].addEventListener('click', function (e) {
+            activateNavItem(this);
+            toggleDropdown(true)
+            hasNavClick = true;
+        })
     }
 
     function toggleDropdown(forceDisplay = false) {
