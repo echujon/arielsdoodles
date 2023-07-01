@@ -3,7 +3,7 @@ title:
   style: "doodles-font"
 style: "style2 medium lightbox  onscroll-fade-in"
 id: "pets"
-content: These are commissioned pet portraits. <span class='doodles-bold'><a href="#contact">Let me know</a></span> if are interested in art commissions.
+content: These are commissioned pet portraits. <span class='doodles-bold'><a href="#contact">Let me know</a></span> if you are interested in art commissions.
 pictures:
   - title: "Skippy and Sabrina"
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
