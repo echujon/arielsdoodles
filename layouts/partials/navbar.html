@@ -124,7 +124,7 @@
     }
 
     function selectNavItemByHash(hash) {
-        if (hash != null) {
+        if (hash) {
             let id = hash;
             let navItem = document.querySelector("#navbar a[href='" + id + "']");
             activateNavItem(navItem);
@@ -132,7 +132,7 @@
     }
 
     window.addEventListener("load", (event) => {
-        if (window.location.hash != null) {
+        if (window.location.hash) {
             let hash = window.location.hash;
             selectNavItemByHash(hash);
         }
