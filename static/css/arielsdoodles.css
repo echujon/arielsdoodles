@@ -57,3 +57,39 @@
 #dndCats .gallery article:nth-of-type(even), #dndCats .inner > img[index='even'] {
     background-color: rgb(172, 187, 236);
 }
+
+/**Mailing list**/
+
+.mailinglist {
+    display: inline-block;
+}
+
+@media only screen and (min-width:1000px ) {
+    .mailinglist {
+        margin-left: auto;
+        margin-right: auto;
+        width: 69%;
+        display: block;
+    }
+}
+
+.formkit-header {
+
+    font-family: 'providence_sansregular';
+
+}
+
+.formkit-form {
+    border: none !important;
+    margin: auto;
+
+}
+
+.formkit-submit span {
+    margin-top: -10px;
+}
+
+.formkit-fields {
+    justify-content: center;
+}
+
