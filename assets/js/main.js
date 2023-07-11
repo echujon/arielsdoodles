@@ -27,6 +27,18 @@
     }, 100);
   });
 
+  async function loadImage(imageUrl) {
+    let img;
+    const imageLoadPromise = new Promise((resolve) => {
+      img = new Image();
+      img.onload = resolve;
+      img.src = imageUrl;
+    });
+
+    await imageLoadPromise;
+    return img;
+  }
+
   // Browser fixes.
 
   // IE: Flexbox min-height bug.
@@ -229,11 +241,13 @@
     if (needLock) $modal[0]._locked = true;
 
     // Set src.
-    $modalImg.attr("src", href);
-    $modalImg.attr("index", $imageIndex);
-    $modalTitle.text($title);
-    // Set visible.
-    $modal.addClass("visible");
+    loadImage(href).then((image) => {
+      $modalImg.attr("src", image.src);
+      $modalImg.attr("index", $imageIndex);
+      $modalTitle.text($title);
+      // Set visible.
+      $modal.addClass("visible");
+    });
 
     // Focus.
     $modal.focus();
