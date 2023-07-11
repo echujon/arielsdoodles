@@ -2,7 +2,9 @@
 ## Basic Configuration
 ## -----------------------------------------------
 title = "Ariel's Doodles"
+copyright = "2023"
 theme = "hugo-story"
+
 
 ## -----------------------------------------------
 ## Publish
@@ -40,3 +42,4 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
 [Params.asset]
   fontawesome_css = ["css/fontawesome-all.min.css"]
   arielsdoodles_cs = ["css/arielsdoodles.css"]
+

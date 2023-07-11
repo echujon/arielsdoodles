@@ -2,7 +2,9 @@
 	<title>{{ .Site.Title }}</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<meta name="description" content="">
+	{{ with .Site.Params.description}}
+	<meta name="description" content="{{.}}">
+	{{end}}
 	<meta name="author" content="">
 	{{ if .Site.Params.favicon }}
 	{{ partial "favicon" }}
@@ -41,5 +43,4 @@
 	{{ range .Site.Params.asset.arielsdoodles_cs -}}
 	<link rel="stylesheet" href="{{ . | absURL }}">
 	{{- end }}
-
 </head>

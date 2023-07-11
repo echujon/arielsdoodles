@@ -30,7 +30,7 @@ disableKinds = ["taxonomy", "taxonomyTerm", "section"]
 ## -----------------------------------------------
 
 [Params]
-  description = "A (modular, highly tweakable) responsive one-page theme for Hugo"
+  description = "You will find portraits of pets, cute Dungeons and Dragons Kitties, and much more."
   logo = "images/banner.jpg"
   favicon = true
 
