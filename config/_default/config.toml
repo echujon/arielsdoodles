@@ -2,7 +2,6 @@
 ## Basic Configuration
 ## -----------------------------------------------
 title = "Ariel's Doodles"
-copyright = "{year}"
 theme = "hugo-story"
 
 ## -----------------------------------------------
