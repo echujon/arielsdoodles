@@ -17,6 +17,24 @@ pictures:
     thumb: "images/gallery/fulls/commissions/pets/Alaska.png"
     button: "Details"
 
+  - title: "Charlie"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/commissions/pets/Charlie.png"
+    thumb: "images/gallery/fulls/commissions/pets/Charlie.png"
+    button: "Details"
+
+  - title: "Hunny and Bub"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/commissions/pets/Hunny_and_Bub.png"
+    thumb: "images/gallery/fulls/commissions/pets/Hunny_and_Bub.png"
+    button: "Details"
+
+  - title: "Rango and Flynn"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "images/gallery/fulls/commissions/pets/Rango_and_Flynn.png"
+    thumb: "images/gallery/fulls/commissions/pets/Rango_and_Flynn.png"
+    button: "Details"
+
   - title: "Holiday Kitties"
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "images/gallery/fulls/commissions/pets/Holiday_Kitties.png"
