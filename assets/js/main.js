@@ -27,12 +27,11 @@
     }, 100);
   });
 
-  async function loadImage(imageUrl) {
-    let img;
+  async function loadImage(img, imageUrl) {
     const imageLoadPromise = new Promise((resolve) => {
-      img = new Image();
-      img.onload = resolve;
+      if (!img) img = new Image();
       img.src = imageUrl;
+      img.onload = resolve;
     });
 
     await imageLoadPromise;
@@ -241,10 +240,8 @@
     $modal[0]._locked = true;
 
     // Set src.
-    loadImage(href).then((image) => {
+    loadImage($modalImg[0], href).then((image) => {
       $modal[0]._locked = false;
-
-      $modalImg.attr("src", image.src);
       $modalImg.attr("index", $imageIndex);
       $modalTitle.text($title);
       // Set visible.
