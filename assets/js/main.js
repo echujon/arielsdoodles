@@ -28,10 +28,16 @@
   });
 
   async function loadImage(img, imageUrl) {
-    const imageLoadPromise = new Promise((resolve) => {
+    const imageLoadPromise = new Promise((resolve, reject) => {
       if (!img) img = new Image();
+
+      img.onload = () => {
+        resolve(img);
+      };
+      img.onError = () => {
+        reject(new Error("Failed to load image"));
+      };
       img.src = imageUrl;
-      img.onload = resolve;
     });
 
     await imageLoadPromise;
@@ -240,13 +246,17 @@
     $modal[0]._locked = true;
 
     // Set src.
-    loadImage($modalImg[0], href).then((image) => {
-      $modal[0]._locked = false;
-      $modalImg.attr("index", $imageIndex);
-      $modalTitle.text($title);
-      // Set visible.
-      $modal.addClass("visible");
-    });
+    loadImage($modalImg[0], href)
+      .then((image) => {
+        $modal[0]._locked = false;
+        $modalImg.attr("index", $imageIndex);
+        $modalTitle.text($title);
+        // Set visible.
+        $modal.addClass("visible");
+      })
+      .catch((error) => {
+        console.error("Error loading image:", error);
+      });
 
     // Focus.
     $modal.focus();
