@@ -229,13 +229,8 @@
     var $a = $(el),
       $gallery = $a.parents(".gallery"),
       $modal = $gallery.children(".modal"),
-      $modalImg = $modal.find("img"),
-      $modalTitle = $modal.find("span.title"),
-      $imageIndex = (Number($a.attr("index")) + 1) % 2 == 0 ? "even" : "odd";
-    (href = $a.attr("href")), ($title = $a.next(".caption").find("h3").text());
-    $uniqueGallery = $gallery;
-    $lastImgIndex = Number($uniqueGallery.find("a").last().attr("index"));
-    if ($a.length > 0) $index = $a.attr("index");
+      $modalImg = $modal.find("img");
+    (href = $a.attr("href")), ($uniqueGallery = $gallery);
     // Not an image? Bail.
     if (!href.match(/\.(jpg|gif|png|mp4|webp|avif)$/)) return;
 
@@ -248,7 +243,13 @@
     // Set src.
     loadImage($modalImg[0], href)
       .then((image) => {
+        $title = $a.next(".caption").find("h3").text();
         $modal[0]._locked = false;
+        $lastImgIndex = Number($uniqueGallery.find("a").last().attr("index"));
+        if ($a.length > 0) $index = $a.attr("index");
+        ($modalTitle = $modal.find("span.title")),
+          ($imageIndex =
+            (Number($a.attr("index")) + 1) % 2 == 0 ? "even" : "odd");
         $modalImg.attr("index", $imageIndex);
         $modalTitle.text($title);
         // Set visible.
