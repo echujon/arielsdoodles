@@ -23,7 +23,7 @@ publishDir = "public"
 ## -----------------------------------------------
 
 disableKinds = ["taxonomy", "taxonomyTerm", "section"]
-# googleAnalytics = "G-XXXXXXXXXX"
+googleAnalytics = "G-GFWBYJPVXR"
 
 ## -----------------------------------------------
 ## Site Parameters
