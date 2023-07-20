@@ -54,8 +54,8 @@
     position: inherit;
 }
 
-section.wrapper {
-    padding-top: 2rem;
+section {
+    scroll-margin-top: 3rem;
 }
 
 #dndCats .gallery article:nth-of-type(even), #dndCats .inner > img[index='even'] {
