@@ -6,6 +6,15 @@
         z-index: 10;
         box-shadow: 0 3px 3px -3px rgba(0, 0, 0, .4);
         height: 6vh;
+        min-height: 50px;
+        display: inherit;
+        /*justify-content: space-between;*/
+        align-items: center;
+        /*padding: 0 24px;*/
+    }
+
+    li {
+        list-style: none;
     }
 
     /* Navbar links */
@@ -82,21 +91,135 @@
         text-decoration: underline;
 
     }
+
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        float: left;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: #000;
+
+    }
+
+    .nav-menu {
+        display: flex;
+        /*justify-content: space-between;*/
+        align-items: center;
+        /*gap: 60px;*/
+    }
+
+    @media (max-width:850px) {
+
+        #navbar {
+            display: flex;
+            padding: 0 24px;
+        }
+
+        #navbar a,
+        #navbar a.active,
+        #navbar .dropdown {
+            color: #fff;
+        }
+
+        .dropdown {
+            float: inherit;
+        }
+
+        #dropdown-content {
+            position: inherit;
+            float: inherit;
+            background-color: #262626;
+        }
+
+        #dropdown-content a {
+            float: left;
+        }
+
+        .hamburger {
+            display: block;
+        }
+
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .nav-menu {
+            position: fixed;
+            left: -100%;
+            top: 50px;
+            gap: 0;
+            flex-direction: column;
+            background-color: #262626;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .nav-item {
+            margin: 16px 0;
+        }
+
+        .nav-menu.active {
+            left: 0;
+            padding-left: 0rem;
+        }
+
+        .nav-menu ul li {
+            padding-left: 0rem;
+        }
+
+        #dropdown-content {
+            margin-left: -1rem;
+        }
+
+        ul#dropdown-content a {
+            background: #666666;
+            width: 100%;
+            text-align: center;
+        }
+
+        li.dropdown-parent {
+            width: 100%;
+        }
+
+    }
 </style>
 
 <nav class="doodles-font" id="navbar">
-    <a href="#home" class="active">Home</a>
-    <div class="dropdown">
-        <div class="dropbtn" id="dropdown-chooser" onclick="toggleDropdown()">Portfolio <i class="fa fa-caret-down"></i>
-        </div>
-        <div class="dropdown-content" id="dropdown-content">
-            <a href="#pets">Pet Portraits</a>
-            <a href="#cats">Calendar Cats</a>
-            <a href="#dndCats">DnD Cats</a>
-
-        </div>
-        <a href="#contact">Contact</a>
-        <a href="https://www.etsy.com/shop/ArielsDoodles">Store</a>
+    <div class="hamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <ul class="nav-menu">
+        <li><a href="#home" class="active">Home</a></li>
+        <li class="dropdown-parent"><span class="dropdown" onclick="toggleDropdown()">Portfolio <i
+                    class="fa fa-caret-down"></i></span>
+            <ul class="dropdown-chooser" id="dropdown-content">
+                <li><a href="#pets">Pet Portraits</a></li>
+                <li> <a href="#cats">Calendar Cats</a></li>
+                <li><a href="#dndCats">DnD Cats</a></li>
+            </ul>
+        </li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://www.etsy.com/shop/ArielsDoodles">Store</a></li>
+    </ul>
 </nav>
 
 <script>
@@ -109,11 +232,35 @@
     // Get the navbar
     var navbar = document.getElementById("navbar");
 
-    //Get dropdown 
-    var dropdown = document.getElementById("dropdown-chooser");
+    //Get dropdown
+    var dropdown = document.querySelector(".dropdown");
+    //Get dropdown > content
+    var dropdownContent = document.getElementById("dropdown-content");
     // Get the offset position of the navbar
     var sticky = navbar.offsetTop;
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+
+
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+    });
+
+    window.onresize = function () {
+        if (dropdownContent)
+            dropdownContent.style.display = "none";
+
+        navMenu.classList.remove("active");
+        hamburger.classList.remove("active");
+        let iEl = dropdown.querySelector('i.fa');
+        if (iEl != null) {
+            iEl.classList.remove("fa-caret-up");
+            iEl.classList.add("fa-caret-down")
+        }
+
+    };
 
     function stickyNav() {
         if (window.pageYOffset >= sticky) {
@@ -204,11 +351,11 @@
             if (typeof (currentlyActive) != 'undefined' && currentlyActive != null) {
                 currentlyActive.classList.remove('active');
                 if (hasCurrentDropDown && !navItemHasDropDown)
-                    dropdown.classList.remove('active');
+                    dropdownContent.classList.remove('active');
 
             }
             if (!hasCurrentDropDown && navItemHasDropDown)
-                dropdown.classList.add('active');
+                dropdownContent.classList.add('active');
             navItem.classList.add('active');
         }
     }
@@ -218,19 +365,32 @@
     for (i = 0; i < navItems.length; i++) {
         navItems[i].addEventListener('click', function (e) {
             activateNavItem(this);
-            toggleDropdown(true)
+            toggleDropdown(true);
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
             hasNavClick = true;
         })
     }
 
     function toggleDropdown(forceDisplay = false) {
-        let dropdownContent = document.getElementById("dropdown-content");
+        /*let dropdownContent = document.getElementById("dropdown-content");*/
+        let iEl = dropdown.querySelector('i.fa');
         if (forceDisplay || dropdownContent.style.display === "block") {
             dropdownContent.style.display = "none";
+            if (iEl != null) {
+                iEl.classList.remove("fa-caret-up");
+                iEl.classList.add("fa-caret-down")
+            }
         }
 
         else {
             dropdownContent.style.display = "block";
+            if (iEl != null) {
+                iEl.classList.remove("fa-caret-down");
+                iEl.classList.add("fa-caret-up")
+            }
+
+
         }
     }
 
