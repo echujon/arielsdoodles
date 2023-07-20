@@ -32,6 +32,13 @@
         padding: 16px;
     }
 
+    /* used only to have a position before sticky*/
+    .topnav {
+
+        position: relative;
+    }
+
+
     /* The sticky class is added to the navbar with JS when it reaches its scroll position */
     .sticky {
         position: fixed;
@@ -201,7 +208,7 @@
     }
 </style>
 
-<nav class="doodles-font" id="navbar">
+<nav class="doodles-font topnav" id="navbar">
     <div class="hamburger">
         <div class="bar"></div>
         <div class="bar"></div>
@@ -264,7 +271,7 @@
 
     function stickyNav() {
         if (window.pageYOffset > sticky) {
-            navbar.classList.add("sticky")
+            navbar.classList.add("sticky");
         } else {
             navbar.classList.remove("sticky");
         }
