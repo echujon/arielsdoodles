@@ -54,6 +54,10 @@
     position: inherit;
 }
 
+section.wrapper {
+    padding-top: 2rem;
+}
+
 #dndCats .gallery article:nth-of-type(even), #dndCats .inner > img[index='even'] {
     background-color: rgb(172, 187, 236);
 }
