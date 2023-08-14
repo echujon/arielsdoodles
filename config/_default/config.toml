@@ -19,12 +19,17 @@ publishDir = "public"
 #baseURL = "https://caressofsteel.github.io/demos/hugo/hugo-story/"
 #publishDir = "//centos/sites/hugodev/hugostory/"
 
-
+#allow for html
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+      
 ## -----------------------------------------------
 ## Hugo Built-in Features
 ## -----------------------------------------------
 
-disableKinds = ["taxonomy", "taxonomyTerm", "section"]
+disableKinds = ["taxonomy", "sitemap", "taxonomyTerm"]
 # googleAnalytics = "G-XXXXXXXXXX"
 
 ## -----------------------------------------------
