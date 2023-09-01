@@ -1,15 +1,83 @@
 <!-- Spotlight -->
-<section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
-    <div class="content">
-        {{ with .title }}
-        <h2 class="{{.style}} title">{{ .text }}</h2>
+<style>
+    .titlebar+section.style2 {
+        margin-top: 1rem;
+        box-shadow: none !important;
+        -webkit-align-items: inherit;
+        align-items: inherit;
+    }
+
+    #commissions .image {
+        width: 23rem;
+        height: 23rem;
+        margin-top: 1rem;
+    }
+
+
+    #contact img {
+        position: inherit;
+    }
+
+    #commissions .image>img {
+
+        border-radius: 0;
+    }
+
+    .actual-content p {
+        text-align: left;
+    }
+
+    .carousel-container {
+        max-width: 400px;
+        /* Adjust as needed */
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    .carousel-slider {
+        display: flex;
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .carousel-slider img {
+        width: 100%;
+        height: auto;
+    }
+
+    @media screen and (orientation:portrait) {
+        #contact .image {
+            top: 0rem;
+
+        }
+
+        .titlebar+section.style2 {
+            align-items: center;
+        }
+
+        #commissions {
+            -webkit-align-items: center;
+            align-items: center;
+        }
+    }
+</style>
+{{ with .titleEntry }}
+<h1 class="{{.style}} titlebar">{{ .text }}</h2>
+    {{end}}
+    <section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
+        <div class="content">
+            {{ with .content }}<div class="actual-content">{{ . | safeHTML }}{{ end }}</div>
+            {{ $formContent := dict "id" .id}}
+            {{if .showForm}}
+            {{partial "contactForm" $formContent}}
+            {{end}}
+        </div>
+        {{with .image}}
+        <div class="image">
+            <img src="{{ . }}" alt="" />
+        </div>
         {{end}}
-        {{ with .content }}<p>{{ . | safeHTML }}</p>{{ end }}
-        {{ with .button }}<ul class="actions stacked">
-            <li><a href="{{ .link }}" class="button">{{ .label }}</a></li>
-        </ul>{{ end }}
-    </div>
-    {{ with .image }}<div class="image">
-        <img src="{{ . }}" alt="" />
-    </div>{{ end }}
-</section>
+        {{if .pictures}}
+        {{partial "carousel" .pictures}}
+        {{end}}
+    </section>

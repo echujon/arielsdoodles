@@ -7,6 +7,6 @@ subtitle: |
   Hi, I'm Ariel and I love making art.
 button:
   label: "Check it out!"
-  link: "#pets"
+  link: "/portfolio"
   style: "doodles-font"
 image: "images/background.png"

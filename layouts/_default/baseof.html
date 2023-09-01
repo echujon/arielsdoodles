@@ -14,12 +14,12 @@
 	{{ partial "navbar.html" .}}
 
 	<!-- Wrapper -->
-	<div id="wrapper" class="divided">
+	<div id="wrapper" class="{{.Params.id}}-page divided">
 		{{- block "main" . }}{{- end }}
 		<!-- Wrapper -->
 	</div>
 	{{ partial "scripts" . }}
-
+	{{ partial "footer" . }}
 </body>
 
 </html>
