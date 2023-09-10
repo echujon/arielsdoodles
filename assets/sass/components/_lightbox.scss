@@ -1,5 +1,7 @@
-.inner{
-    > .backward, > .forward {
+.inner {
+
+    >.backward,
+    >.forward {
         display: block;
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
@@ -20,27 +22,41 @@
         margin-top: -50px;
         color: white;
         font-weight: bold;
-        font-size: 5rem;
+        font-size: 1.7rem;
         transition: 0.6s ease;
         border-radius: 0 3px 3px 0;
+        opacity: .88;
         user-select: none;
         -webkit-user-select: none;
-  }
-   > .backward {
-        left: 0;   
-        &:before {
-            content: '\f104';
+    }
+
+    >.backward {
+        @include breakpoint('<=medium') {
             left: 0;
-            
         }
-    }
-    > .forward {
-        right: 0;   
+
+        left: -10%;
+
+
         &:before {
-            content: '\f105';
-            right: 0;
-            
+            content: '\f137';
+            left: 0;
+
         }
     }
-  
+
+    >.forward {
+        @include breakpoint('<=medium') {
+            right: 0;
+        }
+
+        right: -10%;
+
+        &:before {
+            content: '\f138';
+            right: 0;
+
+        }
+    }
+
 }

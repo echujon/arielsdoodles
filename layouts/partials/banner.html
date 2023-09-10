@@ -17,9 +17,11 @@
     </ul>
     {{ end }}
   </div>
-  {{ with .image }}
-  <div class="image">
-    <img src="{{.}}" alt="Ariel's Doodles banner" />
-  </div>
-  {{end}}
+
+  <a href="{{ .link }}">
+    {{with .landingBanner}}
+    <img class="kickstarter-banner" src="{{.}}" alt="Kickstarter Banner" />
+    {{end}}
+  </a>
+
 </section>

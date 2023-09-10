@@ -16,6 +16,17 @@
         width: 100%;
         height: auto;
     }
+
+    button.carousel-bullet {
+        font-size: 6px;
+        margin-right: 5px;
+    }
+
+    .carousel-navigation {
+        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+    }
 </style>
 
 {{$pictures := .}}
@@ -98,10 +109,10 @@
 
         // Buttons:
 
-        const elPrev = elNew("button", {
-            type: "button",
+        const elPrev = elNew("div", {
+            /*type: "div",*/
             className: "carousel-prev",
-            innerHTML: "<span>Prev</span>",
+            /*innerHTML: "<span>Prev</span>",*/
             onclick: () => prev(),
         });
 
@@ -154,7 +165,7 @@
 
         // Insert UI elements:
         elNavigation.append(...elsBtns);
-        elCarousel.append(elPrev, elNext, elStop, elNavigation);
+        elCarousel.append(elPrev, elNavigation, elNext);
 
         // Clone first and last slides (for "infinite" slider effect)
         elCarouselSlider.prepend(elsSlides[tot - 1].cloneNode(true));

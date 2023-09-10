@@ -91,7 +91,26 @@ section#pets {
         position: relative;
 
     }
+
+    .kickstarter-banner {
+        max-width: 100%;
+        margin: 0;
+    }
+
+
 }
+
+
+
+@media screen and (orientation:portrait) {
+    .kickstarter-banner {
+        max-width: 95%;
+        margin-top: 1.5vh;
+    }
+}
+
+
+
 
 .formkit-header {
 

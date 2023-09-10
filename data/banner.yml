@@ -1,12 +1,12 @@
 ####################### Banner #########################
-style: "banner onload-image-fade-in onload-content-fade-right style2 fullscreen orient-center content-align-center image-position-center"
+style: "banner style2"
 title:
-  text: "Ariel's Doodles"
+  text: "Kickstarter 2024 Cat Calendar"
   #logo: "images/logo.svg"
-subtitle: |
-  Hi, I'm Ariel and I love making art.
+link: "https://www.kickstarter.com/projects/arielsdoodles/illustrated-cat-calendar-2024/"
 button:
   label: "Check it out!"
-  link: "/portfolio"
   style: "doodles-font"
+  link: "https://www.kickstarter.com/projects/arielsdoodles/illustrated-cat-calendar-2024/"
+landingBanner: "images/Kickstarter_Banner.png"
 image: "images/background.png"
