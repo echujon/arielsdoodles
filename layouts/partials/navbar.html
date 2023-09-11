@@ -279,7 +279,11 @@
         <div class="bar"></div>
     </div>
     {{$currentPage := .}}
+    {{range .Site.Menus.items}}
+    <span>{{.Name}}</span>
+    {{end}}
     <ul class="nav-menu">
+
         {{range .Site.Menus.items}}
         {{if ne .Name "Portfolio"}}
         <li><a class="{{if eq $currentPage.Params.Title .Name}}active{{ end }}" href="{{.URL}}">{{.Name}}</a>
