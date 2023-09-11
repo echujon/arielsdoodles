@@ -116,16 +116,16 @@
             onclick: () => prev(),
         });
 
-        const elNext = elNew("button", {
-            type: "button",
+        const elNext = elNew("div", {
+            /*type: "button",*/
             className: "carousel-next",
-            innerHTML: "<span>Next</span>",
+            /*innerHTML: "<span>Next</span>",*/
             onclick: () => next(),
         });
 
         // Navigation:
-
-        const elNavigation = elNew("div", {
+        const elCarouselDiv = elNew("div", { className: 'carousel-nav-buttons' });
+        const elButtonNavigation = elNew("div", {
             className: "carousel-navigation",
         });
 
@@ -164,8 +164,20 @@
         // Init:
 
         // Insert UI elements:
-        elNavigation.append(...elsBtns);
-        elCarousel.append(elPrev, elNavigation, elNext);
+        elButtonNavigation.append(...elsBtns);
+
+        elCarouselDiv.append(elPrev, elButtonNavigation, elNext);
+        elCarousel.append(elCarouselDiv);
+
+
+
+
+
+
+
+
+
+
 
         // Clone first and last slides (for "infinite" slider effect)
         elCarouselSlider.prepend(elsSlides[tot - 1].cloneNode(true));
