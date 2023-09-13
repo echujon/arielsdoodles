@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'providence_sansregular';
     src: url('../webfonts/providence_sans_regular-webfont.woff2') format('woff2'),
-         url('../webfonts/providence_sans_regular-webfont.woff') format('woff');
+        url('../webfonts/providence_sans_regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -19,7 +19,7 @@
 }
 
 .logo-title img {
-    float:left;
+    float: left;
     width: 150px;
     height: 150px;
 }
@@ -41,15 +41,17 @@
 }
 
 .gallery article {
-   margin-left: .1rem; 
+    margin-left: .1rem;
 }
-.inner > img {
+
+.inner>img {
     background-color: #969696;
 }
 
 #contact {
     margin-top: 1rem;
 }
+
 #contact img {
     position: inherit;
 }
@@ -58,7 +60,8 @@ section {
     scroll-margin-top: 3rem;
 }
 
-#dndCats .gallery article:nth-of-type(even), #dndCats .inner > img[index='even'] {
+#dndCats .gallery article:nth-of-type(even),
+#dndCats .inner>img[index='even'] {
     background-color: rgb(172, 187, 236);
 }
 
@@ -68,12 +71,37 @@ section {
     display: inline-block;
 }
 
-@media only screen and (min-width:1000px ) {
+@media only screen and (min-width:1000px) {
     .mailinglist {
         margin-left: auto;
         margin-right: auto;
         width: 69%;
         display: block;
+    }
+}
+
+
+@media screen and (orientation:landscape) {
+    #wrapper {
+        top: -1.5rem;
+        position: relative;
+
+    }
+
+    .kickstarter-banner {
+        max-width: 100%;
+        margin: 0;
+    }
+
+
+}
+
+
+
+@media screen and (orientation:portrait) {
+    .kickstarter-banner {
+        max-width: 95%;
+        margin-top: 1.5vh;
     }
 }
 
@@ -96,4 +124,3 @@ section {
 .formkit-fields {
     justify-content: center;
 }
-
