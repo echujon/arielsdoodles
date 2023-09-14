@@ -105,6 +105,11 @@ section {
     }
 }
 
+.date-launch {
+    font-weight: 600;
+    font-size: 18px;
+}
+
 .formkit-header {
 
     font-family: 'providence_sansregular';
