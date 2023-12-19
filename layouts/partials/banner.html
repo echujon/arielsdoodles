@@ -20,7 +20,8 @@
 
   <a href="{{ .link }}">
     {{with .landingBanner}}
-    <img class="kickstarter-banner" src="{{.}}" alt="Kickstarter Banner" />
+    {{ $image := resources.Get . }}
+    <img class="kickstarter-banner" src="{{$image.RelPermalink}}" alt="Kickstarter Banner" />
     {{end}}
   </a>
 
