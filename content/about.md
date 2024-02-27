@@ -10,10 +10,5 @@ type: about
 title: About
 id: about
 showForm: false
-menu:
-  items:
-    name: "About"
-    pageref: "/about"
-    weight: about
 ---
 Hi! Ariel here, the artist behind Ariel's Doodles. I've been creating art for as long as I can remember. I received my bachelor's in Fine Arts from the University of Utah. I love creating things others can enjoy, and I especially love making cute pet portraits. <a href="/commissions">Let me know if you want one!</a>

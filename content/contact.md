@@ -11,11 +11,6 @@ image: "/images/gallery/fulls/cats/February.png"
 type: contact
 title: Contact
 showForm: true
-menu:
-  items:
-    name: "Contact"
-    pageref: "/contact"
-    weight: 40
 ---
 
 <p>If you're interested in a pet portrait please check out my <a href="/commissions">Commissions</a> page. If you have other inquiries please contact me by email<a href="mailto:ariel@arielsdoodles.com"> ariel@arielsdoodles.com</a> or by using the form below.  

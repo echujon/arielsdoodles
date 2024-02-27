@@ -36,3 +36,24 @@ googleAnalytics = "G-GFWBYJPVXR"
 
 [Params.asset]
   fontawesome_css = ["css/fontawesome-all.min.css"]
+
+
+  [[menu.main]]
+name = "Home"
+url = "/"
+weight = 10
+
+[[menu.main]]
+name = "Portfolio"
+url = "/portfolio/"
+weight = 20
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 30
+
+[[menu.main]]
+name = "Commissions"
+url = "/commissions/"
+weight = 40

@@ -17,11 +17,6 @@ type: commissions
 title: Commissions
 id: commissions
 showForm: true
-menu:
-  items:
-    name: "Commissions"
-    pageref: "/commissions"
-    weight: 30
 ---
 
 <section class="portraits">
