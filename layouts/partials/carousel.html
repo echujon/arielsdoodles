@@ -23,9 +23,35 @@
     }
 
     .carousel-navigation {
-        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        /* This will vertically center the arrows with the bullets */
+        justify-content: center;
+    }
+
+    .carousel-nav-buttons {
         display: flex;
         justify-content: center;
+        align-items: center;
+    }
+
+    .carousel-prev,
+    .carousel-navigation,
+    .carousel-next {
+        margin: 0 10px;
+        /* This adds horizontal space between your elements */
+    }
+
+    /* You can adjust the width of the navigation bullets if necessary */
+    .carousel-navigation {
+        flex-grow: 1;
+        /* This allows the navigation bullets to take up available space */
+    }
+
+    .carousel-bullets {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
