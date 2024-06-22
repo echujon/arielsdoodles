@@ -3,10 +3,19 @@ style: "banner style2"
 title:
   text: "2024 Cat Calendar on Etsy"
   #logo: "images/logo.svg"
-link: "https://www.kickstarter.com/projects/arielsdoodles/illustrated-cat-calendar-2024/"
+# subtitle: |
+#   <span class="date-launch">Get your calendars before they're gone!!</span>
+# link: "https://www.etsy.com/listing/1628683469/illustrated-2024-cat-calendar-12x12"
+
+
+subtitle: |
+  Hi, I'm Ariel and I love making art.
 button:
   label: "Check it out!"
   style: "doodles-font"
+  #link: "https://www.etsy.com/listing/1628683469/illustrated-2024-cat-calendar-12x12"
+  link: "/#cats"
+#landingBanner: "images/Kickstarter_Banner.png"
   link: "https://www.kickstarter.com/projects/arielsdoodles/illustrated-cat-calendar-2024/"
 landingBanner: "images/Kickstarter_Banner.png"
 image: "images/background.png"

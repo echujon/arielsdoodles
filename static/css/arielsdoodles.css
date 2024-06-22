@@ -26,8 +26,9 @@
 
 .logo-title h1 {
     position: relative;
-    top: 18px;
+    top: -10px;
     left: 10px;
+    font-size: 2.8rem;
 }
 
 .logo-image {
@@ -49,85 +50,129 @@
 
 .gallery article {
     margin-left: .1rem;
+    margin-left: .1rem;
 }
 
 .inner>img {
-    background-color: #969696;
-}
 
-
-section {
-    scroll-margin-top: 5rem;
-}
-
-section#pets {
-    box-shadow: none !important;
-}
-
-#dndCats .gallery article:nth-of-type(even),
-#dndCats .inner>img[index='even'] {
-    background-color: rgb(172, 187, 236);
-}
-
-/**Mailing list**/
-
-.mailinglist {
-    display: inline-block;
-}
-
-@media only screen and (min-width:1000px) {
-    .mailinglist {
-        margin-left: auto;
-        margin-right: auto;
-        width: 69%;
-        display: block;
-    }
-}
-
-
-@media screen and (orientation:landscape) {
-    #wrapper {
-        top: -1.5rem;
-        position: relative;
-
+    .inner>img {
+        background-color: #969696;
     }
 
-    .kickstarter-banner {
-        max-width: 100%;
-        margin: 0;
+    #contact {
+        margin-top: 1rem;
     }
 
-
-}
-
-
-
-@media screen and (orientation:portrait) {
-    .kickstarter-banner {
-        max-width: 95%;
-        margin-top: 1.5vh;
+    #contact img {
+        position: inherit;
     }
-}
+
+    section {
+        scroll-margin-top: 5rem;
+    }
+
+    section#pets {
+        box-shadow: none !important;
+    }
+
+    #dndCats .gallery article:nth-of-type(even),
+    #dndCats .inner>img[index='even'] {
+
+        #dndCats .gallery article:nth-of-type(even),
+        #dndCats .inner>img[index='even'] {
+            background-color: rgb(172, 187, 236);
+        }
+
+        /**Mailing list**/
+
+        .mailinglist {
+            display: inline-block;
+        }
+
+        @media only screen and (min-width:1000px) {
+            @media only screen and (min-width:1000px) {
+                .mailinglist {
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 69%;
+                    display: block;
+                }
+            }
+
+
+            @media screen and (orientation:landscape) {
+                #wrapper {
+                    top: -1.5rem;
+                    position: relative;
+
+                }
+
+                .kickstarter-banner {
+                    max-width: 100%;
+                    margin: 0;
+                }
+
+
+            }
+
+
+
+            @media screen and (orientation:portrait) {
+                .kickstarter-banner {
+                    max-width: 95%;
+                    margin-top: 1.5vh;
+                }
+            }
 
 
 
 
-.formkit-header {
 
-    font-family: 'providence_sansregular';
+            @media screen and (orientation:landscape) {
+                #wrapper {
+                    top: -1.5rem;
+                    position: relative;
 
-}
+                }
 
-.formkit-form {
-    border: none !important;
-    margin: auto;
+                .kickstarter-banner {
+                    max-width: 100%;
+                    margin: 0;
+                }
 
-}
 
-.formkit-submit span {
-    margin-top: -10px;
-}
+            }
 
-.formkit-fields {
-    justify-content: center;
-}
+
+
+            @media screen and (orientation:portrait) {
+                .kickstarter-banner {
+                    max-width: 95%;
+                    margin-top: 1.5vh;
+                }
+            }
+
+            .date-launch {
+                font-weight: 600;
+                font-size: 18px;
+            }
+
+            .formkit-header {
+
+                font-family: 'providence_sansregular';
+
+            }
+
+            .formkit-form {
+                border: none !important;
+                margin: auto;
+
+            }
+
+            .formkit-submit span {
+                margin-top: -10px;
+            }
+
+            .formkit-fields {
+                justify-content: center;
+            }
