@@ -4,14 +4,12 @@
         url('../webfonts/providence_sans_regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
 }
 
 .doodles-font {
     font-family: 'providence_sansregular';
     font-weight: 300;
     color: #000000d1;
-
 }
 
 .doodles-bold {
@@ -41,6 +39,13 @@
     font-size: 1.25rem;
 }
 
+.titlebar {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 0rem;
+    box-shadow: none !important;
+}
+
 .gallery article {
     margin-left: .1rem;
 }
@@ -58,7 +63,11 @@
 }
 
 section {
-    scroll-margin-top: 3rem;
+    scroll-margin-top: 5rem;
+}
+
+section#pets {
+    box-shadow: none !important;
 }
 
 #dndCats .gallery article:nth-of-type(even),
@@ -66,13 +75,12 @@ section {
     background-color: rgb(172, 187, 236);
 }
 
-/**Mailing list**/
-
 .mailinglist {
     display: inline-block;
 }
 
-@media only screen and (min-width:1000px) {
+/* Media Queries should be flat, not nested */
+@media only screen and (min-width: 1000px) {
     .mailinglist {
         margin-left: auto;
         margin-right: auto;
@@ -81,25 +89,19 @@ section {
     }
 }
 
-
-@media screen and (orientation:landscape) {
+@media screen and (orientation: landscape) {
     #wrapper {
         top: -1.5rem;
         position: relative;
-
     }
 
     .kickstarter-banner {
         max-width: 100%;
         margin: 0;
     }
-
-
 }
 
-
-
-@media screen and (orientation:portrait) {
+@media screen and (orientation: portrait) {
     .kickstarter-banner {
         max-width: 95%;
         margin-top: 1.5vh;
@@ -112,15 +114,12 @@ section {
 }
 
 .formkit-header {
-
     font-family: 'providence_sansregular';
-
 }
 
 .formkit-form {
     border: none !important;
     margin: auto;
-
 }
 
 .formkit-submit span {

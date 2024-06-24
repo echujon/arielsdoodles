@@ -1,0 +1,12 @@
+{{ define "main" }}
+{{$content := .Content}}
+{{ $content := dict "content" $content}}
+{{$params := merge $content .Params}}
+{{if eq .Params.type "contact"}}
+{{partial "contact" $params}}
+{{else if eq .Params.type "commissions"}}
+{{partial "contact" $params}}
+{{else if eq .Params.type "about"}}
+{{partial "contact" $params}}
+{{end}}
+{{ end }}

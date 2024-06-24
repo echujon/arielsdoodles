@@ -1,0 +1,28 @@
+.carousel-container {
+
+    .carousel-next,
+    .carousel-prev {
+        font-family: 'Font Awesome 5 Pro';
+    }
+
+    .carousel-prev {
+        left: 0;
+
+        &:before {
+            content: '\f104';
+            left: 0;
+
+        }
+    }
+
+    .carousel-next {
+        right: 0;
+
+        &:before {
+            content: '\f105';
+            right: 0;
+
+        }
+    }
+
+}

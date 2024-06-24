@@ -29,7 +29,7 @@ publishDir = "public"
 ## Hugo Built-in Features
 ## -----------------------------------------------
 
-disableKinds = ["taxonomy", "sitemap", "taxonomyTerm"]
+disableKinds = ["taxonomy", "taxonomyTerm"]
 # googleAnalytics = "G-XXXXXXXXXX"
 
 ## -----------------------------------------------
@@ -41,3 +41,30 @@ disableKinds = ["taxonomy", "sitemap", "taxonomyTerm"]
 [Params.social]
 
 [Params.asset]
+
+
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 10
+
+[[menu.main]]
+name = "Portfolio"
+url = "/portfolio/"
+weight = 20
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 30
+
+[[menu.main]]
+name = "Commissions"
+url = "/commissions/"
+weight = 40
+
+[[menu.main]]
+name = "Contact"
+url = "/contact/"
+weight = 50
