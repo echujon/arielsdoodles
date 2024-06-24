@@ -1,22 +1,26 @@
-function changeStyleOnEvents(el, events) {
+function changeStyleOnEvents(els, events, portrait="style1", landscape="style2") {
   for (var i = 0; i < events.length; i++) {
     window.addEventListener(
       events[i],
       function () {
-        if (window.matchMedia("(orientation: portrait)").matches) {
+        if (window.matchMedia("(orientation: portrait)").matches || window.innerWidth <= 980) {
           // you're in PORTRAIT mode
 
-          if (el != null) {
-            el.classList.remove("style2");
-            el.classList.add("style1");
+          if (els != null) {
+            els.forEach(element => {
+              element.classList.remove(landscape);
+              element.classList.add(portrait);
+            });
           }
         }
 
-        if (window.matchMedia("(orientation: landscape)").matches) {
+        if (window.matchMedia("(orientation: landscape)").matches|| window.innerWidth > 980) {
           // you're in LANDSCAPE mode
-          if (el != null) {
-            el.classList.remove("style1");
-            el.classList.add("style2");
+          if (els != null) {
+            els.forEach(element => {
+              element.classList.remove(portrait);
+              element.classList.add(landscape);
+            });
           }
         }
       },
@@ -24,9 +28,12 @@ function changeStyleOnEvents(el, events) {
     );
   }
 }
-let el = document.querySelector(".banner");
+let banner = document.querySelectorAll(".banner");
 let events = ["load", "resize"];
-changeStyleOnEvents(el, events);
+changeStyleOnEvents(banner, events);
+
+let galleries = document.querySelectorAll(".gallery");
+changeStyleOnEvents(galleries, events, "style2", "style1");
 
 const targetElements = document.querySelectorAll(".modal");
 
