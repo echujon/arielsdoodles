@@ -1,0 +1,78 @@
+title:
+  text: "2021 Calendar Cats"
+  style: "doodles-font"
+style: "style1 medium lightbox  onscroll-fade-in"
+id: "cats"
+content: Kitties from my 2021 Cat Calendar. If you are interested in a high quality print of any of my Cat Calendar kitties, <span class='doodles-bold'><a href="/contact">let me know.</a></span>
+pictures:
+  - title: "January Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/January.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/January.png"
+   
+
+  - title: "February Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/February.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/February.png"
+   
+
+  - title: "March Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/March.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/March.png"
+   
+
+  - title: "April Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/April.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/April.png"
+   
+
+  - title: "May Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/May.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/May.png"
+   
+
+  - title: "June Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/June.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/June.png"
+   
+
+  - title: "July Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/July.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/July.png"
+   
+
+  - title: "August Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/August.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/August.png"
+   
+
+  - title: "September Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/September.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/September.png"
+   
+
+  - title: "October Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/October.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/October.png"
+   
+
+  - title: "November Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/November.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/November.png"
+   
+
+  - title: "December Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2021/December.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2021/December.png"
+   
