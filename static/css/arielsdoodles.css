@@ -48,6 +48,13 @@
 
 .gallery article {
     margin-left: .1rem;
+    margin-bottom: .1rem;
+}
+
+article img {
+    width: 2em;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 .inner>img {
