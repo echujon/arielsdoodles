@@ -7,7 +7,7 @@ id: "contact"
 titleEntry:
   text: "Contact"
   style: "doodles-font"
-image: "/images/gallery/fulls/cats/February.png"
+image: "/images/gallery/fulls/cats/calendar/2021/February.png"
 type: contact
 title: Contact
 showForm: true
