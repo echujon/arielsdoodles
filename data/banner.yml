@@ -1,7 +1,7 @@
 ####################### Banner #########################
 style: "banner style2"
 title:
-  text: "2024 Cat Calendar on Etsy"
+  text: "Ariel's Doodles"
   #logo: "images/logo.svg"
 # subtitle: |
 #   <span class="date-launch">Get your calendars before they're gone!!</span>
@@ -16,6 +16,4 @@ button:
   #link: "https://www.etsy.com/listing/1628683469/illustrated-2024-cat-calendar-12x12"
   link: "/#cats"
 #landingBanner: "images/Kickstarter_Banner.png"
-  link: "https://www.kickstarter.com/projects/arielsdoodles/illustrated-cat-calendar-2024/"
-landingBanner: "images/Kickstarter_Banner.png"
 image: "images/background.png"
