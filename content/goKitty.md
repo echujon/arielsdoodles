@@ -14,7 +14,9 @@ showForm: false
 
 ## Components:
 - **52 Cards:**
-  - 48 Kitty Cards (12 features: Light, Snow, Cozy, Clover, Rain, Flower, Firefly, Fan, Ice Cream, Apple, Pumpkin, Leaf; each with 4 cards in 4 Seasonal Suits: Winter, Spring, Summer, Fall)
+  - 48 Kitty Cards<br>
+    - **12 Features**: Light, Snow, Cozy, Clover, Rain, Flower, Firefly, Fan, Ice Cream, Apple, Pumpkin, Leaf; each with 4 cards in<br>
+    - Each feature has 4 cards in **4 Seasonal Suits**: Winter, Spring, Summer, Fall
   - 4 Mouse Cards
 - **15 Seek Tokens**
 

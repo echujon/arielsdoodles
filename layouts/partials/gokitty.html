@@ -1,11 +1,22 @@
 <style>
+    #gokitty ul,
+    #gokitty ol {
+        text-align: left;
+    }
+
     #gokitty ol li {
         list-style-type: decimal;
         margin: 0px;
     }
 
-    #gokitty ul li {
+    #gokitty ul>li,
+    #gokitty ul li>ul>li>ul>li {
         list-style-type: disc;
+        margin: 0px;
+    }
+
+    #gokitty ul li>ul>li {
+        list-style-type: circle;
         margin: 0px;
     }
 </style>
