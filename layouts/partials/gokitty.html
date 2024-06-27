@@ -1,0 +1,24 @@
+<style>
+    #gokitty ol li {
+        list-style-type: decimal;
+        margin: 0px;
+    }
+
+    #gokitty ul li {
+        list-style-type: disc;
+        margin: 0px;
+    }
+</style>
+<section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
+    <div>
+        {{ with .content }}<div class="actual-content">{{ . | safeHTML }}{{ end }}</div>
+    </div>
+    {{with .image}}
+    <div class="image">
+        <img src="{{ . }}" alt="" />
+    </div>
+    {{end}}
+    {{if .pictures}}
+    {{partial "carousel" .pictures}}
+    {{end}}
+</section>
