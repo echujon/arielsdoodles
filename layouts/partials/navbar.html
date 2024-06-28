@@ -96,7 +96,7 @@
     }
 
     #navbar a.active,
-    .dropbtn.active {
+    .dropdown.active {
         color: #000;
         font-weight: 800;
         text-decoration: underline;
@@ -286,7 +286,7 @@
         <li><a class="{{if eq $currentPage.Params.Title .Name}}active{{ end }}" href="{{.URL}}">{{.Name}}</a>
         </li>
         {{else}}
-        <li class="dropdown-parent"><span class="dropdown active" onclick="toggleDropdown()">Portfolio <i
+        <li class="dropdown-parent"><span class="dropdown" onclick="toggleDropdown()">Portfolio <i
                     class="fa fa-caret-down"></i></span>
             <ul class="dropdown-chooser" id="dropdown-content">
                 <li><a href="/portfolio/#pets">Pet Portraits</a></li>
@@ -365,7 +365,10 @@
         if (hash) {
             let id = hash;
             let navItem = document.querySelector("#navbar a[href*='" + id + "']");
-            activateNavItem(navItem);
+            if (navItem)
+                activateNavItem(navItem);
+            else
+                console.warn(`No navItem with hash: ${id} found`);
         }
     }
 
@@ -436,17 +439,21 @@
         let navItemHasDropDown = false;
         if (currentlyActive != null && currentlyActive.parentNode.id == 'dropdown-content')
             hasCurrentDropDown = true;
-        if (navItem.parentNode.id == 'dropdown-content')
+        if (navItem.closest('#dropdown-content'))
             navItemHasDropDown = true;
         if (currentlyActive != navItem) {
             if (typeof (currentlyActive) != 'undefined' && currentlyActive != null) {
                 currentlyActive.classList.remove('active');
-                if (hasCurrentDropDown && !navItemHasDropDown)
+                if (hasCurrentDropDown && !navItemHasDropDown) {
                     dropdownContent.classList.remove('active');
+                    dropdown.classList.remove('active');
+                }
 
             }
-            if (!hasCurrentDropDown && navItemHasDropDown)
+            if (!hasCurrentDropDown && navItemHasDropDown) {
                 dropdownContent.classList.add('active');
+                dropdown.classList.add('active');
+            }
             navItem.classList.add('active');
         }
     }
