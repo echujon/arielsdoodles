@@ -36,8 +36,8 @@ The goal of Go Kitty is to collect sets of kitty cards, known as Clowders, to ea
 ### On Your Turn:
 - Ask any player for a specific Trait or Seasonal Suit card, or use a Seek Token.
 - You cannot ask for a Mouse card unless you use a Seek Token.
-- Start your Kitty Clowder at the beginning of your turn. If the draw pile is empty, you may build Clowders at the end of the turn.
-- If you have no cards left in your hand, you must draw a card.
+- Start your Kitty Clowder at the beginning of your turn. If the draw pile is empty, you may build Clowder sets at the end of the turn.
+- If the only cards you have is a/are Mouse card(s), you may ask for any Seasonal Suit.
 
 ### Asking for a Trait Card:
 1. You must have at least one card of the same Trait.
