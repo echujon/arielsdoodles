@@ -65,12 +65,12 @@ The goal of Go Kitty is to collect sets of kitty cards, known as Clowders, to ea
 - Acts as a wild card to complete any Kitty Clowder.
 - Cannot be used to make their own Clowder.
 
-## Clowder types:
+### Clowder types:
 - **Clowder of a Kind:** 4 cards with the same Trait. (3 points)
 - **Year-round Clowder:** 4 cards, each a different Seasonal Suit (Winter, Spring, Summer, Fall). (2 points)
 - **Seasonal Clowder:** 4 cards with the same Seasonal Suit. (1 point)
 
 - Reactivate one Seek Token for each Clowder made.
 
-## End of the Game:
+### End of the Game:
 - When the draw pile is gone, players take one more turn, then the game ends. The player with the most points wins. If tied, the player with the most active Seek Tokens wins.
