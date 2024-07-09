@@ -21,7 +21,7 @@ showForm: false
 - **15 Seek Tokens**
 
 ## Objective
-The goal of Go Kitty is to collect sets of kitty cards, known as Clowders, to earn points. The player with the most points at the end of the game wins.
+The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to earn points. The player with the most points at the end of the game wins.
 
 ## Setup:
 1. Remove Mouse cards.
