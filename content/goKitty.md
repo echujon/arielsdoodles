@@ -34,7 +34,7 @@ The goal of Go Kitty is to collect sets of kitty cards, known as Clowders, to ea
 ## Gameplay:
 
 ### On Your Turn:
-- If you cannot take an action draw a card from the draw pile
+- If you cannot take an action draw a card from the draw pile.
 - At the beginning of your turn put down your Clowder sets face up. If the draw pile is empty, you may build Clowder sets at the end of the turn.
 - Ask any player for a specific Trait or Seasonal Suit card, or use a Seek Token.
 - You cannot ask for a Mouse card unless you use a Seek Token.
