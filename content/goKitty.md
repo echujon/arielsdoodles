@@ -16,7 +16,7 @@ showForm: false
 - **52 Cards:**
   - 48 Kitty Cards<br>
     - **12 Traits**: Light, Snow, Cozy, Clover, Rain, Flower, Firefly, Fan, Ice Cream, Apple, Pumpkin, and Leaf<br>
-    - Each Trait has 4 cards in **4 Seasonal Suits**: Winter, Spring, Summer, Fall
+    - Each Trait has 4 cards in **4 Seasonal Suits**: Winter(![suit-winter](../images/suits/Winter.png)), Spring(![suit-spring](../images/suits/Spring.png)), Summer(![suit-summer](../images/suits/Summer.png)), Fall(![suit-fall](../images/suits/Fall.png))
   - 4 Mouse Cards
 - **15 Seek Tokens**
 
@@ -53,17 +53,21 @@ The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to 
 
 ### Using a Seek Token:
 1. Turn the Seek Token over; it is no longer active.
-2. Ask any player for any card, including a Mouse card. You do not need to have the card in your hand, but the quantity of cards you receive follows the Trait and Seasonal Suit rules. If the asked player doesn't have the cards, they say "No Kitty" and your turn ends.
-3. Alternatively, look at the top 3 cards of the draw deck, keep one, and place the rest at the bottom. Your turn ends.
+2. Ask any player for any card, including a Mouse card. You do not need to have the card in your hand, but the number of cards you receive follows the Trait and Seasonal Suit rules. If the asked player doesn't have the requested cards, they say "No Kitty" and your turn ends.
+3. Alternatively, look at the top 3 cards of the draw deck, keep one, and place the other two at the bottom. Your turn ends.
+
+#### Reactivating a Seek Token:
+1. You may reactivate a Seek Token when you lay down a Clowder.
+2. You may reactivate a Seek Token if you skip your turn.
 
 ### Mouse Card:
-- Can be used to reverse a play. If asked for a card, use the Mouse card to get the cards they are asking for.
-  - If they ask for a Trait card, they give you all their Trait cards.
-  - If they ask for a Seasonal Suit card, they give you one of that suit.
+- Can be used to reverse a play. If asked for a card that you have in your hand, you may use the Mouse card to get the cards they are asking for. 
+  - If they ask for a Trait card that you have, they give you all their Trait cards.
+  - If they ask for a Seasonal Suit card that you have, they give you one of that suit.
   - Once used, discard the Mouse card.
   - Cannot reverse a play on a Seek Token asking for a Mouse card.
 - Acts as a wild card to complete any Kitty Clowder.
-- Cannot be used to make their own Clowder.
+- Cannot be used to make a Mouse set (4 Mouse cards).
 
 ### Clowder types:
 - **Clowder of a Kind:** 4 cards with the same Trait. (3 points)
@@ -73,4 +77,4 @@ The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to 
 - Reactivate one Seek Token for each Clowder made.
 
 ### End of the Game:
-- When the draw pile is gone, players take one more turn, then the game ends. The player with the most points wins. If tied, the player with the most active Seek Tokens wins.
+- When the draw pile is depleted, each player takes one last turn. During these final turns, players can form a Clowder at any time during their turn. The player with the most points at the end wins. In the event of a tie, the player with the most active Seek Tokens wins.

@@ -20,6 +20,15 @@
         list-style-type: circle;
         margin: 0px;
     }
+
+    img[alt^='suit'] {
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+        margin-bottom: .1em;
+        /* Fine-tune position */
+
+    }
 </style>
 <section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
     <div>
