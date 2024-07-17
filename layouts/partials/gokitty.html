@@ -21,13 +21,25 @@
         margin: 0px;
     }
 
-    img[alt^='suit'] {
+    .suit img {
         width: 1em;
         height: 1em;
         vertical-align: middle;
         margin-bottom: .1em;
-        /* Fine-tune position */
 
+
+    }
+
+    @media only screen and (min-width: 551px) {
+        .suit {
+            display: inline-block;
+        }
+    }
+
+    @media only screen and (max-width: 550px) {
+        .suit {
+            display: block;
+        }
     }
 </style>
 <section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
