@@ -18,11 +18,14 @@ showForm: false
   - 48 Kitty Cards <br>
     4 copies each of 12 unique cards. Each card has one of 12 Traits, grouped into 4 Seasonal Suits. Each suit has 3 Traits and 12 cards in total (4 copies per Trait).
 
-    | Season    | Winter <span class="suit">(![suit-winter](../images/suits/Winter.png)) </span> |Spring  <span class="suit">(![suit-spring](../images/suits/Spring.png))</span>| Summer <span class="suit">(![suit-summer](../images/suits/Summer.png))</span> | Fall <span class="suit">(![suit-fall](../images/suits/Fall.png))</span> |
-    | --------  | ------- |------- |---------- |---------|
-    | Traits (4)| Light   | Clover | Firefly   | Apple   |
-    |           | Cozy    | Rain   | Fan       | Pumpkin |
-    |           | Snow    | Flower | Ice Cream | Leaf    |
+   
+
+    <b>New Cards</b>
+     | Season    | Winter <span class="suit">(![suit-winter](../images/suits/Winter.png)) </span> |Spring  <span class="suit">(![suit-spring](../images/suits/Spring.png))</span>| Summer <span class="suit">(![suit-summer](../images/suits/Summer.png))</span> | Fall <span class="suit">(![suit-fall](../images/suits/Fall.png))</span> |
+    | --------  | ------- |------- |---------- |-------------|
+    | Traits (4)| Light  <span class="kitty-card">![Light](../images/suits/Light.png) </span> | Clover <span class="kitty-card">![Clover](../images/suits/Clover.png) </span>| Firefly <span class="kitty-card">![Firefly](../images/suits/Firefly.png) </span>  | Apple <span class="kitty-card">![Apple](../images/suits/Apple.png) </span>       |
+    |           | Snug   <span class="kitty-card">![Snug](../images/suits/Snug.png) </span> | Rain  <span class="kitty-card">![Rain](../images/suits/Rain.png) </span> | Fan <span class="kitty-card">![Fan](../images/suits/Fan.png) </span>      | Pumpkin  <span class="kitty-card">![Pumpkin](../images/suits/Pumpkin.png) </span>   |
+    |           | Cold  <span class="kitty-card">![Cold](../images/suits/Cold.png) </span>  | Posy <span class="kitty-card">![Posy](../images/suits/Posy.png) </span>  | Ice Cream <span class="kitty-card">![Ice-Cream](../images/suits/IceCream.png) </span>| Leaf Pile <span class="kitty-card">![Leaf Pile](../images/suits/LeafPile.png) </span>  |
 
   - 4 Mouse Cards
 - **15 Seek Tokens**
@@ -35,7 +38,7 @@ The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to 
 
 ## Setup:
 1. Remove Mouse cards.
-2. Shuffle the deck, deal 5 cards to each player.
+2. Shuffle the deck, deal 3 cards to each player.
 3. Give each player 3 Seek Tokens.
 4. Add Mouse cards back and reshuffle to form the draw deck.
 5. The player who last saw a kitty goes first, or the player to the left of the dealer.
