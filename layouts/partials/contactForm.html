@@ -53,10 +53,21 @@
         margin: inherit;
     }
 
+    .website-field {
+        display: none;
+    }
+
     @media screen and (orientation:portrait) {
         form {
             padding: 1em 1em 1em 1em;
         }
+    }
+
+    .g-recaptcha {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1em;
+        /* optional, to give spacing below */
     }
 </style>
 <div class="form">
@@ -76,7 +87,12 @@
 
         <label>Message</label>
         <textarea rows="5" class="form-input" name="entry.449082259"></textarea>
-
+        <div class="website-field">
+            <label for="website">Website</label>
+            <input type="text" name="website" id="website">
+        </div>
+        <div class="g-recaptcha" data-sitekey="6Ld35SUrAAAAAGsXCX16VcYMy7IfkGa7jwuTMyb3
+"></div>
         <input class="doodles-font send-button" type="submit" value="Send" />
     </form>
 
@@ -96,4 +112,22 @@
         form.append(p);
 
     }
+    document.querySelector('.google-form').addEventListener('submit', function (event) {
+        var response = grecaptcha.getResponse();
+        var websiteField = document.getElementById('website').value;
+
+        if (websiteField.length > 0) {
+            // Honeypot field filled out - likely a bot
+            event.preventDefault();
+            alert('Spam detected. Submission blocked.');
+            return;
+        }
+
+        if (response.length === 0) {
+            // reCAPTCHA not completed
+            event.preventDefault();
+            alert('Please verify you are human.');
+        }
+    });
 </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
