@@ -5,6 +5,12 @@ style: "style1 medium lightbox  onscroll-fade-in"
 id: "pets"
 content: These are commissioned pet portraits. If you are interested in a portrait of your pet check out my <a href="/commissions">Commissions</a> page.
 pictures:
+  - title: "Kuma"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/commissions/pets/Kuma.png"
+    thumb: "/images/gallery/fulls/commissions/pets/Kuma.png"
+    #button: "Details"
+
   - title: "Zero & Bella"
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "/images/gallery/fulls/commissions/pets/Zero_Bella.png"

@@ -1,0 +1,39 @@
+title:
+  text: "Coaster Cats"
+  style: "doodles-font"
+style: "style1 medium lightbox  onscroll-fade-in"
+id: "coasters"
+content: Cute Coaster Cats
+pictures:
+  - title: "Calico"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/coasters/calico.png"
+    thumb: "/images/gallery/fulls/coasters/calico.png"
+    #button: "Details"
+  - title: "Cuddly Kitties"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/coasters/cuddly_kitties.png"
+    thumb: "/images/gallery/fulls/coasters/cuddly_kitties.png"
+    #button: "Details"
+    
+  - title: "Tux Taby"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/coasters/tuxblack_kitty.png"
+    thumb: "/images/gallery/fulls/coasters/tuxblack_kitty.png"
+    #button: "Details"
+
+  - title: "Orange"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/coasters/orange.png"
+    thumb: "/images/gallery/fulls/coasters/orange.png"
+    #button: "Details"
+
+
+
+  - title: "Gray Tabby"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/coasters/gray_tabby.png"
+    thumb: "/images/gallery/fulls/coasters/gray_tabby.png"
+    #button: "Details"
+
+    

@@ -27,7 +27,7 @@
 
   {{ with .image }}
   {{ $image := resources.Get . }}
-  {{ $imageWebp := $image.Resize (printf "%dx webp q85" $image.Width) }}
+  {{ $imageWebp := $image.Resize (printf "%dx webp q90" $image.Width) }}
   <div class="image">
     <picture>
       {{/* WebP source */}}
