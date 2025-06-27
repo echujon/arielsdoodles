@@ -1,17 +1,35 @@
+{{ $imagePath := .image }}
+{{ $thumbPath := .thumb }}
+
+{{ $image := resources.Get $imagePath }}
+{{ $thumb := resources.Get $thumbPath }}
+
+{{ if and $image $thumb }}
+{{/* Convert image and thumb to WebP while preserving original dimensions */}}
+{{ $imageWebp := $image.Resize (printf "%dx webp q85" $image.Width) }}
+{{ $thumbWebp := $thumb.Resize (printf "%dx webp q85" $thumb.Width) }}
+
 <article>
-    <a index={{.index}} href="{{ .image }}" class="image">
-        <img src="{{ .thumb }}" alt="" />
+    <a index="{{ .index }}" href="{{ $imageWebp.RelPermalink }}" class="image">
+        <picture>
+            {{/* WebP source */}}
+            <source srcset="{{ $thumbWebp.RelPermalink }}" type="image/webp">
+            {{/* Fallback image (original format) */}}
+            <img src="{{ $thumb.RelPermalink }}" alt="{{ .title }}" loading="lazy" />
+        </picture>
     </a>
     <div class="caption doodles-font">
         <h3>{{ .title }}</h3>
-        {{with .content}}
+        {{ with .content }}
         <p>{{ . }}</p>
-        {{end}}
+        {{ end }}
         {{ with .button }}
         <ul class="actions fixed">
             <li><span class="button small">{{ . }}</span></li>
         </ul>
         {{ end }}
-
     </div>
 </article>
+{{ else }}
+<p>Image not found: {{ $imagePath }}</p>
+{{ end }}

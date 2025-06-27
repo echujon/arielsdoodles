@@ -11,8 +11,8 @@ id: gokitty
 showForm: false
 ---
 # Go Kitty
-<b>2-5 Players, 15-25 minutes</b>
-<b>+7 year</b>
+**2-5 Players · 15-25 minutes · Ages +7 year**
+
 ## Components:
 - **52 Cards:**
   - 48 Kitty Cards <br>
@@ -32,8 +32,9 @@ showForm: false
 ## Objective
 The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to earn points. The player with the most points at the end of the game wins. There are 3 different types of clowders:
 - **Clowder of a Kind:** 4 cards with the same Trait. (3 points)
-- **Year-round Clowder:** 4 cards, each a different Season(Winter, Spring, Summer, Fall). (2 points)
+- **Year-round Clowder:** 4 cards, each a different Season(Winter<span class="suit">(![suit-winter](../images/suits/Winter.png)) </span> , Spring, Summer, Fall). (2 points)
 - **Seasonal Clowder:** 4 cards with the same Season. (1 point)
+  - completing one **Seasonal Clowder** for each Season—Winter, Spring, Summer, and Fall—you score (4 extra points)
 
 ## Setup:
 1. Remove Mouse cards.

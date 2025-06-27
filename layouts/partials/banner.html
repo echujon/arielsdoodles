@@ -26,10 +26,17 @@
   </a>
 
   {{ with .image }}
+  {{ $image := resources.Get . }}
+  {{ $imageWebp := $image.Resize (printf "%dx webp q85" $image.Width) }}
   <div class="image">
-    <img src="{{.}}" alt="Ariel's Doodles banner" />
+    <picture>
+      {{/* WebP source */}}
+      <source srcset="{{ $imageWebp.RelPermalink }}" type="image/webp">
+      {{/* Fallback image (original format) */}}
+      <img src="{{ $image.RelPermalink }}" alt="Ariel's Doodles banner" loading="lazy" />
+    </picture>
   </div>
-  {{end}}
+  {{ end }}
 
 
 </section>
