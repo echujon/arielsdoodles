@@ -27,7 +27,7 @@ showForm: false
 
 
   - 4 Mouse Cards
-- **15 Seek Tokens**
+- **15 Pounce Tokens**
 
 ## Objective
 The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to earn points. The player with the most points at the end of the game wins. There are 3 different types of clowders:
@@ -39,7 +39,7 @@ The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to 
 ## Setup:
 1. Remove Mouse cards.
 2. Shuffle the deck, deal 3 cards to each player.
-3. Give each player 3 Seek Tokens.
+3. Give each player 3 Pounce Tokens.
 4. Add Mouse cards back and reshuffle to form the draw deck.
 5. The player who last saw a kitty goes first, or the player to the left of the dealer.
 6. Turns proceed clockwise.
@@ -49,8 +49,8 @@ The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to 
 ### On Your Turn:
 - At the beginning of your turn put down your Clowder sets face up. If the draw pile is empty, you may build Clowder sets at anytime during your turn.
 - If you do not have cards in your hand you may "Go Kitty" and take a card from the draw pile.
-- Ask any player for a specific Trait or Season card, or use a Seek Token.
-- You cannot ask for a Mouse card unless you use a Seek Token.
+- Ask any player for a specific Trait or Season card, or use a Pounce Token.
+- You cannot ask for a Mouse card unless you use a Pounce Token.
 - If the only cards you have is a/are Mouse card(s), you may ask for any Season.
 
 ### Asking for a Trait Card:
@@ -64,21 +64,21 @@ The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to 
 2. If the asked player has the suit, they give you one card. Your turn ends.
 3. If they don't have it, they say "GoKitty" and you draw a card. Your turn ends.
 
-### Using a Seek Token:
-1. Turn the Seek Token over; it is no longer active.
+### Using a Pounce Token:
+1. Turn the Pounce Token over; it is no longer active.
 2. Ask any player for any card, including a Mouse card. You do not need to have the card in your hand, but the number of cards you receive follows the Trait and Season rules. If the asked player doesn't have the requested cards, they say "No Kitty" and your turn ends.
 3. Alternatively, look at the top 3 cards of the draw deck, keep one, and place the other two at the bottom. Your turn ends.
 
-#### Reactivating a Seek Token:
-1. You may reactivate a Seek Token when you lay down a Clowder.
-2. You may reactivate a Seek Token if you skip your turn.
+#### Reactivating a Pounce Token:
+1. You may reactivate a Pounce Token when you lay down a Clowder.
+2. You may reactivate a Pounce Token if you skip your turn.
 
 ### Mouse Card:
 - Can be used to reverse a play. If asked for a card that you have in your hand, you may use the Mouse card to get the cards they are asking for. 
   - If they ask for a Trait card that you have, they give you all their Trait cards.
   - If they ask for a Season card that you have, they give you one of that suit.
   - Once used, discard the Mouse card.
-  - Cannot reverse a play on a Seek Token asking for a Mouse card.
+  - Cannot reverse a play on a Pounce Token asking for a Mouse card.
 - Acts as a wild card to complete any Kitty Clowder.
 - Cannot be used to make a Mouse set (4 Mouse cards).
 
@@ -87,7 +87,7 @@ The goal of Go Kitty is to collect sets of 4 kitty cards, known as Clowders, to 
 - **Year-round Clowder:** 4 cards, each a different Seasona (Winter, Spring, Summer, Fall). (2 points)
 - **Season Clowder:** 4 cards with the same Season Suit. (1 point)
 
-- Reactivate one Seek Token for each Clowder made.
+- Reactivate one Pounce Token for each Clowder made.
 
 ### End of the Game:
-- When the draw pile is depleted, each player takes one last turn. During these final turns, players can form a Clowder at any time during their turn. The player with the most points at the end wins. In the event of a tie, the player with the most active Seek Tokens wins.
+- When the draw pile is depleted, each player takes one last turn. During these final turns, players can form a Clowder at any time during their turn. The player with the most points at the end wins. In the event of a tie, the player with the most active Pounce Tokens wins.

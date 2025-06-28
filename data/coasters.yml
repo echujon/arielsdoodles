@@ -1,9 +1,9 @@
 title:
-  text: "Coaster Cats"
+  text: "Cats in Boxes"
   style: "doodles-font"
 style: "style1 medium lightbox  onscroll-fade-in"
 id: "coasters"
-content: Cute Coaster Cats
+content: Kitties in Boxes
 pictures:
   - title: "Calico"
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
@@ -15,7 +15,7 @@ pictures:
     image: "/images/gallery/fulls/coasters/cuddly_kitties.png"
     thumb: "/images/gallery/fulls/coasters/cuddly_kitties.png"
     #button: "Details"
-    
+
   - title: "Tux Taby"
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "/images/gallery/fulls/coasters/tuxblack_kitty.png"
