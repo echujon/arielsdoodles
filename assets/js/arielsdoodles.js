@@ -1,39 +1,52 @@
-function changeStyleOnEvents(els, events, portrait="style1", landscape="style2") {
-  for (var i = 0; i < events.length; i++) {
-    window.addEventListener(
-      events[i],
-      function () {
-        if (window.matchMedia("(orientation: portrait)").matches || window.innerWidth <= 980) {
-          // you're in PORTRAIT mode
+function changeStyleOnEvents(els, events, portrait = "style1", landscape = "style2", callback = null) {
+  function applyStyles() {
+    if (window.matchMedia("(orientation: portrait)").matches || window.innerWidth <= 980) {
+      if (els) {
+        els.forEach(element => {
+          element.classList.remove(landscape);
+          element.classList.add(portrait);
+        });
+      }
+    } else {
+      if (els) {
+        els.forEach(element => {
+          element.classList.remove(portrait);
+          element.classList.add(landscape);
+        });
+      }
+    }
 
-          if (els != null) {
-            els.forEach(element => {
-              element.classList.remove(landscape);
-              element.classList.add(portrait);
-            });
-          }
-        }
+    // Run callback (if provided) — only once on "load"
+    if (typeof callback === "function" && event.type === "load") {
+      callback();
+    }
+  }
 
-        if (window.matchMedia("(orientation: landscape)").matches|| window.innerWidth > 980) {
-          // you're in LANDSCAPE mode
-          if (els != null) {
-            els.forEach(element => {
-              element.classList.remove(portrait);
-              element.classList.add(landscape);
-            });
-          }
-        }
-      },
-      false
-    );
+  for (let i = 0; i < events.length; i++) {
+    window.addEventListener(events[i], applyStyles, false);
   }
 }
-let banner = document.querySelectorAll(".banner");
-let events = ["load", "resize"];
-changeStyleOnEvents(banner, events);
 
+function scrollToHashAfterStylesSettle() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const target = document.querySelector(window.location.hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    });
+  });
+}
+
+let banner = document.querySelectorAll(".banner");
 let galleries = document.querySelectorAll(".gallery");
-changeStyleOnEvents(galleries, events, "style2", "style1");
+
+changeStyleOnEvents(banner, ["load"], "style1", "style2", scrollToHashAfterStylesSettle);
+changeStyleOnEvents(galleries, ["load"], "style2", "style1");
+
+// On resize, just apply styles (no scroll)
+changeStyleOnEvents(banner, ["resize"], "style1", "style2");
+changeStyleOnEvents(galleries, ["resize"], "style2", "style1");
 
 const targetElements = document.querySelectorAll(".modal");
 
