@@ -365,7 +365,7 @@
     function selectNavItemByHash(hash) {
         if (hash) {
             let id = hash;
-            let navItem = document.querySelector("#navbar a[href*='" + id + "']");
+            let navItem = document.querySelector("#navbar a[href$='" + id + "']");
             if (navItem)
                 activateNavItem(navItem);
             else
