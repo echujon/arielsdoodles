@@ -1,5 +1,5 @@
 [build.environment]
-HUGO_VERSION="0.112.7"
+HUGO_VERSION="0.113.0"
 
 [build.processing]
   skip_processing = false
