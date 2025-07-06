@@ -1,7 +1,7 @@
 title:
   text: "Pet Portraits"
   style: "doodles-font"
-style: "style1 medium lightbox  onscroll-fade-in"
+style: "style2 medium lightbox  onscroll-fade-in"
 id: "pets"
 content: These are commissioned pet portraits. If you are interested in a portrait of your pet check out my <a href="/commissions">Commissions</a> page.
 pictures:

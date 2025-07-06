@@ -6,10 +6,12 @@ titleEntry:
   text: "Commissions"
   style: "doodles-font"
 pictures:
-  - image: "/images/gallery/fulls/commissions/pets/Alaska.png"
-    title: "Alaska & Friends"
+  - image: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
+    title: "Skippy & Sabrina"
   - image: "/images/gallery/fulls/commissions/pets/Hunny_and_Bub.png"
     title: "Hunny & Bub"
+  - image: "/images/gallery/fulls/commissions/pets/Alaska.png"
+    title: "Alaska & Friends"
   - image: "/images/gallery/fulls/commissions/pets/Skippy_and_Sabrina.png"
     title: "Skippy & Sabrina"
 

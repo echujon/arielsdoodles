@@ -4,7 +4,9 @@
         /* Adjust as needed */
         margin: 0 auto;
         overflow: hidden;
+        /*aspect-ratio: 4/3;*/
     }
+
 
     .carousel-slider {
         display: flex;
@@ -12,9 +14,38 @@
         transition: transform 0.3s ease;
     }
 
+    .carousel-stop {
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        /* or use a subtle gray/red */
+        border: 2px solid #999;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .carousel-stop:hover {
+        border-color: #333;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .stop-square {
+        width: 16px;
+        height: 16px;
+        background-color: black;
+    }
+
     .carousel-slider img {
         width: 100%;
+        display: block;
         height: auto;
+        object-fit: cover;
     }
 
     button.carousel-bullet {
@@ -145,14 +176,20 @@
             /*type: "div",*/
             className: "carousel-prev",
             /*innerHTML: "<span>Prev</span>",*/
-            onclick: () => prev(),
+            onclick: () => {
+                prev();
+                elStop.disabled = false;
+            },
         });
 
         const elNext = elNew("div", {
             /*type: "button",*/
             className: "carousel-next",
             /*innerHTML: "<span>Next</span>",*/
-            onclick: () => next(),
+            onclick: () => {
+                next();
+                elStop.disabled = false;
+            },
         });
 
         // Navigation:
@@ -164,8 +201,11 @@
         const elStop = elNew("button", {
             type: "button",
             className: "carousel-stop",
-            innerHTML: "<span>STOP</span>",
-            onclick: () => stop(),
+            innerHTML: '<div class="stop-square"></div>',
+            onclick: function () {
+                stop()
+                this.disabled = true;
+            }
         })
 
         // Navigation bullets:
@@ -174,7 +214,10 @@
             const elBtn = elNew("button", {
                 type: "button",
                 className: "carousel-bullet",
-                onclick: () => goto(i)
+                onclick: () => {
+                    goto(i);
+                    elStop.disabled = false;
+                }
             });
             elsBtns.push(elBtn);
         }
@@ -198,7 +241,7 @@
         // Insert UI elements:
         elButtonNavigation.append(...elsBtns);
 
-        elCarouselDiv.append(elPrev, elButtonNavigation, elNext);
+        elCarouselDiv.append(elStop, elPrev, elButtonNavigation, elNext);
         elCarousel.append(elCarouselDiv);
 
 

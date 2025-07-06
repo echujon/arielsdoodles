@@ -1,7 +1,7 @@
 title:
   text: "Cats in Boxes"
   style: "doodles-font"
-style: "style1 medium lightbox  onscroll-fade-in"
+style: "style2 medium lightbox  onscroll-fade-in"
 id: "catsInBoxes"
 content: Kitties in Boxes
 pictures:
