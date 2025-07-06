@@ -1,17 +1,22 @@
 function changeStyleOnEvents(els, events, portrait = "style1", landscape = "style2", callback = null) {
   function applyStyles(event) {
-    let isPortrait = window.matchMedia("(orientation: portrait)").matches || window.innerWidth <= 980;
-    let mode = isPortrait ? "mobile" : "desktop";
-
-    if (localStorage.getItem("layoutMode") !== mode) {
-      els.forEach(el => {
-        el.classList.remove(isPortrait ? landscape : portrait);
-        el.classList.add(isPortrait ? portrait : landscape);
-      });
-
-      localStorage.setItem("layoutMode", mode);
+    if (window.matchMedia("(orientation: portrait)").matches || window.innerWidth <= 980) {
+      if (els) {
+        els.forEach(element => {
+          element.classList.remove(landscape);
+          element.classList.add(portrait);
+        });
+      }
+    } else {
+      if (els) {
+        els.forEach(element => {
+          element.classList.remove(portrait);
+          element.classList.add(landscape);
+        });
+      }
     }
 
+    // Run callback (if provided) — only once on "load"
     if (typeof callback === "function" && event.type === "load" && window.location.hash) {
       callback();
     }
