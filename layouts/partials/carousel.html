@@ -14,11 +14,10 @@
         transition: transform 0.3s ease;
     }
 
-    .carousel-stop {
+    .carousel-toggle {
         width: 40px;
         height: 40px;
         background-color: transparent;
-        /* or use a subtle gray/red */
         border: 2px solid #999;
         border-radius: 6px;
         display: flex;
@@ -30,9 +29,17 @@
         transition: border-color 0.2s ease, background-color 0.2s ease;
     }
 
-    .carousel-stop:hover {
+    .carousel-toggle:hover {
         border-color: #333;
         background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .play-triangle {
+        width: 0;
+        height: 0;
+        border-left: 16px solid black;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
     }
 
     .stop-square {
@@ -149,7 +156,7 @@
             c -= 1;
             anim();
             // Ensure stop button is enabled if navigation occurs
-            elStop.disabled = false;
+            elToggle.disabled = false;
         };
 
         const next = () => {
@@ -157,28 +164,30 @@
             c += 1;
             anim();
             // Ensure stop button is enabled if navigation occurs
-            elStop.disabled = false;
+            elToggle.disabled = false;
         };
 
         const goto = (index) => {
             c = index;
             anim();
             // Ensure stop button is enabled if navigation occurs
-            elStop.disabled = false;
+            elToggle.disabled = false;
         };
 
         const play = () => {
             // Only start if not already playing
             if (!itv) {
                 itv = setInterval(next, pause + animation);
-                elStop.disabled = false; // Re-enable stop button when playing
+                elToggle.setAttribute("aria-lable", "Stop slideshow");
+                elToggle.innerHTML = '<div class="stop-square"></div>'; // Re-enable stop button when playing
             }
         };
 
         const stop = () => {
             clearInterval(itv);
-            itv = null; // Clear the interval ID
-            elStop.disabled = true; // Disable the stop button
+            itv = null;
+            elToggle.setAttribute("aria-label", "Play slideshow");
+            elToggle.innerHTML = '<div class="play-triangle"></div>';
         };
 
         // Buttons:
@@ -186,7 +195,7 @@
             className: "carousel-prev",
             onclick: () => {
                 // If previously stopped, re-enable play and then navigate
-                if (elStop.disabled) {
+                if (elToggle.disabled) {
                     play();
                 }
                 prev();
@@ -197,7 +206,7 @@
             className: "carousel-next",
             onclick: () => {
                 // If previously stopped, re-enable play and then navigate
-                if (elStop.disabled) {
+                if (elToggle.disabled) {
                     play();
                 }
                 next();
@@ -210,18 +219,22 @@
             className: "carousel-navigation",
         });
 
-        const elStop = elNew("button", {
+        const elToggle = elNew("button", {
             type: "button",
-            className: "carousel-stop",
+            className: "carousel-toggle",
+            ariaLabel: "Stop slideshow",
             innerHTML: '<div class="stop-square"></div>',
             onclick: function () {
-                if (itv) { // If playing, stop it
+                if (itv) {
                     stop();
-                } else { // If stopped, play it
+                } else {
                     play();
                 }
             }
         });
+
+
+
 
 
         // Navigation bullets:
@@ -231,7 +244,7 @@
                 className: "carousel-bullet",
                 onclick: () => {
                     // If previously stopped, re-enable play and then navigate
-                    if (elStop.disabled) {
+                    if (elToggle.disabled) {
                         play();
                     }
                     goto(i);
@@ -256,7 +269,7 @@
         // Init:
         // Insert UI elements:
         elButtonNavigation.append(...elsBtns);
-        elCarouselDiv.append(elStop, elPrev, elButtonNavigation, elNext);
+        elCarouselDiv.append(elToggle, elPrev, elButtonNavigation, elNext);
         elCarousel.append(elCarouselDiv);
 
         // Clone first and last slides (for "infinite" slider effect)
