@@ -122,7 +122,6 @@
 
         const animation = 500;
         const pause = 5000;
-        // Or use something like: const animation = Math.abs(elCarousel.dataset.carouselAnimation ?? 500);
 
         const elCarouselSlider = elemental(".carousel-slider", elCarousel);
         const elsSlides = els(".carousel-slide", elCarouselSlider);
@@ -146,49 +145,62 @@
         };
 
         const prev = () => {
-            if (c <= -1) return; // prevent blanks on fast prev-click
+            if (c <= -1) return;
             c -= 1;
             anim();
+            // Ensure stop button is enabled if navigation occurs
+            elStop.disabled = false;
         };
 
         const next = () => {
-            if (c >= tot) return; // prevent blanks on fast next-click
+            if (c >= tot) return;
             c += 1;
             anim();
+            // Ensure stop button is enabled if navigation occurs
+            elStop.disabled = false;
         };
 
         const goto = (index) => {
             c = index;
             anim();
+            // Ensure stop button is enabled if navigation occurs
+            elStop.disabled = false;
         };
 
         const play = () => {
-            itv = setInterval(next, pause + animation);
+            // Only start if not already playing
+            if (!itv) {
+                itv = setInterval(next, pause + animation);
+                elStop.disabled = false; // Re-enable stop button when playing
+            }
         };
 
         const stop = () => {
             clearInterval(itv);
+            itv = null; // Clear the interval ID
+            elStop.disabled = true; // Disable the stop button
         };
 
         // Buttons:
-
         const elPrev = elNew("div", {
-            /*type: "div",*/
             className: "carousel-prev",
-            /*innerHTML: "<span>Prev</span>",*/
             onclick: () => {
+                // If previously stopped, re-enable play and then navigate
+                if (elStop.disabled) {
+                    play();
+                }
                 prev();
-                elStop.disabled = false;
             },
         });
 
         const elNext = elNew("div", {
-            /*type: "button",*/
             className: "carousel-next",
-            /*innerHTML: "<span>Next</span>",*/
             onclick: () => {
+                // If previously stopped, re-enable play and then navigate
+                if (elStop.disabled) {
+                    play();
+                }
                 next();
-                elStop.disabled = false;
             },
         });
 
@@ -203,56 +215,49 @@
             className: "carousel-stop",
             innerHTML: '<div class="stop-square"></div>',
             onclick: function () {
-                stop()
-                this.disabled = true;
+                if (itv) { // If playing, stop it
+                    stop();
+                } else { // If stopped, play it
+                    play();
+                }
             }
-        })
+        });
+
 
         // Navigation bullets:
-
         for (let i = 0; i < tot; i++) {
             const elBtn = elNew("button", {
                 type: "button",
                 className: "carousel-bullet",
                 onclick: () => {
+                    // If previously stopped, re-enable play and then navigate
+                    if (elStop.disabled) {
+                        play();
+                    }
                     goto(i);
-                    elStop.disabled = false;
                 }
             });
             elsBtns.push(elBtn);
         }
 
-
         // Events:
-
         // Infinite slide effect:
         elCarouselSlider.addEventListener("transitionend", () => {
             if (c <= -1) c = tot - 1;
             if (c >= tot) c = 0;
-            anim(0); // quickly switch to "c" slide (with animation duration 0)
+            anim(0);
         });
 
-        // Pause on pointer enter:
-        elCarousel.addEventListener("pointerenter", () => stop());
-        elCarousel.addEventListener("pointerleave", () => play());
+        // --- REMOVE THESE LINES ---
+        // elCarousel.addEventListener("pointerenter", () => stop());
+        // elCarousel.addEventListener("pointerleave", () => play());
+        // --------------------------
 
         // Init:
-
         // Insert UI elements:
         elButtonNavigation.append(...elsBtns);
-
         elCarouselDiv.append(elStop, elPrev, elButtonNavigation, elNext);
         elCarousel.append(elCarouselDiv);
-
-
-
-
-
-
-
-
-
-
 
         // Clone first and last slides (for "infinite" slider effect)
         elCarouselSlider.prepend(elsSlides[tot - 1].cloneNode(true));
@@ -266,6 +271,6 @@
     };
 
     // Allows to use multiple carousels on the same page:
-    els(".carousel-container").forEach(carousel); 
+    els(".carousel-container").forEach(carousel);
 </script>
 {{end}}
