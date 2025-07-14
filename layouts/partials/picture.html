@@ -1,14 +1,19 @@
 {{ $imagePath := .image }}
-{{ $thumbPath := .thumb }}
+{{ $thumbPath := .thumb | default .image }}
+{{ $title := .title | default "Untitled" }}
 
 {{ $image := resources.Get $imagePath }}
 {{ $thumb := resources.Get $thumbPath }}
+
+{{ $isCarousel := .isCarousel | default false }}
 
 {{ if and $image $thumb }}
 {{/* Convert image and thumb to WebP while preserving original dimensions */}}
 {{ $imageWebp := $image.Resize (printf "%dx webp q85" $image.Width) }}
 {{ $thumbWebp := $thumb.Resize (printf "%dx webp q85" $thumb.Width) }}
-
+{{if $isCarousel}}
+<img class="carousel-slide" src="{{ $imageWebp.RelPermalink }}" alt="Image">
+{{else}}
 <article>
     <a index="{{ .index }}" href="{{ $imageWebp.RelPermalink }}" class="image">
         <picture>
@@ -30,6 +35,7 @@
         {{ end }}
     </div>
 </article>
+{{end}}
 {{ else }}
 <p>Image not found: {{ $imagePath }}</p>
 {{ end }}

@@ -107,7 +107,10 @@
         {{$index := dict "index" $i}}
         {{$picture := merge $picture $index}}
         {{with $picture}}
-        <img class="carousel-slide" src="{{.image}}" alt="Image">
+        <!-- img class="carousel-slide" src="{{.image}}" alt="Image"!-->
+        {{ $pictureWithFlags := merge $picture (dict "index" $i "isCarousel" true) }}
+        {{ partial "picture" $pictureWithFlags }}
+        <!--{{ partial "picture" $picture }} !-->
         {{end}}
         {{end}}
     </div>
