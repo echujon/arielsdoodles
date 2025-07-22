@@ -1,4 +1,5 @@
 .carousel-container {
+    max-width: 50vh;
 
     .carousel-next,
     .carousel-prev {
@@ -23,6 +24,17 @@
             right: 0;
 
         }
+    }
+
+    // Apply margin-right only in landscape mode
+    @include orientation(landscape) {
+        margin-right: 3vh;
+    }
+
+    // Ensure no margin-right in portrait mode (optional, good for clarity/overrides)
+    @include orientation(portrait) {
+        margin-right: 0;
+        margin-bottom: 2vh;
     }
 
 }
