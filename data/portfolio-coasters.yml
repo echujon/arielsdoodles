@@ -3,6 +3,7 @@ title:
   style: "doodles-font"
 style: "style1 medium lightbox  onscroll-fade-in"
 id: "catsInBoxes"
+weight: 20
 content: Kitties in Boxes
 pictures:
   - title: "Calico"

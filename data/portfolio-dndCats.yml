@@ -3,6 +3,7 @@ title:
   style: "doodles-font"
 style: "style1 medium lightbox  onscroll-fade-in"
 id: "dndCats"
+weight: 50
 content: These are kitties inspired by the fantasy game Dungeons & Dragons. <span class='doodles-bold'><a href="/contact">Let me know</a></span> if you want a high quality print, sticker, or magnet of any of my DnD kitties.
 pictures:
   - title: "Barbarian Kitty"

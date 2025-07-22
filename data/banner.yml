@@ -16,4 +16,22 @@ button:
   #link: "https://www.etsy.com/listing/1628683469/illustrated-2024-cat-calendar-12x12"
   link: "/portfolio"
 #landingBanner: "images/Kickstarter_Banner.png"
+id: "banner"
 image: "images/background.png"
+pictures:
+  - title: "January Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2024/January.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2024/January.png"
+   
+
+  - title: "February Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2024/February.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2024/February.png"
+   
+
+  - title: "March Kitty"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/cats/calendar/2024/March.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2024/March.png"

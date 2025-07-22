@@ -3,6 +3,7 @@ title:
   style: "doodles-font"
 style: "style1 medium lightbox  onscroll-fade-in"
 id: "cats"
+weight: 30
 content: Kitties from my 2024 Cat Calendar. If you are interested in a high quality print of any of my Cat Calendar kitties, <span class='doodles-bold'><a href="/contact">let me know.</a></span>
 pictures:
   - title: "January Kitty"

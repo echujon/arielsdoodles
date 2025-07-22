@@ -4,9 +4,14 @@
         <h1 class="titlebar doodles-font">Portfolio</h1>
     </div>
 </section>
-{{ partial "pets" site.Data.pets }}
-{{ partial "coaster" site.Data.coasters}}
-{{ partial "cats" site.Data.cats2024 }}
-{{ partial "cats" site.Data.cats2021 }}
-{{ partial "dndCats" site.Data.dndCats }}
+{{ $portfolioData := slice }}
+{{ range $key, $value := site.Data }}
+{{ if hasPrefix $key "portfolio-" }}
+{{ $portfolioData = $portfolioData | append $value }}
+{{end}}
+{{end}}
+{{ $sortedPortfolioData := sort $portfolioData "weight" }}
+{{ range $item := $sortedPortfolioData }}
+{{ partial "portfolio" $item }} {{/* Pass the entire data file's content to the partial */}}
+{{ end }}
 {{ end }}
