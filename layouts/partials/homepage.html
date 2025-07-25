@@ -1,0 +1,25 @@
+<section class="wrapper style special">
+    <div class="inner triptych-section">
+        {{ range .triptych_sections }}
+        <div class="triptych-item">
+            <a href="{{ .button_link | relURL }}" class="triptych-link-overlay"></a>
+            <a href="{{ .button_link | relURL }}" class="triptych-link">
+                <div class="image">
+                    {{ $image := resources.Get .image }}
+                    {{ if $image }}
+                    {{ $imageWebp := $image.Resize (printf "%dx webp q85" $image.Width) }}
+                    <picture>
+                        <source srcset="{{ $imageWebp.RelPermalink }}" type="image/webp">
+                        <img src="{{ $image.RelPermalink }}" alt="{{ .title }}" loading="lazy" />
+                    </picture>
+                    {{ else }}
+                    <p>Image not found: {{ .image }}</p>
+                    {{ end }}
+                </div>
+                <h3 class="doodles-font">{{ .title }}</h3>
+                <p>{{ .content }}</p>
+            </a>
+        </div>
+        {{ end }}
+    </div>
+</section>
