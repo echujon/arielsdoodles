@@ -1,0 +1,16 @@
+style: "style1 medium lightbox  onscroll-fade-in"
+triptych_sections:
+  - title: "Portfolio"
+    image: "/images/gallery/fulls/coasters/calico.png"
+    #content: "My delightful collection of felines finding comfort in unexpected places."
+    button_link: "/portfolio/#catsInBoxes" # Link to a specific page or filtered gallery
+
+  - title: "Commissions"
+    image: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
+    #content: "Interested in a custom piece? Learn about my commission process and past works."
+    button_link: "/commissions"
+
+  - title: "Other Cute Stuff"
+    image: "/images/gallery/fulls/cats/DnD/Bard.png"
+    #content: "A heartwarming gallery of the most adorable pets I've had the pleasure to draw."
+    button_link: "/portfolio/#dndCats"

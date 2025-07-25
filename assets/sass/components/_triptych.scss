@@ -1,0 +1,100 @@
+// assets/scss/_triptych.scss
+
+.triptych-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    margin-top: -6rem;
+
+    .triptych-item {
+        flex: 1 1 30%;
+        /* Grow, shrink, and set a base width for each item */
+        max-width: 350px;
+        border-radius: 1.5rem;
+        /* This sets the rounded corners for the *entire section's border* */
+        /* Adjust '1.5rem' to your desired level of roundness for the overall box */
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        position: relative;
+        border: solid 1px _palette(border); // This is your faint border around the section
+        transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        /* Optional: Maximum width for each item */
+        text-align: center;
+        background-color: _palette(bg);
+        padding: 1.5rem;
+        border-radius: _border-radius();
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        position: relative; // Crucial for the absolute positioned overlay link
+        display: flex;
+        flex-direction: column; // Stack content vertically
+        justify-content: space-between; // Distribute space between content blocks
+        min-height: 400px; // Set a minimum height for the entire box to make them even. Adjust as needed!
+        // This value should be large enough to accommodate the tallest content.
+
+        border: solid 1px _palette(border); // Faint border for the whole section
+        transition: border-color 0.2s ease-in-out; // Smooth transition for hover
+
+        // Transparent overlay link to make the whole section clickable
+        .triptych-link-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; // Ensure it's above other content but below text if needed for popups etc.
+            text-decoration: none; // Remove default underline
+            cursor: pointer; // Show pointer on hover
+        }
+
+        // Hover effect for the entire item
+        &:hover {
+            border-color: _palette(accent); // Example hover effect for the border
+            transform: translateY(-5px); // Optional: Subtle lift on hover
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15); // Optional: Enhance shadow on hover
+        }
+
+        .image {
+            display: block;
+            margin-bottom: 1rem;
+            width: 100%;
+            //height: 200px; // Fixed height for the image container. Adjust as needed!
+            // This makes the image area consistent across all triptych items.
+            overflow: hidden; // Crucial to crop images to this fixed height
+            border-radius: _border-radius(); // Apply border-radius to the image container
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%; // Make image fill its container
+                object-fit: contain; // Crop image to fit without distortion
+                object-position: center; // Center the image within its fixed height
+                border-radius: _border-radius(); // Ensure image itself also has radius if container has it
+            }
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: _palette(fg-bold);
+            flex-shrink: 0; // Prevent title from shrinking if content is long
+        }
+
+        p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: _palette(fg);
+            flex-grow: 1; // Allow paragraph to grow and take available space, pushing content down
+            margin-bottom: 0; // Remove default bottom margin to let justify-content handle spacing
+        }
+
+        @include breakpoint('<=medium') {
+            flex: 1 1 45%;
+        }
+
+        @include breakpoint('<=small') {
+            flex: 1 1 90%;
+            max-width: 400px;
+        }
+    }
+}

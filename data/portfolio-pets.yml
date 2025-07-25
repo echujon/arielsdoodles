@@ -6,6 +6,24 @@ id: "pets"
 weight: 10
 content: These are commissioned pet portraits. If you are interested in a portrait of your pet check out my <a href="/commissions">Commissions</a> page.
 pictures:
+  - title: "Felix & Dobby"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/commissions/pets/Felix_and_Dobby.png"
+    thumb: "/images/gallery/fulls/commissions/pets/Felix_and_Dobby.png"
+    #button: "Details"
+
+  - title: "Murphy, Little Red & Topol"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
+    thumb: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
+    #button: "Details"
+    
+  - title: "Rango & Flynn"
+    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
+    image: "/images/gallery/fulls/commissions/pets/Rango_and_Flynn.png"
+    thumb: "/images/gallery/fulls/commissions/pets/Rango_and_Flynn.png"
+    #button: "Details"
+    
   - title: "Kuma"
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "/images/gallery/fulls/commissions/pets/Kuma.png"
@@ -17,13 +35,6 @@ pictures:
     image: "/images/gallery/fulls/commissions/pets/Zero_Bella.png"
     thumb: "/images/gallery/fulls/commissions/pets/Zero_Bella.png"
     #button: "Details"
-
-  - title: "Felix & Dobby"
-    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
-    image: "/images/gallery/fulls/commissions/pets/Felix_and_Dobby.png"
-    thumb: "/images/gallery/fulls/commissions/pets/Felix_and_Dobby.png"
-    #button: "Details"
-
   - title: "Bentley & Beau"
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "/images/gallery/fulls/commissions/pets/Bentley_and_Beau.png"
@@ -34,12 +45,6 @@ pictures:
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "/images/gallery/fulls/commissions/pets/Milo_Otis.png"
     thumb: "/images/gallery/fulls/commissions/pets/Milo_Otis.png"
-    #button: "Details"
-
-  - title: "Murphy, Little Red & Topol"
-    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
-    image: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
-    thumb: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
     #button: "Details"
 
   - title: "Douglas"
@@ -70,12 +75,6 @@ pictures:
     #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
     image: "/images/gallery/fulls/commissions/pets/Hunny_and_Bub.png"
     thumb: "/images/gallery/fulls/commissions/pets/Hunny_and_Bub.png"
-    #button: "Details"
-
-  - title: "Rango & Flynn"
-    #content: "Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices."
-    image: "/images/gallery/fulls/commissions/pets/Rango_and_Flynn.png"
-    thumb: "/images/gallery/fulls/commissions/pets/Rango_and_Flynn.png"
     #button: "Details"
 
   - title: "Holiday Kitties"
