@@ -1,5 +1,5 @@
 ---
-date: 2023-07-23T01:10:09-06:00
+date: 2025-08-02T01:10:09-06:00
 draft: false
 style: "style2 orient-right content-align-left image-position-center onscroll-image-fade-in"
 titleEntry:
@@ -18,7 +18,10 @@ showForm: false
   - 48 Kitty Cards <br>
     4 copies each of 12 unique cards. Each card has one of 12 Traits, grouped into 4 Season suits. Each suit has 3 Traits and 12 cards in total (4 copies per Trait).
 
-    | Season    | Winter <span class="suit">(![suit-winter](../images/suits/Winter.png)) </span> |Spring  <span class="suit">(![suit-spring](../images/suits/Spring.png))</span>| Summer <span class="suit">(![suit-summer](../images/suits/Summer.png))</span> | Fall <span class="suit">(![suit-fall](../images/suits/Fall.png))</span> |
+    | Season    | Winter <span class="suit">(![suit-winter](/images/suits/Winter.png)) </span>
+|Spring  <span class="suit">(![suit-spring](/images/suits/Spring.png)) </span>
+| Summer <span class="suit">(![suit-winter](/images/suits/Summer.png)) </span>
+ | Fall <span class="suit">(![suit-fall](/images/suits/Fall.png))</span> |
     | --------  | ------- |------- |---------- |--------------|
     | Traits (4)| Light   | Clover | Firefly   | Apple        |
     |           | Snug    | Rain   | Fan       | Pumpkin      |
@@ -32,7 +35,7 @@ showForm: false
 ## Objective
 Players collect sets of 4 kitty cards (**Clowders**) to earn points. The player with the most points at the end of the game wins. There are 3 different types of clowders:
 - **Clowder of a Kind:** 4 cards with the same Trait. (3 points)
-- **Year-round Clowder:** 4 cards, each a different Season(Winter<span class="suit">(![suit-winter](../images/suits/Winter.png)) </span> , Spring<span class="suit">(![suit-spring](../images/suits/Spring.png)), Summer<span class="suit">(![suit-summer](../images/suits/Summer.png)), Fall<span class="suit">(![suit-fall](../images/suits/Fall.png))). (2 points)
+- **Year-round Clowder:** 4 cards, each a different Season(Winter<span class="suit">(![suit-winter](/images/suits/Winter.png)) </span> , Spring<span class="suit">(![suit-spring](/images/suits/Spring.png)), Summer<span class="suit">(![suit-summer](/images/suits/Summer.png)), Fall<span class="suit">(![suit-fall](/images/suits/Fall.png))). (2 points)
 - **Season Clowder:** 4 cards with the same Season. (1 point)
   - **Annual Bonus** Complete one Season Clowder from each Season—Winter, Spring, Summer, and Fall. (4 extra points)
 
