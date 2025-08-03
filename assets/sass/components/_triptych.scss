@@ -7,11 +7,12 @@
     gap: 2rem;
     margin-bottom: 4rem;
     margin-top: -6rem;
-
+    align-items: stretch;
     .triptych-item {
-        flex: 1 1 30%;
+        flex: 1 0 30%;
         /* Grow, shrink, and set a base width for each item */
         max-width: 350px;
+        //height: 450px;
         border-radius: 1.5rem;
         /* This sets the rounded corners for the *entire section's border* */
         /* Adjust '1.5rem' to your desired level of roundness for the overall box */
@@ -74,10 +75,11 @@
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: 2.0rem;
             margin-bottom: 0.75rem;
             color: _palette(fg-bold);
             flex-shrink: 0; // Prevent title from shrinking if content is long
+            order: unset;
         }
 
         p {

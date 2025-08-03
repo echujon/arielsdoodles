@@ -14,6 +14,8 @@ pictures:
     title: "Alaska & Friends"
   - image: "/images/gallery/fulls/commissions/pets/Skippy_and_Sabrina.png"
     title: "Skippy & Sabrina"
+  - image: "/images/gallery/fulls/commissions/pets/Bentley_and_Beau.png"
+    title: "Bentley and Beau"
 
 type: commissions
 title: Commissions

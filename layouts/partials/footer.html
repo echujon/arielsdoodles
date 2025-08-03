@@ -34,3 +34,9 @@
 {{range .Site.Params.asset.main_js -}}
 <script type="text/javascript" src="{{ . | absURL }}"></script>
 {{- end }}
+{{ $script := resources.Get "js/triptych-randomizer.js" }}
+{{ if $script }}
+<script src="{{ $script.RelPermalink }}"></script>
+{{ else }}
+{{ warnf "triptych-randomizer.js not found in assets/js/ or could not be processed." }}
+{{ end }}

@@ -1,25 +1,47 @@
 <section class="wrapper style special">
     <div class="inner triptych-section">
         {{ range .triptych_sections }}
-        <div class="triptych-item">
-            <a href="{{ .button_link | relURL }}" class="triptych-link-overlay"></a>
-            <a href="{{ .button_link | relURL }}" class="triptych-link">
+            {{ $processedSectionItems := slice }}
+            {{ range .section_items }}
+                {{ $originalImage := resources.Get .image }}
+                {{ if $originalImage }}
+                    {{ $webpImage := $originalImage.Resize (printf "%dx webp q85" $originalImage.Width) }}
+                    {{ $processedItem := dict
+                        "image" $originalImage.RelPermalink
+                        "webp" $webpImage.RelPermalink
+                        "link" .link
+                        "itemTitle" .title 
+                    }}
+                    {{ $processedSectionItems = $processedSectionItems | append $processedItem }}
+                {{ else }}
+                    {{ warnf "Triptych image NOT FOUND (resources.Get failed) for section %s: %s" .title .image }}
+                    {{ $processedItem := dict
+                        "image" ""
+                        "webp" ""
+                        "link" .link
+                        "itemTitle" .title
+                    }}
+                    {{ $processedSectionItems = $processedSectionItems | append $processedItem }}
+                {{ end }}
+            {{ end }}
+
+            {{/* NEW LOGIC: Randomly select ONE item for the main section title using shuffle */}}
+            {{ $displayTitle := .title }}
+            <div class="triptych-item"
+                 data-section-title="{{ .title }}"       data-section-content="{{ .content }}"
+                 data-section-items='{{ $processedSectionItems | jsonify }}'>
+
+                <a href="#" class="triptych-link-overlay"></a>
+
                 <div class="image">
-                    {{ $image := resources.Get .image }}
-                    {{ if $image }}
-                    {{ $imageWebp := $image.Resize (printf "%dx webp q85" $image.Width) }}
                     <picture>
-                        <source srcset="{{ $imageWebp.RelPermalink }}" type="image/webp">
-                        <img src="{{ $image.RelPermalink }}" alt="{{ .title }}" loading="lazy" />
+                        <source srcset="" type="image/webp">
+                        <img src="" alt="" loading="lazy" />
                     </picture>
-                    {{ else }}
-                    <p>Image not found: {{ .image }}</p>
-                    {{ end }}
                 </div>
-                <h3 class="doodles-font">{{ .title }}</h3>
+                <h3 class="doodles-font">{{ $displayTitle }}</h3>
                 <p>{{ .content }}</p>
-            </a>
-        </div>
+            </div>
         {{ end }}
     </div>
 </section>

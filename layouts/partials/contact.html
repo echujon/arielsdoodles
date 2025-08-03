@@ -59,17 +59,18 @@
     {{end}}
     <section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
         <div class="content">
-            {{ with .content }}<div class="actual-content">{{ . | safeHTML }}{{ end }}</div>
+            {{ with .content }}
+            <div class="actual-content">{{ . | safeHTML }}</div>
+            {{ end }}
             {{ $formContent := dict "id" .id}}
             {{if .showForm}}
             {{partial "contactForm" $formContent}}
             {{end}}
         </div>
-        {{with .image}}
-        <div class="image">
-            <img src="{{ . }}" alt="" />
-        </div>
-        {{end}}
+        {{ with .image }}
+        {{ $imageObj := dict "image" . }}
+        {{ partial "picture" $imageObj }}
+        {{ end }}
         {{if .pictures}}
         {{partial "carousel" .pictures}}
         {{end}}

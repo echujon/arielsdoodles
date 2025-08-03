@@ -1,16 +1,29 @@
 style: "style1 medium lightbox  onscroll-fade-in"
 triptych_sections:
-  - title: "Portfolio"
-    image: "/images/gallery/fulls/coasters/calico.png"
-    #content: "My delightful collection of felines finding comfort in unexpected places."
-    button_link: "/portfolio/#catsInBoxes" # Link to a specific page or filtered gallery
-
+  - title: "Gallery"
+    section_items: 
+       - image: "/images/gallery/fulls/chalkart/Chalk_Fairy.png"
+         link: "/portfolio/#chalkArt"
+       - image: "/images/gallery/fulls/commissions/pets/Rango_and_Flynn.png"
+         link: "/portfolio/#pets"
+       - image: "/images/gallery/fulls/commissions/pets/Bentley_and_Beau.png"
+         link: "/portfolio/#pets"
   - title: "Commissions"
-    image: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
-    #content: "Interested in a custom piece? Learn about my commission process and past works."
-    button_link: "/commissions"
+    section_items:
+       - image: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
+         link: "/commissions" # Link to a specific page or filtered gallery
+       - image: "/images/gallery/fulls/commissions/pets/Skippy_and_Sabrina.png"
+         link: "/commissions"
+       - image: "/images/gallery/fulls/commissions/pets/Felix_and_Dobby.png"
+         link: "/commissions"
+       - image: "/images/gallery/fulls/commissions/pets/Alaska.png"
+         link: "/commissions"
 
   - title: "Other Cute Stuff"
-    image: "/images/gallery/fulls/cats/DnD/Bard.png"
-    #content: "A heartwarming gallery of the most adorable pets I've had the pleasure to draw."
-    button_link: "/portfolio/#dndCats"
+    section_items:
+       - image: "/images/gallery/fulls/cats/DnD/Barbarian.png"
+         link: "/portfolio/#dndCats" # Link to a specific page or filtered gallery
+       - image: "/images/gallery/fulls/cats/DnD/Bard.png"
+         link: "/portfolio/#dndCats"
+       - image: "/images/gallery/fulls/coasters/calico.png"
+         link: "/portfolio/#catsInBoxes"

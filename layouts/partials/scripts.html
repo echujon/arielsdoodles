@@ -7,7 +7,8 @@
 {{ $main := resources.Get "js/main.js" }}
 {{ $demo := resources.Get "js/demo.js" }}
 {{ $arielsdoodles := resources.Get "js/arielsdoodles.js" }}
-{{ $js := slice $jQuery $scrollex $scrolly $browser $breakpoints $util $demo $main $arielsdoodles | resources.Concat
+{{ $triptych_randomizer := resources.Get "js/triptych-randomizer.js" }}
+{{ $js := slice $jQuery $scrollex $scrolly $browser $breakpoints $util $demo $main $arielsdoodles $triptych_randomizer| resources.Concat
 "js/bundle.js" | minify }}
 
 <!-- Scripts -->
