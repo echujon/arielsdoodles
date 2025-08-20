@@ -1,0 +1,31 @@
+{{- $src := .Destination -}}
+{{- $alt := .Text -}}
+
+<!-- DEBUG: Start render hook -->
+<!-- DEBUG: Src = {{ $src }} -->
+<!-- DEBUG: Alt = {{ $alt }} -->
+
+{{- $image := resources.Get $src -}}
+
+{{- if $image -}}
+  <!-- DEBUG: Image found! -->
+  {{- /* Convert the image to WebP */ -}}
+  {{- $webp := $image.Process "webp" -}}
+
+  <picture>
+    {{- /* Offer the WebP version first to modern browsers */ -}}
+    <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
+
+    {{- /* Offer the original format as a fallback for older browsers */ -}}
+    <source srcset="{{ $image.RelPermalink }}" type="{{ $image.MediaType }}" />
+
+    {{- /* The img tag is the ultimate fallback and is required for accessibility */ -}}
+    <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}" />
+  </picture>
+{{- else -}}
+  <!-- DEBUG: Image NOT found! -->
+  {{- /* Fallback for images not in /assets (e.g., in /static or external URLs) */ -}}
+  <img src="{{ $src | safeURL }}" alt="{{ $alt }}" />
+{{- end -}}
+
+<!-- DEBUG: End render hook -->

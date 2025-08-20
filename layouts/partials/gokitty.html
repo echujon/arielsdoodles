@@ -51,15 +51,7 @@
     }
 </style>
 <section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
-    <div>
-        {{ with .content }}<div class="actual-content">{{ . | safeHTML }}{{ end }}</div>
-    </div>
-    {{with .image}}
-    <div class="image">
-        <img src="{{ . }}" alt="" />
-    </div>
-    {{end}}
-    {{if .pictures}}
-    {{partial "carousel" .pictures}}
-    {{end}}
+    <div class="actual-content">
+        {{ .Content | safeHTML }}
+    </div>   
 </section>
