@@ -69,6 +69,12 @@
         margin-bottom: 1em;
         /* optional, to give spacing below */
     }
+
+    .cf-turnsitle {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1em;
+    }
 </style>
 <div class="form">
     {{$subject := ""}}
@@ -87,15 +93,17 @@
 
         <label>Message</label>
         <textarea rows="5" class="form-input" name="entry.449082259"></textarea>
+        
         <div class="website-field">
             <label for="website">Website</label>
             <input type="text" name="website" id="website">
         </div>
-        <div class="g-recaptcha" data-sitekey="6Ld35SUrAAAAAGsXCX16VcYMy7IfkGa7jwuTMyb3
-"></div>
+        
+        <!-- Cloudflare Turnstile -->
+        <div class="cf-turnstile" data-sitekey="{{ .Site.Params.turnstileSiteKey }}"></div>
+        
         <input class="doodles-font send-button" type="submit" value="Send" />
     </form>
-
 </div>
 
 <script type="text/javascript">var submitted = false;</script>
@@ -123,11 +131,13 @@
             return;
         }
 
-        if (response.length === 0) {
-            // reCAPTCHA not completed
+        // Turnstile check
+        var turnstileResponse = document.querySelector('[name="cf-turnstile-response"]');
+        if (!turnstileResponse || turnstileResponse.value.length === 0) {
             event.preventDefault();
             alert('Please verify you are human.');
+            return;
         }
     });
 </script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
