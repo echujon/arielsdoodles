@@ -98,10 +98,11 @@
             <label for="website">Website</label>
             <input type="text" name="website" id="website">
         </div>
-        
+        {{ with .turnstileSiteKey }}
         <!-- Cloudflare Turnstile -->
-        <div class="cf-turnstile" data-sitekey="{{ .Site.Params.turnstileSiteKey }}"></div>
-        
+        <div class="cf-turnstile" data-sitekey="{{ . }}"></div>
+        {{ end }}
+    
         <input class="doodles-font send-button" type="submit" value="Send" />
     </form>
 </div>

@@ -35,6 +35,7 @@ disableKinds = ["taxonomy"]
   description = "You will find portraits of pets, cute Dungeons and Dragons Kitties, and much more."
   logo = "images/banner.jpg"
   favicon = true
+  turnstileSiteKey = "0x4AAAAAAB_XENp3OdtwuY8i"
 
 [Params.social]
   email = "arielchujonart@gmail.com"

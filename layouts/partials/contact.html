@@ -55,14 +55,15 @@
     }
 </style>
 {{ with .titleEntry }}
-<h1 class="{{.style}} titlebar">{{ .text }}</h2>
-    {{end}}
+    <h1 class="{{.style}} titlebar">{{ .text }}</h2>
+{{end}}
     <section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
         <div class="content">
             {{ with .content }}
             <div class="actual-content">{{ . | safeHTML }}</div>
             {{ end }}
             {{ $formContent := dict "id" .id}}
+            {{$formContent = merge $formContent .}}
             {{if .showForm}}
             {{partial "contactForm" $formContent}}
             {{end}}

@@ -2,6 +2,7 @@
 {{$content := .Content}}
 {{ $content := dict "content" $content}}
 {{$params := merge $content .Params}}
+{{$params := merge $params .Site.Params}}
 {{if eq .Params.type "contact"}}
 {{partial "contact" $params}}
 {{else if eq .Params.type "commissions"}}
