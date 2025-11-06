@@ -122,7 +122,6 @@
 
     }
     document.querySelector('.google-form').addEventListener('submit', function (event) {
-        var response = grecaptcha.getResponse();
         var websiteField = document.getElementById('website').value;
 
         if (websiteField.length > 0) {
