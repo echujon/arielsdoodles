@@ -36,7 +36,7 @@ disableKinds = ["taxonomy"]
   logo = "images/banner.jpg"
   favicon = true
   turnstileSiteKey = "0x4AAAAAAB_XENp3OdtwuY8i"
-  workerURL = "arielsdoodles-form-handler.fchujon.workers.dev"
+  workerURL = "https://arielsdoodles-form-handler.fchujon.workers.dev"
 
 [Params.social]
   email = "arielchujonart@gmail.com"
