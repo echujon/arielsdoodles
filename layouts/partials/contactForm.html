@@ -2,10 +2,8 @@
     /**Google Forms**/
     form {
         max-width: 420px;
-        /*margin: 50px auto;*/
         margin: auto;
         padding: 1em 0 1em 0;
-        /*text-align: center;*/
     }
 
     .form {
@@ -19,8 +17,7 @@
         font-size: 18px;
         border-radius: 5px;
         line-height: 22px;
-        background-color:
-            #fff;
+        background-color: #fff;
         transition: all 0.3s;
         padding: 13px;
         margin-bottom: 15px;
@@ -28,8 +25,6 @@
         box-sizing: border-box;
         outline: 0;
     }
-
-
 
     textarea {
         height: 150px;
@@ -53,8 +48,13 @@
         margin: inherit;
     }
 
-    .website-field {
-        display: none;
+    .hp-field {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
     }
 
     @media screen and (orientation:portrait) {
@@ -63,81 +63,137 @@
         }
     }
 
-    .g-recaptcha {
+    .cf-turnstile {
         display: flex;
         justify-content: center;
         margin-bottom: 1em;
-        /* optional, to give spacing below */
     }
 
-    .cf-turnsitle {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 1em;
+    .send-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .error-message, .thank-you {
+        padding: 1em;
+        margin: 1em;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .error-message {
+        background-color: #fee;
+        color: #c33;
+    }
+
+    .thank-you {
+        background-color: #efe;
+        color: #3a3;
     }
 </style>
+
 <div class="form">
-    {{$subject := ""}}
-    {{if not (eq .id "contact")}} {{$subject = .id | strings.FirstUpper}} {{end}}
-    <form class="doodles-font google-form"
-        action="https://docs.google.com/forms/d/1kpxu7bBnbc1WspM5Hx57S3SmM_2xsQ01mLdMlIo-1bI/formResponse" method="post"
-        target="hidden_iframe" onsubmit="submitted=true;">
+    <form class="doodles-font google-form" id="contactForm">
+        
         <label>Name*</label>
-        <input type="text" class="form-input" name="entry.283437977" required>
+        <input type="text" class="form-input" name="name" required>
 
         <label>Email*</label>
-        <input type="email" class="form-input" name="entry.1550864971" required>
+        <input type="email" class="form-input" name="email" required>
 
         <label>Subject*</label>
-        <input type="text" class="form-input" value="{{$subject}}" name="entry.861459794" required>
+        <input type="text" class="form-input" name="subject" required>
 
         <label>Message</label>
-        <textarea rows="5" class="form-input" name="entry.449082259"></textarea>
+        <textarea rows="5" class="form-input" name="message"></textarea>
         
-        <div class="website-field">
-            <label for="website">Website</label>
-            <input type="text" name="website" id="website">
+        <!-- Honeypot field - appears like a real field to bots -->
+        <div class="hp-field" aria-hidden="true">
+            <label for="phone_number">Phone</label>
+            <input type="text" name="phone_number" id="phone_number" tabindex="-1" autocomplete="off">
         </div>
+        
+        <!-- Cloudflare Turnstile -->
         {{ with .turnstileSiteKey }}
         <!-- Cloudflare Turnstile -->
-        <div class="cf-turnstile" data-sitekey="{{ . }}"></div>
-        {{ end }}
-    
-        <input class="doodles-font send-button" type="submit" value="Send" />
+            <div class="cf-turnstile" data-sitekey="{{ . }}" data-callback="onTurnstileSuccess"></div>
+        {{ end }}    
+        <input class="doodles-font send-button" type="submit" value="Send" disabled id="submitBtn" />
     </form>
 </div>
 
-<script type="text/javascript">var submitted = false;</script>
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showThankYou()}"></iframe>
+{{with .workerURL}}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script type="text/javascript">
-    var submitted = false;
-    function showThankYou() {
-        let googleform = document.querySelector(".google-form");
-        googleform.style.display = "none";
-        let form = document.querySelector(".form");
-        let p = document.createElement("p");
-        p.append("Thank you for your submissions.");
-        p.classList.add("thank-you");
-        form.append(p);
+    var turnstileVerified = false;
+    const WORKER_URL = "{{.}}"; // Replace with your worker URL
 
+    // Enable submit button only after Turnstile verification
+    function onTurnstileSuccess(token) {
+        turnstileVerified = true;
+        document.getElementById('submitBtn').disabled = false;
     }
-    document.querySelector('.google-form').addEventListener('submit', function (event) {
-        var websiteField = document.getElementById('website').value;
 
-        if (websiteField.length > 0) {
-            // Honeypot field filled out - likely a bot
-            event.preventDefault();
-            alert('Spam detected. Submission blocked.');
+    function showMessage(message, isError = false) {
+        let form = document.querySelector(".form");
+        let msgDiv = document.createElement("div");
+        msgDiv.textContent = message;
+        msgDiv.classList.add(isError ? "error-message" : "thank-you");
+        
+        // Remove any existing messages
+        let existingMsg = form.querySelector('.error-message, .thank-you');
+        if (existingMsg) existingMsg.remove();
+        
+        form.appendChild(msgDiv);
+        
+        if (!isError) {
+            document.getElementById('contactForm').style.display = 'none';
+        }
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+        
+        // Honeypot check
+        var honeypotField = document.getElementById('phone_number').value;
+        if (honeypotField.length > 0) {
+            showMessage('Spam detected. Submission blocked.', true);
             return;
         }
 
-        // Turnstile check
-        var turnstileResponse = document.querySelector('[name="cf-turnstile-response"]');
-        if (!turnstileResponse || turnstileResponse.value.length === 0) {
-            event.preventDefault();
-            alert('Please verify you are human.');
+        // Turnstile verification check
+        if (!turnstileVerified) {
+            showMessage('Please verify you are human by completing the challenge.', true);
             return;
+        }
+
+        // Disable submit button during submission
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.value = 'Sending...';
+
+        try {
+            const formData = new FormData(this);
+            
+            const response = await fetch(WORKER_URL, {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                showMessage('Thank you for your submission!');
+            } else {
+                showMessage(result.error || 'Submission failed. Please try again.', true);
+                submitBtn.disabled = false;
+                submitBtn.value = 'Send';
+            }
+        } catch (error) {
+            showMessage('Network error. Please try again.', true);
+            submitBtn.disabled = false;
+            submitBtn.value = 'Send';
         }
     });
 </script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{{ end }}
