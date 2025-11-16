@@ -6,3 +6,4 @@ resources/
 launch.json
 # Local Netlify folder
 .netlify
+node_modules/

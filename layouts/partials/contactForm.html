@@ -107,15 +107,12 @@
         <label>Message</label>
         <textarea rows="5" class="form-input" name="message"></textarea>
         
-        <!-- Honeypot field - appears like a real field to bots -->
         <div class="hp-field" aria-hidden="true">
             <label for="phone_number">Phone</label>
             <input type="text" name="phone_number" id="phone_number" tabindex="-1" autocomplete="off">
         </div>
         
-        <!-- Cloudflare Turnstile -->
         {{ with .turnstileSiteKey }}
-        <!-- Cloudflare Turnstile -->
             <div class="cf-turnstile" data-sitekey="{{ . }}" data-callback="onTurnstileSuccess"></div>
         {{ end }}    
         <input class="doodles-font send-button" type="submit" value="Send" disabled id="submitBtn" />
@@ -126,9 +123,8 @@
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script type="text/javascript">
     var turnstileVerified = false;
-    const WORKER_URL = "{{.}}"; // Replace with your worker URL
+    const WORKER_URL = "{{.}}"; 
 
-    // Enable submit button only after Turnstile verification
     function onTurnstileSuccess(token) {
         turnstileVerified = true;
         document.getElementById('submitBtn').disabled = false;
