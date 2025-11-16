@@ -34,7 +34,7 @@ googleAnalytics = "G-GFWBYJPVXR"
   logo = "images/banner.jpg"
   favicon = true
   turnstileSiteKey = "0x4AAAAAAB_XENp3OdtwuY8i"
-  workerURL = "https://arielsdoodles-form-handler.fchujon.workers.dev"
+  workerURL = "https://arielsdoodles-form-handler.arielsdoodles.workers.dev"
 
 [Params.asset]
   fontawesome_css = ["css/fontawesome-all.min.css"]
