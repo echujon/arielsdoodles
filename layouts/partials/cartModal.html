@@ -1,0 +1,76 @@
+{{- /* Shopping Cart Modal */ -}}
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<div class="cart-modal" id="cartModal">
+  <div class="cart-header">
+    <h2>Shopping Cart</h2>
+    <button class="cart-close" onclick="closeCart()" aria-label="Close cart">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="cart-body">
+    <div class="cart-items" id="cartItemsList">
+      <!-- Cart items will be populated by JavaScript -->
+      <p class="empty-cart">Your cart is empty</p>
+    </div>
+  </div>
+
+  <div class="cart-footer">
+    <div class="cart-summary">
+      <span>Total:</span>
+      <span class="cart-total">$0.00</span>
+    </div>
+    <div class="cart-actions">
+      <button class="checkout-button" onclick="proceedToCheckout()" id="checkoutBtn">
+        Proceed to Checkout
+      </button>
+      <button class="clear-cart-button" onclick="clearCart()">
+        Clear Cart
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleCart() {
+    const overlay = document.getElementById('cartOverlay');
+    const modal = document.getElementById('cartModal');
+
+    if (modal.classList.contains('active')) {
+      closeCart();
+    } else {
+      overlay.classList.add('active');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeCart() {
+    const overlay = document.getElementById('cartOverlay');
+    const modal = document.getElementById('cartModal');
+
+    overlay.classList.remove('active');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function clearCart() {
+    if (window.shoppingCart) {
+      window.shoppingCart.clearCart();
+    }
+  }
+
+  function proceedToCheckout() {
+    if (window.shoppingCart) {
+      window.shoppingCart.checkout();
+    }
+  }
+
+  // Close cart when pressing Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeCart();
+    }
+  });
+</script>

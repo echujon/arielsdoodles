@@ -37,10 +37,13 @@ disableKinds = ["taxonomy"]
 ## -----------------------------------------------
 
 [Params]
+  cartWorkerURL = "http://localhost:8787"
 
 [Params.social]
 
 [Params.asset]
+  fontawesome_css = ["css/fontawesome-all.min.css"]
+  arielsdoodles_css = ["css/arielsdoodles.css", "css/cart.css"]
 
 
 
@@ -48,6 +51,10 @@ disableKinds = ["taxonomy"]
 name = "Home"
 url = "/"
 weight = 10
+[[menu.main]]
+name = "Cat Calendar"
+url = "/calendar/"
+weight = 20
 
 [[menu.main]]
 name = "Portfolio"

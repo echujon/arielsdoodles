@@ -1,0 +1,246 @@
+{{ define "main" }}
+<section class="aling-center">
+    <div class="inner">
+        <h1 class="titlebar doodles-font">{{.Title}}</h1>
+    </div>
+</section>
+
+<div class="product-detail">
+    <div class="product-detail-inner">
+        {{ if .Params.image }}
+        <div class="product-detail-image">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" />
+        </div>
+        {{ end }}
+
+        <div class="product-detail-info">
+            <h1>{{ .Title }}</h1>
+
+            {{ if .Params.price }}
+            <p class="product-detail-price">${{ .Params.price }}</p>
+            {{ end }}
+
+            <div class="product-detail-description">
+                {{ .Content }}
+            </div>
+
+            {{ if and .Params.productId .Params.priceId }}
+            <div class="product-detail-actions">
+                <!-- Quantity Selector -->
+                <div class="quantity-selector">
+                    <button type="button" class="qty-decrease" aria-label="Decrease quantity">−</button>
+                    <input type="number" class="qty-input" value="1" min="1" aria-label="Quantity" />
+                    <button type="button" class="qty-increase" aria-label="Increase quantity">+</button>
+                </div>
+
+                <!-- Add to Cart Button -->
+                <button
+                    class="add-to-cart-btn"
+                    data-product-id="{{ .Params.productId }}"
+                    data-price-id="{{ .Params.priceId }}"
+                    data-name="{{ .Title }}"
+                    data-price="{{ mul .Params.price 100 }}"
+                    {{ if .Params.image }}data-image="{{ .Params.image }}"{{ end }}
+                >
+                    Add to Cart
+                </button>
+            </div>
+            {{ else }}
+            <p class="product-error">This product is not yet configured for purchase.</p>
+            {{ end }}
+        </div>
+    </div>
+</div>
+
+<style>
+.product-detail {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.product-detail-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .product-detail-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.product-detail-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail-info h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.product-detail-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c5f2d;
+    margin-bottom: 1.5rem;
+}
+
+.product-detail-description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.product-detail-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.qty-decrease,
+.qty-increase {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-width: 40px;
+}
+
+.qty-decrease:hover,
+.qty-increase:hover {
+    background-color: #e0e0e0;
+}
+
+.qty-decrease:active,
+.qty-increase:active {
+    background-color: #d0d0d0;
+}
+
+.qty-input {
+    border: none;
+    text-align: center;
+    width: 60px;
+    padding: 0.75rem 0.5rem;
+    font-size: 1rem;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.add-to-cart-btn {
+    background-color: #2c5f2d;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 600;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #1e4620;
+}
+
+.add-to-cart-btn:active {
+    transform: translateY(1px);
+}
+
+.add-to-cart-btn.added {
+    background-color: #4caf50;
+}
+
+.product-error {
+    color: #d32f2f;
+    padding: 1rem;
+    background-color: #ffebee;
+    border-radius: 4px;
+}
+</style>
+
+<script>
+(function() {
+    const qtyInput = document.querySelector('.qty-input');
+    const qtyDecrease = document.querySelector('.qty-decrease');
+    const qtyIncrease = document.querySelector('.qty-increase');
+    const addToCartBtn = document.querySelector('.add-to-cart-btn');
+
+    if (!qtyInput || !qtyDecrease || !qtyIncrease || !addToCartBtn) {
+        return; // Elements not found, exit
+    }
+
+    // Handle quantity decrease
+    qtyDecrease.addEventListener('click', function() {
+        let currentValue = parseInt(qtyInput.value) || 1;
+        if (currentValue > 1) {
+            qtyInput.value = currentValue - 1;
+        }
+    });
+
+    // Handle quantity increase
+    qtyIncrease.addEventListener('click', function() {
+        let currentValue = parseInt(qtyInput.value) || 1;
+        qtyInput.value = currentValue + 1;
+    });
+
+    // Validate quantity input
+    qtyInput.addEventListener('input', function() {
+        let value = parseInt(this.value);
+        if (isNaN(value) || value < 1) {
+            this.value = 1;
+        }
+    });
+
+    // Handle Add to Cart
+    addToCartBtn.addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        const priceId = this.dataset.priceId;
+        const name = this.dataset.name;
+        const price = parseInt(this.dataset.price);
+        const image = this.dataset.image || null;
+        const quantity = parseInt(qtyInput.value) || 1;
+
+        if (window.shoppingCart) {
+            window.shoppingCart.addItem(productId, priceId, name, price, quantity, image);
+
+            // Visual feedback
+            addToCartBtn.textContent = 'Added!';
+            addToCartBtn.classList.add('added');
+
+            setTimeout(() => {
+                addToCartBtn.textContent = 'Add to Cart';
+                addToCartBtn.classList.remove('added');
+            }, 2000);
+
+            // Reset quantity to 1 after adding
+            qtyInput.value = 1;
+        } else {
+            alert('Cart is loading, please try again in a moment');
+        }
+    });
+})();
+</script>
+{{ end }}

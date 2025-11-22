@@ -94,28 +94,71 @@
 
 <div class="form">
     <form class="doodles-font google-form" id="contactForm">
-        
-        <label>Name*</label>
-        <input type="text" class="form-input" name="name" required>
 
-        <label>Email*</label>
-        <input type="email" class="form-input" name="email" required>
+        {{/* Custom fields or default fields */}}
+        {{ $fields := .fields }}
+        {{ if not $fields }}
+            {{/* Default fields if none provided */}}
+            {{ $fields = slice
+                (dict "name" "name" "label" "Name" "type" "text" "required" true)
+                (dict "name" "email" "label" "Email" "type" "email" "required" true)
+                (dict "name" "subject" "label" "Subject" "type" "text" "required" true)
+                (dict "name" "message" "label" "Message" "type" "textarea" "rows" 5)
+            }}
+        {{ end }}
 
-        <label>Subject*</label>
-        <input type="text" class="form-input" name="subject" required>
+        {{/* Render each custom field */}}
+        {{ range $fields }}
+            <label for="{{ .name }}">{{ .label }}{{ if .required }}*{{ end }}</label>
 
-        <label>Message</label>
-        <textarea rows="5" class="form-input" name="message"></textarea>
-        
+            {{ if eq .type "textarea" }}
+                <textarea
+                    id="{{ .name }}"
+                    class="form-input"
+                    name="{{ .name }}"
+                    {{ if .rows }}rows="{{ .rows }}"{{ else }}rows="5"{{ end }}
+                    {{ if .required }}required{{ end }}
+                    {{ with .placeholder }}placeholder="{{ . }}"{{ end }}
+                ></textarea>
+            {{ else if eq .type "select" }}
+                <select
+                    id="{{ .name }}"
+                    class="form-input"
+                    name="{{ .name }}"
+                    {{ if .required }}required{{ end }}
+                >
+                    {{ if .placeholder }}
+                        <option value="" disabled selected>{{ .placeholder }}</option>
+                    {{ end }}
+                    {{ range .options }}
+                        <option value="{{ .value }}">{{ .label }}</option>
+                    {{ end }}
+                </select>
+            {{ else }}
+                <input
+                    id="{{ .name }}"
+                    type="{{ .type | default "text" }}"
+                    class="form-input"
+                    name="{{ .name }}"
+                    {{ if .required }}required{{ end }}
+                    {{ with .placeholder }}placeholder="{{ . }}"{{ end }}
+                    {{ with .min }}min="{{ . }}"{{ end }}
+                    {{ with .max }}max="{{ . }}"{{ end }}
+                    {{ with .pattern }}pattern="{{ . }}"{{ end }}
+                />
+            {{ end }}
+        {{ end }}
+
+        {{/* Honeypot field (always included) */}}
         <div class="hp-field" aria-hidden="true">
             <label for="phone_number">Phone</label>
             <input type="text" name="phone_number" id="phone_number" tabindex="-1" autocomplete="off">
         </div>
-        
+
         {{ with .turnstileSiteKey }}
             <div class="cf-turnstile" data-sitekey="{{ . }}" data-callback="onTurnstileSuccess"></div>
-        {{ end }}    
-        <input class="doodles-font send-button" type="submit" value="Send" disabled id="submitBtn" />
+        {{ end }}
+        <input class="doodles-font send-button" type="submit" value="{{ .submitText | default "Send" }}" disabled id="submitBtn" />
     </form>
 </div>
 

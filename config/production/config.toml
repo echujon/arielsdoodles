@@ -35,9 +35,12 @@ googleAnalytics = "G-GFWBYJPVXR"
   favicon = true
   turnstileSiteKey = "0x4AAAAAAB_XENp3OdtwuY8i"
   workerURL = "https://arielsdoodles-formhandler.arielsdoodles.workers.dev"
+  #cartWorkerURL = "https://arielsdoodles-cart.YOUR_SUBDOMAIN.workers.dev"
+  enableShop = false
 
 [Params.asset]
   fontawesome_css = ["css/fontawesome-all.min.css"]
+  arielsdoodles_css = ["css/arielsdoodles.css", "css/cart.css"]
 
 
   [[menu.main]]

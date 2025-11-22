@@ -1,0 +1,47 @@
+{{ define "main" }}
+<style>
+@media (min-width: 768px) {
+    .calendar-form-container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+</style>
+<section class="aling-center">
+    <div class="inner">
+        <h1 class="titlebar doodles-font">{{.Title}}</h1>
+    </div>
+</section>
+
+<section class="wrapper style1 align-center">
+    <div class="inner">
+        {{ $img := resources.Get "images/Pre-Orders.png" }}
+        {{ if $img }}
+        <div class="calendar-image" style="max-width: 600px; margin: 0 auto 2em auto;">
+            <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}" style="width: 100%; height: auto; border-radius: 8px;" />
+        </div>
+        {{ else }}
+        <p style="color: red;">DEBUG: Image not found at images/Pre-Orders.png</p>
+        {{ end }}
+        <p>Reserve your 2026 Cat Calendar! Fill out the form below to reserve one or more calendars.</p>
+        <p>All pre-orders will receive an early bird discount!</p>
+        <div class="calendar-form-container">
+
+        {{/* Define custom fields for calendar reservation */}}
+        {{ $calendarFields := slice
+            (dict "name" "name" "label" "Name" "type" "text" "required" true )
+            (dict "name" "email" "label" "Email" "type" "email" "required" true )
+            (dict "name" "quantity" "label" "How many calendars?" "type" "number" "required" true "min" 1 "max" 10 "placeholder" "1")
+        }}
+
+        {{/* Call contact form partial with custom configuration */}}
+        {{ partial "contactForm" (dict
+            "fields" $calendarFields
+            "submitText" "Reserve Calendar(s)"
+            "turnstileSiteKey" site.Params.turnstileSiteKey
+            "workerURL" site.Params.workerURL
+        ) }}
+        </div>
+    </div>
+</section>
+{{end}}

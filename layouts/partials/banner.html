@@ -18,13 +18,13 @@
     {{ end }}
   </div!-->
 
-  <a href="{{ .link }}">
-    {{with .landingBanner}}
-    {{ $image := resources.Get . }}
-    <img class="kickstarter-banner" src="{{$image.RelPermalink}}" alt="Kickstarter Banner" />
-    {{end}}
+  {{with .landingBanner}}
+  {{ $image := resources.Get . }}
+  <a href="{{ $.link }}">
+    <img class="kickstarter-banner" src="{{$image.RelPermalink}}" alt="Calendar Banner" />
   </a>
-
+  {{else}}
+  {{/* Only show background image if landingBanner is not set */}}
   {{ with .image }}
   {{ $image := resources.Get . }}
   {{ $imageWebp := $image.Resize (printf "%dx webp q90" $image.Width) }}
@@ -36,5 +36,6 @@
       <img src="{{ $image.RelPermalink }}" alt="Ariel's Doodles banner" loading="lazy" />
     </picture>
   </div>
+  {{ end }}
   {{ end }}
 </section>

@@ -15,7 +15,8 @@ button:
   style: "doodles-font"
   #link: "https://www.etsy.com/listing/1628683469/illustrated-2024-cat-calendar-12x12"
   link: "/portfolio"
-#landingBanner: "images/Kickstarter_Banner.png"
+landingBanner: "images/CatBanner.png"
+link: "/calendar"
 id: "banner"
 image: "images/background.png"
 pictures:

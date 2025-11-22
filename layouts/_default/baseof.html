@@ -18,7 +18,23 @@
 		{{- block "main" . }}{{- end }}
 		<!-- Wrapper -->
 	</div>
+
+	{{ if .Site.Params.enableShop }}
+	<!-- Shopping Cart Modal -->
+	{{ partial "cartModal" . }}
+	{{ end }}
+
 	{{ partial "scripts" . }}
+
+	{{ if .Site.Params.enableShop }}
+	<!-- Shopping Cart Script -->
+	<script>
+		// Set cart worker URL for the shopping cart
+		window.CART_WORKER_URL = '{{ .Site.Params.cartWorkerURL }}';
+	</script>
+	<script src="/js/cart.js"></script>
+	{{ end }}
+
 	{{ partial "footer" . }}
 </body>
 

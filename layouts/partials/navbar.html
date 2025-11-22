@@ -150,6 +150,15 @@
 
     }
 
+    /* Cart Widget Visibility Controls */
+    .cart-widget-mobile {
+        display: none;
+    }
+
+    .cart-widget-desktop {
+        display: inline-block;
+    }
+
     @media (min-width:851px) {
         .nav-title {
             padding: 3px;
@@ -169,6 +178,20 @@
 
         .nav-title {
             font-size: 20px;
+        }
+
+        /* Show mobile cart, hide desktop cart */
+        .cart-widget-mobile {
+            display: block;
+            margin-left: auto;
+            margin-right: 0.5rem;
+            order: 2;
+            position: relative;
+            top: .25em;
+        }
+
+        .cart-widget-desktop {
+            display: none;
         }
 
         span.logo {
@@ -210,7 +233,7 @@
 
         .hamburger {
             display: block;
-            margin-left: auto;
+            order: 3;
         }
 
         .hamburger.active .bar:nth-child(2) {
@@ -273,6 +296,12 @@
         <span class="logo"><img src="/images/ad-logo.png"></img> </span>
         <span class="nav-text">Ariel's Doodles</span>
     </a>
+    <!-- Shopping Cart Widget (Mobile - Always Visible) -->
+    {{ if site.Params.enableShop }}
+    <div class="cart-widget-mobile">
+        {{ partial "cartWidget" . }}
+    </div>
+    {{ end }}
     <div class="hamburger">
         <div class="bar"></div>
         <div class="bar"></div>
@@ -298,20 +327,10 @@
         </li>
         {{end}}
         {{end}}
-        <!--li><a href="https://www.etsy.com/shop/ArielsDoodles">Store</a></li!-->
-        <!--<li><a href="/" class="active">Home</a></li>
-        <li class="dropdown-parent"><span class="dropdown active" onclick="toggleDropdown()">Portfolio <i
-                    class="fa fa-caret-down"></i></span>
-            <ul class="dropdown-chooser" id="dropdown-content">
-                <li><a href="/portfolio/#pets">Pet Portraits</a></li>
-                <li> <a href="/portfolio/#cats">Calendar Cats</a></li>
-                <li><a href="/portfolio/#dndCats">DnD Cats</a></li>
-            </ul>
-        </li>
-        <li><a href="/commissions">Commissions</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="https://www.etsy.com/shop/ArielsDoodles">Store</a></li!-->
+        <!-- Shopping Cart Widget (Desktop) -->
+        {{ if site.Params.enableShop }}
+        <li class="cart-widget-desktop">{{ partial "cartWidget" . }}</li>
+        {{ end }}
     </ul>
 </nav>
 
