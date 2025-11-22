@@ -1,5 +1,6 @@
 ####################### Banner #########################
 style: "banner style2"
+customClass: "calendar-banner"
 title:
   text: "Ariel's Doodles"
   #logo: "images/logo.svg"

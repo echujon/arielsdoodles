@@ -987,4 +987,9 @@ overflow-x: hidden;
 	}
 }
 
+// Calendar Banner Spacing
+section.calendar-banner {
+	margin-bottom: 8rem;
+}
+
 @include color-banner;
