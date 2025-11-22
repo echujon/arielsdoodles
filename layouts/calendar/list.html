@@ -29,7 +29,7 @@
 
         {{/* Define custom fields for calendar reservation */}}
         {{ $calendarFields := slice
-            (dict "name" "type" "type" "hidden" "value" "preorder")
+            (dict "name" "formtype" "type" "hidden" "value" "preorder")
             (dict "name" "name" "label" "Name" "type" "text" "required" true )
             (dict "name" "email" "label" "Email" "type" "email" "required" true )
             (dict "name" "quantity" "label" "How many calendars?" "type" "number" "required" true "min" 1 "max" 1000)
