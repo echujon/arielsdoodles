@@ -109,43 +109,52 @@
 
         {{/* Render each custom field */}}
         {{ range $fields }}
-            <label for="{{ .name }}">{{ .label }}{{ if .required }}*{{ end }}</label>
-
-            {{ if eq .type "textarea" }}
-                <textarea
-                    id="{{ .name }}"
-                    class="form-input"
-                    name="{{ .name }}"
-                    {{ if .rows }}rows="{{ .rows }}"{{ else }}rows="5"{{ end }}
-                    {{ if .required }}required{{ end }}
-                    {{ with .placeholder }}placeholder="{{ . }}"{{ end }}
-                ></textarea>
-            {{ else if eq .type "select" }}
-                <select
-                    id="{{ .name }}"
-                    class="form-input"
-                    name="{{ .name }}"
-                    {{ if .required }}required{{ end }}
-                >
-                    {{ if .placeholder }}
-                        <option value="" disabled selected>{{ .placeholder }}</option>
-                    {{ end }}
-                    {{ range .options }}
-                        <option value="{{ .value }}">{{ .label }}</option>
-                    {{ end }}
-                </select>
-            {{ else }}
+            {{ if eq .type "hidden" }}
                 <input
-                    id="{{ .name }}"
-                    type="{{ .type | default "text" }}"
-                    class="form-input"
+                    type="hidden"
                     name="{{ .name }}"
-                    {{ if .required }}required{{ end }}
-                    {{ with .placeholder }}placeholder="{{ . }}"{{ end }}
-                    {{ with .min }}min="{{ . }}"{{ end }}
-                    {{ with .max }}max="{{ . }}"{{ end }}
-                    {{ with .pattern }}pattern="{{ . }}"{{ end }}
+                    value="{{ .value }}"
                 />
+            {{ else }}
+                <label for="{{ .name }}">{{ .label }}{{ if .required }}*{{ end }}</label>
+
+                {{ if eq .type "textarea" }}
+                    <textarea
+                        id="{{ .name }}"
+                        class="form-input"
+                        name="{{ .name }}"
+                        {{ if .rows }}rows="{{ .rows }}"{{ else }}rows="5"{{ end }}
+                        {{ if .required }}required{{ end }}
+                        {{ with .placeholder }}placeholder="{{ . }}"{{ end }}
+                    ></textarea>
+                {{ else if eq .type "select" }}
+                    <select
+                        id="{{ .name }}"
+                        class="form-input"
+                        name="{{ .name }}"
+                        {{ if .required }}required{{ end }}
+                    >
+                        {{ if .placeholder }}
+                            <option value="" disabled selected>{{ .placeholder }}</option>
+                        {{ end }}
+                        {{ range .options }}
+                            <option value="{{ .value }}">{{ .label }}</option>
+                        {{ end }}
+                    </select>
+                {{ else }}
+                    <input
+                        id="{{ .name }}"
+                        type="{{ .type | default "text" }}"
+                        class="form-input"
+                        name="{{ .name }}"
+                        {{ if .required }}required{{ end }}
+                        {{ with .placeholder }}placeholder="{{ . }}"{{ end }}
+                        {{ with .min }}min="{{ . }}"{{ end }}
+                        {{ with .max }}max="{{ . }}"{{ end }}
+                        {{ with .pattern }}pattern="{{ . }}"{{ end }}
+                        {{ with .value }}value="{{ . }}"{{ end }}
+                    />
+                {{ end }}
             {{ end }}
         {{ end }}
 

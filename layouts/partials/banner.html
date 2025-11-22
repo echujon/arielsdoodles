@@ -1,5 +1,5 @@
 <!-- Banner -->
-<section id="home" class="banner {{ .style }}">
+<section id="home" class="banner {{ .style }} {{ with .customClass }}{{ . }}{{ end }}">
   <!--div class="content">
     {{ with .title }}
     <div class="logo-title">
