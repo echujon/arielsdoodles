@@ -164,23 +164,29 @@
             <input type="text" name="phone_number" id="phone_number" tabindex="-1" autocomplete="off">
         </div>
 
-        {{ with .turnstileSiteKey }}
-            <div class="cf-turnstile" data-sitekey="{{ . }}" data-callback="onTurnstileSuccess"></div>
+        {{ if not .skipTurnstile }}
+            {{ with .turnstileSiteKey }}
+                <div class="cf-turnstile" data-sitekey="{{ . }}" data-callback="onTurnstileSuccess"></div>
+            {{ end }}
         {{ end }}
-        <input class="doodles-font send-button" type="submit" value="{{ .submitText | default "Send" }}" disabled id="submitBtn" />
+        <input class="doodles-font send-button" type="submit" value="{{ .submitText | default "Send" }}" {{ if .skipTurnstile }}{{ else }}disabled{{ end }} id="submitBtn" />
     </form>
 </div>
 
 {{with .workerURL}}
+{{ if not $.skipTurnstile }}
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{{ end }}
 <script type="text/javascript">
-    var turnstileVerified = false;
-    const WORKER_URL = "{{.}}"; 
+    var turnstileVerified = {{ if $.skipTurnstile }}true{{ else }}false{{ end }};
+    const WORKER_URL = "{{.}}";
 
+    {{ if not $.skipTurnstile }}
     function onTurnstileSuccess(token) {
         turnstileVerified = true;
         document.getElementById('submitBtn').disabled = false;
     }
+    {{ end }}
 
     function showMessage(message, isError = false) {
         let form = document.querySelector(".form");

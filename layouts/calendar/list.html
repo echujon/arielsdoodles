@@ -39,8 +39,8 @@
         {{ partial "contactForm" (dict
             "fields" $calendarFields
             "submitText" "Reserve Calendar(s)"
-            "turnstileSiteKey" site.Params.turnstileSiteKey
             "workerURL" site.Params.workerURL
+            "skipTurnstile" true
         ) }}
         </div>
     </div>
