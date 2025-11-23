@@ -51,10 +51,13 @@ disableKinds = ["taxonomy"]
 name = "Home"
 url = "/"
 weight = 10
+
 [[menu.main]]
 name = "Cat Calendar"
 url = "/calendar/"
 weight = 20
+  [menu.main.params]
+  highlight = true
 
 [[menu.main]]
 name = "Portfolio"

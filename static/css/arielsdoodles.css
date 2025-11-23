@@ -136,3 +136,12 @@ section#pets {
 .formkit-fields {
     justify-content: center;
 }
+
+.calendar-description {
+    line-height: 1.4;
+    margin-bottom: 2em;
+}
+
+.calendar-description p {
+    margin-bottom: 0.5em;
+}

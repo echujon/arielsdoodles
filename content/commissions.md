@@ -25,7 +25,7 @@ showForm: true
 
 <section class="portraits">
   <h3 class="doodles-font">Pet Portraits</h3>
-  <p>I love making pet portraits. I charge $120.00 for one  8 x 8 print and a digitial copy that I will email it to you. Price does not include shipping and handling.</p>
+  <p>I love making pet portraits. I charge $120.00 for one  8" x 8" print and a digital copy that I will email to you. Price does not include shipping and handling.</p>
 
   <h3 class="doodles-font">Other Commissions</h3>
   <p>I would consider doing other types of commissions. Let me know what you would like and I will let you know if it's something I can do.</p>
