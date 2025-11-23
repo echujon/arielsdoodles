@@ -185,6 +185,7 @@
     function onTurnstileSuccess(token) {
         turnstileVerified = true;
         document.getElementById('submitBtn').disabled = false;
+        console.log('Turnstile verified');
     }
     {{ end }}
 
@@ -228,7 +229,7 @@
 
         try {
             const formData = new FormData(this);
-            
+
             const response = await fetch(WORKER_URL, {
                 method: 'POST',
                 body: formData,

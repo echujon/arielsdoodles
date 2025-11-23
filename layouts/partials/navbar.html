@@ -235,6 +235,12 @@
             order: 3;
         }
 
+        /* When cart is not visible, push hamburger to the right */
+        .cart-widget-mobile:empty + .hamburger,
+        #navbar:not(:has(.cart-widget-mobile)) .hamburger {
+            margin-left: auto;
+        }
+
         .hamburger.active .bar:nth-child(2) {
             opacity: 0;
         }
