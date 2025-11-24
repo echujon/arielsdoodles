@@ -1,5 +1,15 @@
 {{ define "main" }}
 <style>
+.calendar-image {
+    max-width: 600px;
+    margin: 0 auto 2em auto;
+}
+.cat-calendar-preorder-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+            
 @media (min-width: 768px) {
     .calendar-form-container {
         max-width: 500px;
@@ -15,13 +25,18 @@
 
 <section class="wrapper style1 align-center">
     <div class="inner">
-        {{ $img := resources.Get "images/Pre-Orders.png" }}
-        {{ if $img }}
-        <div class="calendar-image" style="max-width: 600px; margin: 0 auto 2em auto;">
-            <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}" style="width: 100%; height: auto; border-radius: 8px;" />
+        {{with .Params.image}}
+        <div class="calendar-image">
+            {{ partial "webpImage.html" (dict
+                "image" .
+                "alt" "2026 Cat Calendar Pre-orders"
+                "class" "cat-calendar-preorder-image"
+                "quality" 90
+                ) }}
         </div>
+
         {{ else }}
-        <p style="color: red;">DEBUG: Image not found at images/Pre-Orders.png</p>
+        <p style="color: red;">DEBUG: Image not found - .Params.image is empty</p>
         {{ end }}
         <div class="calendar-description">
             <p>Reserve your pre-order 2026 Cat Calendar! Fill out the form below to reserve one or more calendars.</p>

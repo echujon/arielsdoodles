@@ -1,0 +1,43 @@
+{{/*
+  Reusable partial for creating WebP images with fallback
+
+  Usage:
+    {{ partial "webp-image.html" (dict
+        "image" "images/banner.png"
+        "alt" "Banner image"
+        "class" "my-image-class"
+        "quality" 90
+        "loading" "lazy"
+    ) }}
+
+  Parameters:
+    - image (required): Path to the image in assets folder
+    - alt (optional): Alt text for the image
+    - class (optional): CSS class(es) to apply to the <img> element
+    - quality (optional): WebP quality (default: 85)
+    - loading (optional): Loading attribute (default: "lazy")
+*/}}
+
+{{ $imagePath := .image }}
+{{ $alt := .alt | default "" }}
+{{ $class := .class | default "" }}
+{{ $quality := .quality | default 85 }}
+{{ $loading := .loading | default "lazy" }}
+
+{{ if $imagePath }}
+  {{ $img := resources.Get $imagePath }}
+
+  {{ if $img }}
+    {{ $imgWebp := $img.Resize (printf "%dx webp q%d" $img.Width $quality) }}
+    <picture>
+      {{/* WebP source */}}
+      <source srcset="{{ $imgWebp.RelPermalink }}" type="image/webp">
+      {{/* Fallback image (original format) */}}
+      <img {{ with $class }}class="{{ . }}"{{ end }} src="{{ $img.RelPermalink }}" alt="{{ $alt }}" loading="{{ $loading }}" />
+    </picture>
+  {{ else }}
+    <p style="color: red;">Error: Image resource not found at path: "{{ $imagePath }}"</p>
+  {{ end }}
+{{ else }}
+  <p style="color: red;">Error: No image path provided to webpImage partial</p>
+{{ end }}

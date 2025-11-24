@@ -130,36 +130,6 @@
             /*rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
         );
     }
-    /*function navOnScroll() {
-        //check what section we're on
-        if (!hasNavClick) {
-            var currentScroll = window.pageYOffset;
-            var currentSection;
-            toggleDropdown(true);
-            navSections.forEach(section => {
-                let sectionOffset = section.offsetTop;
-                let sectionHalfSize = section.clientHeight / 2.5;
-                if ((sectionOffset - sectionHalfSize) < currentScroll) {
-                    currentSection = section;
-                    return
-                }
-
-            })
-            if (currentSection) {
-                let id = currentSection.getAttribute("id");
-                let navItem = document.querySelector("#navbar a[href='#" + id + "']");
-                activateNavItem(navItem);
-                title = currentSection.querySelector(".title");
-                event.preventDefault();
-                //history.pushState({}, '', currentSection.href);
-            }
-        }
-        else {
-            hasNavClick = false;
-        }
-
-        // activateNavItem(navItem);
-    }*/
 
     function activateNavItem(navItem) {
         let currentlyActive = document.querySelector("#navbar a.active");

@@ -19,22 +19,23 @@
   </div!-->
 
   {{with .landingBanner}}
-  {{ $image := resources.Get . }}
   <a href="{{ $.link }}">
-    <img class="kickstarter-banner" src="{{$image.RelPermalink}}" alt="2026 Cat Calendar Banner" />
+    {{ partial "webpImage.html" (dict
+      "image" .
+      "alt" "2026 Cat Calendar Banner"
+      "class" "kickstarter-banner"
+      "quality" 90
+    ) }}
   </a>
   {{else}}
   {{/* Only show background image if landingBanner is not set */}}
   {{ with .image }}
-  {{ $image := resources.Get . }}
-  {{ $imageWebp := $image.Resize (printf "%dx webp q90" $image.Width) }}
   <div class="image">
-    <picture>
-      {{/* WebP source */}}
-      <source srcset="{{ $imageWebp.RelPermalink }}" type="image/webp">
-      {{/* Fallback image (original format) */}}
-      <img src="{{ $image.RelPermalink }}" alt="Ariel's Doodles banner" loading="lazy" />
-    </picture>
+    {{ partial "webpImage.html" (dict
+      "image" .
+      "alt" "Ariel's Doodles banner"
+      "quality" 90
+    ) }}
   </div>
   {{ end }}
   {{ end }}
