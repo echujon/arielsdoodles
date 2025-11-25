@@ -174,14 +174,14 @@
 </div>
 
 {{with .workerURL}}
-{{ if not $.skipTurnstile }}
+{{ if not ($.skipTurnstile) }}
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {{ end }}
 <script type="text/javascript">
     var turnstileVerified = {{ if $.skipTurnstile }}true{{ else }}false{{ end }};
     const WORKER_URL = "{{.}}";
 
-    {{ if not $.skipTurnstile }}
+    {{ if not ($.skipTurnstile) }}
     function onTurnstileSuccess(token) {
         turnstileVerified = true;
         document.getElementById('submitBtn').disabled = false;

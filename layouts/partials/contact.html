@@ -38,6 +38,15 @@
         transition: transform 0.3s ease;
     }
 
+    /* Ensure slideshow isn't constrained by spotlight.style2 .image rules */
+    section.spotlight .slideshow-container {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 800px;
+        border-radius: 0 !important;
+        margin: 0 auto;
+    }
+
     @media screen and (orientation:portrait) {
         #contact .image {
             top: 0rem;
@@ -73,6 +82,6 @@
         {{ partial "picture" $imageObj }}
         {{ end }}
         {{if .pictures}}
-        {{partial "carousel" .pictures}}
+        {{partial "slideshow" .pictures}}
         {{end}}
     </section>
