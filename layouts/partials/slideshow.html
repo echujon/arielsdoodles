@@ -232,6 +232,70 @@
         if (e.key === 'ArrowLeft') prevSlide();
         if (e.key === 'ArrowRight') nextSlide();
     });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Minimum distance for a swipe
+
+    const imageWrapper = container.querySelector('.slideshow-image-wrapper');
+
+    imageWrapper.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    imageWrapper.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    // Mouse drag support for desktop
+    let mouseDown = false;
+    let mouseStartX = 0;
+    let mouseEndX = 0;
+
+    imageWrapper.addEventListener('mousedown', (e) => {
+        mouseDown = true;
+        mouseStartX = e.screenX;
+    });
+
+    imageWrapper.addEventListener('mouseup', (e) => {
+        if (mouseDown) {
+            mouseEndX = e.screenX;
+            handleMouseSwipe();
+            mouseDown = false;
+        }
+    });
+
+    imageWrapper.addEventListener('mouseleave', () => {
+        mouseDown = false;
+    });
+
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swiped right, go to previous
+                prevSlide();
+            } else {
+                // Swiped left, go to next
+                nextSlide();
+            }
+        }
+    }
+
+    function handleMouseSwipe() {
+        const swipeDistance = mouseEndX - mouseStartX;
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Dragged right, go to previous
+                prevSlide();
+            } else {
+                // Dragged left, go to next
+                nextSlide();
+            }
+        }
+    }
 })();
 </script>
 {{ end }}
