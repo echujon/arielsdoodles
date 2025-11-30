@@ -37,7 +37,7 @@ disableKinds = ["taxonomy"]
   favicon = true
   turnstileSiteKey = "0x4AAAAAAB_XENp3OdtwuY8i"
   workerURL = "https://arielsdoodles-formhandler.arielsdoodles.workers.dev"
-  enableShop = false
+  enableShop = true
 
 [Params.social]
   email = "arielchujonart@gmail.com"

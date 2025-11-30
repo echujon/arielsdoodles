@@ -56,13 +56,20 @@ weight = 10
 name = "Cat Calendar"
 url = "/calendar/"
 weight = 20
+[menu.main.params]
+  highlight = true
+
+[[menu.main]]
+name = "Shop"
+url = "/shop/"
+weight = 20
   [menu.main.params]
   highlight = true
 
 [[menu.main]]
 name = "Portfolio"
 url = "/portfolio/"
-weight = 20
+weight = 25
 
 [[menu.main]]
 name = "About"

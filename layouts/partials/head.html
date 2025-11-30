@@ -35,9 +35,10 @@
 	</noscript>
 	{{end}}
 
-	<!-- FontAwesome CSS -->
+	<!-- FontAwesome CSS (async loaded to prevent render blocking) -->
 	{{ range .Site.Params.asset.fontawesome_css -}}
-	<link rel="stylesheet" href="{{ . | absURL }}">
+	<link rel="preload" href="{{ . | absURL }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="{{ . | absURL }}"></noscript>
 	{{- end }}
 
 	{{ range .Site.Params.asset.arielsdoodles_css -}}
