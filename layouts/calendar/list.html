@@ -1,16 +1,33 @@
 {{ define "main" }}
 <style>
-.calendar-image {
-    max-width: 600px;
+.calendar-images-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
     margin: 0 auto 2em auto;
+    max-width: 1200px;
 }
+
+.calendar-image {
+    width: 100%;
+}
+
 .cat-calendar-preorder-image {
     width: 100%;
     height: auto;
     border-radius: 8px;
 }
-            
+
 @media (min-width: 768px) {
+    .calendar-images-container {
+        flex-direction: row;
+        gap: 2em;
+    }
+
+    .calendar-image {
+        flex: 1;
+    }
+
     .calendar-form-container {
         max-width: 500px;
         margin: 0 auto;
@@ -25,18 +42,31 @@
 
 <section class="wrapper style1 align-center">
     <div class="inner">
-        {{with .Params.image}}
-        <div class="calendar-image">
-            {{ partial "webpImage.html" (dict
-                "image" .
-                "alt" "2026 Cat Calendar Pre-orders"
-                "class" "cat-calendar-preorder-image"
-                "quality" 90
-                ) }}
+        {{with .Params.images}}
+        <div class="calendar-images-container">
+            {{with .image_1}}
+            <div class="calendar-image">
+                {{ partial "webpImage.html" (dict
+                    "image" .
+                    "alt" "2026 Cat Calendar Cover"
+                    "class" "cat-calendar-preorder-image"
+                    "quality" 90
+                    ) }}
+            </div>
+            {{end}}
+            {{with .image_2}}
+            <div class="calendar-image">
+                {{ partial "webpImage.html" (dict
+                    "image" .
+                    "alt" "2026 Cat Calendar Back Cover"
+                    "class" "cat-calendar-preorder-image"
+                    "quality" 90
+                    ) }}
+            </div>
+            {{end}}
         </div>
-
         {{ else }}
-        <p style="color: red;">DEBUG: Image not found - .Params.image is empty</p>
+        <p style="color: red;">DEBUG: Images not found - .Params.images is empty</p>
         {{ end }}
         <div class="calendar-description">
             <p>Reserve your pre-order 2026 Cat Calendar! Fill out the form below to reserve one or more calendars.</p>
