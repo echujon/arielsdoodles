@@ -1,6 +1,8 @@
 <nav class="doodles-font topnav" id="navbar">
     <a class="nav-title" href="/">
-        <span class="logo"><img src="/images/ad-logo.png"></img> </span>
+        {{ $logo := resources.Get "images/ad-logo.png" }}
+        {{ $logoResized := $logo.Resize "100x100 webp" }}
+        <span class="logo"><img src="{{ $logoResized.RelPermalink }}" width="50" height="50"></img> </span>
         <span class="nav-text">Ariel's Doodles</span>
     </a>
     <!-- Shopping Cart Widget (Mobile - Always Visible) -->
