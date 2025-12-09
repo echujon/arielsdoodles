@@ -21,21 +21,109 @@
         margin: 0px;
     }
 
+    #gokitty table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        margin: 1em 0;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #gokitty table th,
+    #gokitty table td {
+        padding: 0.5em 1em;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    #gokitty table th {
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width: 768px) {
+        #gokitty table {
+            font-size: 0.9em;
+        }
+
+        #gokitty table th,
+        #gokitty table td {
+            padding: 0.4em 0.6em;
+        }
+    }
+
     .suit img {
         width: 1em;
         height: 1em;
         vertical-align: middle;
         margin-bottom: .1em;
+    }
 
+    .season-list {
+        white-space: nowrap;
+    }
 
+    .season-list .suit {
+        display: inline-block;
     }
 
     .kitty-card img {
         width: 6em;
-        vertical-align: middle;
-        margin-bottom: .1em;
+        display: block;
+        margin: 0 auto .1em auto;
+    }
 
+    .mouse-card img {
+        margin: 0 0 .1em 0;
+    }
 
+    @media only screen and (max-width: 768px) {
+        .kitty-card img {
+            width: 4em;
+        }
+    }
+
+    #gokitty h1 {
+        text-align: center;
+    }
+
+    #gokitty .collapsible-section h1 {
+        text-align: left;
+        cursor: pointer;
+        position: relative;
+        padding-left: 2rem;
+        user-select: none;
+    }
+
+    #gokitty .collapsible-section h1::after {
+        content: '▼';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.3s ease;
+        font-size: 0.5em;
+    }
+
+    #gokitty .collapsible-section h1.collapsed::after {
+        transform: translateY(-50%) rotate(-90deg);
+    }
+
+    #gokitty .collapsible-content {
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.3s ease;
+        max-height: 10000px;
+        opacity: 1;
+    }
+
+    #gokitty .collapsible-content.collapsed {
+        max-height: 0;
+        opacity: 0;
+    }
+
+    #gokitty .collapsible-content p {
+        text-align: left;
     }
 
     @media only screen and (min-width: 551px) {
@@ -48,10 +136,65 @@
         .suit {
             display: block;
         }
+
+        #gokitty .collapsible-content ul li,
+        #gokitty > div > ul li {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
     }
 </style>
 <section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
     <div class="actual-content">
-        {{ .Content | safeHTML }}
-    </div>   
+        <h1 class="doodles-font">{{ .Title }}</h1>
+        <div id="gokitty-content">
+            {{ .Content | safeHTML }}
+        </div>
+    </div>
 </section>
+
+<script>
+(function() {
+    const content = document.getElementById('gokitty-content');
+    if (!content) return;
+
+    // Find all h1 elements that start sections (Go Kitty: Classic and Go Kitty: Pounce!)
+    const h1Elements = content.querySelectorAll('h1');
+
+    h1Elements.forEach((h1, index) => {
+        // Create wrapper for collapsible section
+        const wrapper = document.createElement('div');
+        wrapper.className = 'collapsible-section';
+
+        // Insert wrapper before h1
+        h1.parentNode.insertBefore(wrapper, h1);
+
+        // Move h1 into wrapper
+        wrapper.appendChild(h1);
+
+        // Create content container
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'collapsible-content';
+        wrapper.appendChild(contentDiv);
+
+        // Move all elements after h1 until next h1 or hr into content div
+        let nextElement = wrapper.nextElementSibling;
+        while (nextElement && nextElement.tagName !== 'H1' && nextElement.tagName !== 'HR') {
+            const current = nextElement;
+            nextElement = nextElement.nextElementSibling;
+            contentDiv.appendChild(current);
+        }
+
+        // If there's an HR after this section, skip it but don't include it
+        if (nextElement && nextElement.tagName === 'HR') {
+            // Keep the HR in place (don't move it)
+        }
+
+        // Add click handler to toggle
+        h1.addEventListener('click', function() {
+            this.classList.toggle('collapsed');
+            contentDiv.classList.toggle('collapsed');
+        });
+    });
+})();
+</script>

@@ -3,39 +3,38 @@ date: 2025-08-02T01:10:09-06:00
 draft: false
 style: "style2 orient-right content-align-left image-position-center onscroll-image-fade-in"
 titleEntry:
-  text: "Go Kitty Rules"
+  text: "Go Kitty"
   style: "doodles-font"
 type: gokitty
-title: Go Kitty Rules
+title: Go Kitty Game
 id: gokitty
 showForm: false
 ---
-# Go Kitty
-**2-5 Players · 15-25 minutes · Ages +7 year**
-
 ## Components:
 - **52 Cards:**
   - 48 Kitty Cards <br>
     4 copies each of 12 unique cards. Each card has one of 12 Traits, grouped into 4 Season suits. Each suit has 3 Traits and 12 cards in total (4 copies per Trait).
 
-    | Season    | Winter <span class="suit">(![suit-winter](/images/suits/Winter.png)) </span>
-|Spring  <span class="suit">(![suit-spring](/images/suits/Spring.png)) </span>
-| Summer <span class="suit">(![suit-winter](/images/suits/Summer.png)) </span>
- | Fall <span class="suit">(![suit-fall](/images/suits/Fall.png))</span> |
-    | --------  | ------- |------- |---------- |--------------|
-    | Traits (4)| Light   | Clover | Firefly   | Apple        |
-    |           | Snug    | Rain   | Fan       | Pumpkin      |
-    |           | Cold    | Posy   | Ice Cream | Leaf Pile    |
+    | Season | Winter <span class="suit">(![suit-winter](/images/suits/Winter.png))</span> | Spring <span class="suit">(![suit-spring](/images/suits/Spring.png))</span> | Summer <span class="suit">(![suit-summer](/images/suits/Summer.png))</span> | Fall <span class="suit">(![suit-fall](/images/suits/Fall.png))</span> |
+    | -------- | ------- | ------- | ------- | ------- |
+    | Traits | Light <span class="kitty-card">![Light](/images/suits/Light.png)</span> | Clover <span class="kitty-card">![Clover](/images/suits/Clover.png)</span> | Firefly <span class="kitty-card">![Firefly](/images/suits/Firefly.png)</span> | Apple <span class="kitty-card">![Apple](/images/suits/Apple.png)</span> |
+    |  | Snug <span class="kitty-card">![Snug](/images/suits/Snug.png)</span> | Rain <span class="kitty-card">![Rain](/images/suits/Rain.png)</span> | Fan <span class="kitty-card">![Fan](/images/suits/Fan.png)</span> | Pumpkin <span class="kitty-card">![Pumpkin](/images/suits/Pumpkin.png)</span> |
+    |  | Cold <span class="kitty-card">![Cold](/images/suits/Cold.png)</span> | Posy <span class="kitty-card">![Posy](/images/suits/Posy.png)</span> | Ice Cream <span class="kitty-card">![IceCream](/images/suits/IceCream.png)</span> | Leaf Pile <span class="kitty-card">![LeafPile](/images/suits/LeafPile.png)</span> |
 
 
 
-  - 4 Mouse Cards
+  - 4 Mouse Cards <br>
+    <span class="kitty-card mouse-card">![Mouse](/images/suits/Mouse.png)</span>
 - **15 Pounce Tokens**
+
+# Go Kitty: Classic
+**2-5 Players · 15-25 minutes · Ages +7 year**
 
 ## Objective
 Players collect sets of 4 kitty cards (**Clowders**) to earn points. The player with the most points at the end of the game wins. There are 3 different types of clowders:
 - **Clowder of a Kind:** 4 cards with the same Trait. (3 points)
-- **Year-round Clowder:** 4 cards, each a different Season(Winter<span class="suit">(![suit-winter](/images/suits/Winter.png)) </span> , Spring<span class="suit">(![suit-spring](/images/suits/Spring.png)), Summer<span class="suit">(![suit-summer](/images/suits/Summer.png)), Fall<span class="suit">(![suit-fall](/images/suits/Fall.png))). (2 points)
+- **Year-round Clowder:** 4 cards, each a different Season. (2 points) <br>
+  <span class="season-list">[Winter<span class="suit">(![suit-winter](/images/suits/Winter.png))</span>, Spring<span class="suit">(![suit-spring](/images/suits/Spring.png))</span>, Summer<span class="suit">(![suit-summer](/images/suits/Summer.png))</span>, Fall<span class="suit">(![suit-fall](/images/suits/Fall.png))</span>]</span>
 - **Season Clowder:** 4 cards with the same Season. (1 point)
   - **Annual Bonus** Complete one Season Clowder from each Season—Winter, Spring, Summer, and Fall. (4 extra points)
 
@@ -92,7 +91,24 @@ You may only use an active (face-up) Pounce Token.
 - **Wild Card** – Mouse cards may complete any Clowder.  
 - Cannot be used to form a set of 4 Mouse cards.
 
-## End of the Game  
-- When the draw pile runs out, each player gets one final turn.  
-- The player with the most points wins.  
+## End of the Game
+- When the draw pile runs out, each player gets one final turn.
+- The player with the most points wins.
   1. **Tiebreaker:** Most active Pounce Tokens.
+
+---
+
+# Go Kitty: Pounce!
+**2-5 Players · 20-30 minutes · Ages +7 year**
+
+## Overview
+Go Kitty: Pounce! is an expansion that adds new strategic elements to the base Go Kitty game.
+
+## Additional Components:
+- Coming soon...
+
+## New Rules:
+- Coming soon...
+
+## Gameplay Changes:
+- Coming soon...
