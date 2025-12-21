@@ -72,10 +72,94 @@
         width: 6em;
         display: block;
         margin: 0 auto .1em auto;
+        cursor: pointer;
     }
 
     .mouse-card img {
         margin: 0 0 .1em 0;
+        cursor: pointer;
+    }
+
+    /* Modal styles - matching portfolio lightbox */
+    .kitty-modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        user-select: none;
+        transition: opacity 0.5s ease, visibility 0.5s, z-index 0.5s;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        outline: 0;
+        background-color: rgba(0, 0, 0, 0.925);
+        visibility: hidden;
+        opacity: 0;
+        z-index: 0;
+    }
+
+    .kitty-modal.visible {
+        pointer-events: auto;
+        visibility: visible;
+        opacity: 1;
+        z-index: 10001;
+    }
+
+    .kitty-modal:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 4rem;
+        height: 4rem;
+        cursor: pointer;
+        background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><line x1="20" y1="20" x2="44" y2="44" stroke="white" stroke-width="1.5"/><line x1="20" y1="44" x2="44" y2="20" stroke="white" stroke-width="1.5"/></svg>');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 3rem;
+    }
+
+    .kitty-modal .inner {
+        transform: translateY(0.75rem);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        opacity: 0;
+        text-align: center;
+    }
+
+    .kitty-modal.loaded .inner {
+        transform: translateY(0);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 1;
+    }
+
+    .kitty-modal .inner img {
+        display: block;
+        max-width: 90vw;
+        max-height: 85vh;
+        box-shadow: 0 1rem 3rem 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .kitty-modal .inner .title {
+        color: #fff;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 1em;
+    }
+
+    .kitty-modal .inner .name {
+        color: #fff;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 1em;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .kitty-modal .inner img {
+            max-width: 100vw;
+        }
     }
 
     @media only screen and (max-width: 768px) {
@@ -153,8 +237,88 @@
     </div>
 </section>
 
+<!-- Modal for kitty card images -->
+<div id="kittyModal" class="kitty-modal" tabindex="-1">
+    <div class="inner">
+        <span class="title doodles-font" id="kittyModalTitle"></span>
+        <img id="kittyModalImage" src="" alt="">
+        <span class="name doodles-font" id="kittyModalName"></span>
+    </div>
+</div>
+
 <script>
+// Modal functions - matching portfolio lightbox behavior
 (function() {
+    const modal = document.getElementById('kittyModal');
+    const modalImage = document.getElementById('kittyModalImage');
+    const modalTitle = document.getElementById('kittyModalTitle');
+    const modalName = document.getElementById('kittyModalName');
+    let modalLocked = false;
+
+    function openKittyModal(imageSrc, imageName) {
+        if (modalLocked) return;
+
+        modalLocked = true;
+
+        // Set image source and title/name
+        modalImage.src = imageSrc;
+        modalTitle.textContent = imageName;
+        modalName.textContent = imageName;
+
+        // Show modal
+        modal.classList.add('visible');
+
+        // Wait for image to load then add loaded class
+        modalImage.onload = function() {
+            setTimeout(() => {
+                modal.classList.add('loaded');
+                modalLocked = false;
+            }, 50);
+        };
+
+        // Focus modal
+        modal.focus();
+    }
+
+    function closeKittyModal() {
+        if (modalLocked) return;
+        if (!modal.classList.contains('visible')) return;
+
+        modalLocked = true;
+
+        // Remove loaded class first for transition
+        modal.classList.remove('loaded');
+
+        // Then remove visible after a delay
+        setTimeout(() => {
+            modal.classList.remove('visible');
+            modalImage.src = '';
+            modalTitle.textContent = '';
+            modalName.textContent = '';
+            modalLocked = false;
+        }, 350);
+    }
+
+    // Close modal when clicking on it (but not the image)
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal || e.target === modal.querySelector('.inner')) {
+            closeKittyModal();
+        }
+    });
+
+    // Prevent click on image from closing modal
+    modalImage.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeKittyModal();
+        }
+    });
+
+    // Collapsible sections
     const content = document.getElementById('gokitty-content');
     if (!content) return;
 
@@ -194,6 +358,43 @@
         h1.addEventListener('click', function() {
             this.classList.toggle('collapsed');
             contentDiv.classList.toggle('collapsed');
+        });
+    });
+
+    // Add click handlers to all kitty card images (including mouse)
+    const allCardImages = document.querySelectorAll('.kitty-card img, .mouse-card img');
+    allCardImages.forEach(img => {
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            const imageSrc = this.src;
+
+            // Check if this is a mouse card
+            const isMouseCard = this.closest('.mouse-card');
+
+            if (isMouseCard) {
+                // For mouse card, just use "Mouse" as the name
+                openKittyModal(imageSrc, 'Mouse');
+                return;
+            }
+
+            // For kitty cards, get the name from the parent td element
+            const tdElement = this.closest('td');
+            let imageName = '';
+
+            if (tdElement) {
+                // Get all text nodes from the td, excluding the img
+                const clone = tdElement.cloneNode(true);
+                const spans = clone.querySelectorAll('.kitty-card');
+                spans.forEach(span => span.remove());
+                imageName = clone.textContent.trim();
+            }
+
+            // Fallback to filename if no text found
+            if (!imageName) {
+                imageName = this.src.split('/').pop().split('.')[0];
+            }
+
+            openKittyModal(imageSrc, imageName);
         });
     });
 })();

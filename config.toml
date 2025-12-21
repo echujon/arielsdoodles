@@ -33,6 +33,9 @@ disableKinds = ["taxonomy"]
 ## Site Parameters
 ## -----------------------------------------------
 
+[Params]
+  enableShop = false
+
 [Params.social]
   email = "arielchujonart@gmail.com"
   facebook = "https://www.facebook.com/arielchujonart"

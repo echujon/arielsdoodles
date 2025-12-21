@@ -98,7 +98,7 @@ You may only use an active (face-up) Pounce Token.
 
 ---
 
-# Go Kitty: Pounce!
+# Clowder!
 **2-5 Players · 20-30 minutes · Ages +7 year**
 
 ## Overview
