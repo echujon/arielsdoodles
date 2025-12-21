@@ -318,6 +318,13 @@
         }
     });
 
+    // Close modal when scrolling
+    window.addEventListener('scroll', function() {
+        if (modal.classList.contains('visible')) {
+            closeKittyModal();
+        }
+    });
+
     // Collapsible sections
     const content = document.getElementById('gokitty-content');
     if (!content) return;
