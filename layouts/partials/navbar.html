@@ -20,6 +20,7 @@
     <ul class="nav-menu">
 
         {{range .Site.Menus.main}}
+        {{if not .Params.skip}}
         {{if ne .Name "Portfolio"}}
         <li><a class="{{if .Params.highlight}}highlight{{ end }} {{if or (eq $currentPage.RelPermalink .URL) (eq $currentPage.CurrentSection.RelPermalink .URL)}}active{{ end }}" href="{{.URL}}">{{.Name}}</a>
         </li>
@@ -34,6 +35,7 @@
                 <li><a href="/portfolio/#chalkArt">Chalk Art</a></li>
             </ul>
         </li>
+        {{end}}
         {{end}}
         {{end}}
         <!-- Shopping Cart Widget (Desktop) -->

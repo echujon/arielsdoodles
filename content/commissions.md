@@ -16,6 +16,22 @@ type: commissions
 title: Commissions
 id: commissions
 showForm: true
+fields:
+  - name: "name"
+    label: "Name"
+    type: "text"
+    required: true
+  - name: "email"
+    label: "Email"
+    type: "email"
+    required: true
+  - name: "subject"
+    type: "hidden"
+    value: "commission"
+  - name: "message"
+    label: "Message"
+    type: "textarea"
+    rows: 5
 ---
 
 <section class="portraits">

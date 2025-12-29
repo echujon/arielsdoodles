@@ -58,6 +58,7 @@ url = "/calendar/"
 weight = 20
 [menu.main.params]
   highlight = true
+  skip = true
 
 [[menu.main]]
 name = "Shop"

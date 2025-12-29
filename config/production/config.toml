@@ -51,9 +51,11 @@ weight = 10
 [[menu.main]]
 name = "Cat Calendar"
 url = "/calendar/"
+
 weight = 20
-  [menu.main.params]
+[menu.main.params]
   highlight = true
+  skip = true
 
 [[menu.main]]
 name = "Portfolio"

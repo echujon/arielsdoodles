@@ -69,10 +69,16 @@
         <p style="color: red;">DEBUG: Images not found - .Params.images is empty</p>
         {{ end }}
         <div class="calendar-description">
+            {{ if .Params.soldOut }}
+            <p><b>Thanks for your support! We have sold out of our 2026 Cat Calendars!!!</b></p>
+            <p>Please subscribe to our mailing list to get notified about our new products and upcoming events!</p>
+            {{ else }}
             <p>Reserve your pre-order 2026 Cat Calendar! Fill out the form below to reserve one or more calendars.</p>
             <p>Each calendar will be 12" x 12" and cost $35 (not including shipping).</p>
             <p><b>Reserve now to get your calendars for just $30 each — save $5 per calendar!</b></p>
+            {{ end }}
         </div>
+        {{ if not .Params.soldOut }}
         <div class="calendar-form-container">
 
         {{/* Define custom fields for calendar reservation */}}
@@ -91,6 +97,7 @@
             "skipTurnstile" true
         ) }}
         </div>
+        {{ end }}
     </div>
 </section>
 {{end}}
