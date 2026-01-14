@@ -146,3 +146,15 @@ section#pets {
 .calendar-description p {
     margin-bottom: 0.5em;
 }
+
+/* Global print styles - hide navigation and footer */
+@media print {
+    nav, #navbar, .nav-menu, .hamburger, footer {
+        display: none !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+}

@@ -27,7 +27,7 @@ showForm: false
     <span class="kitty-card mouse-card">![Mouse](/images/suits/Mouse.png)</span>
 - **15 Pounce Tokens**
 
-# Go Kitty: Classic
+# Clowder: Go Kitty
 **2-5 Players · 15-25 minutes · Ages +7 year**
 
 ## Objective
@@ -35,10 +35,16 @@ Players collect sets of 4 kitty cards (**Clowders**) to earn points. The player 
 - **Clowder of a Kind:** 4 cards with the same Trait. (3 points)
 - **Year-round Clowder:** 4 cards, each a different Season. (2 points) <br>
   <span class="season-list">[Winter<span class="suit">(![suit-winter](/images/suits/Winter.png))</span>, Spring<span class="suit">(![suit-spring](/images/suits/Spring.png))</span>, Summer<span class="suit">(![suit-summer](/images/suits/Summer.png))</span>, Fall<span class="suit">(![suit-fall](/images/suits/Fall.png))</span>]</span>
-- **Season Clowder:** 4 cards with the same Season. (1 point)
-  - **Annual Bonus** Complete one Season Clowder from each Season—Winter, Spring, Summer, and Fall. (4 extra points)
+  -**Bonus** - Enable up to 2 pounce tokens.
+- **Seasonal Clowder:** 4 cards with the same Season. (1 point)
+  - **Compounding Bonus** - Earn bonus points for collecting different Seasonal Clowders:
 
-
+  | Number of distinct Season Clowders | Points      | 
+  | -----------------------------------|-------------|
+  | 1 Season Clowder                   | 1           | 
+  | 2 Season Clowders                  | 4           | 
+  | 3 Season Clowders                  | 10          |
+  | 4 Season Clowders                  | 16          | 
 
 ## Setup
 1. Remove Mouse cards.
@@ -56,7 +62,7 @@ Players collect sets of 4 kitty cards (**Clowders**) to earn points. The player 
 - choose one action:
   - Ask another player for a **Trait** or **Season** card
   - Use/Reactivate a **Pounce Token**.
-If the only cards in your hand are Mouse card, you may ask any Season.
+If the only cards in your hand are Mouse card, you may ask for any Season.
 
 ### Asking for a Trait Card
 1. You must hold at least one card with the Trait you're asking for.
