@@ -188,8 +188,10 @@
         text-align: center;
     }
 
-    #clowder > .actual-content > h1 {
-        font-size: 0.8em;
+    #clowder > .actual-content > h1 .subtitle {
+        font-size: 0.6em;
+        display: block;
+        /*margin-top: 0.5em;*/
     }
 
     #clowder .collapsible-section h1 {
@@ -394,7 +396,7 @@
 </style>
 <section class="spotlight {{ .style }}" {{ with .id }} id="{{ . }}" {{ end }}>
     <div class="actual-content">
-        <h1 class="doodles-font">{{ .Title }}</h1>
+        <h1 class="doodles-font">{{ .Title }}{{ if .subtitle }}<span class="subtitle">{{ .subtitle }}</span>{{ end }}</h1>
         <div id="clowder-content">
             {{ .Content | safeHTML }}
         </div>

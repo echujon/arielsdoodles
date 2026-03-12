@@ -6,7 +6,8 @@ titleEntry:
   text: "Clowder"
   style: "doodles-font"
 type: clowder
-title: Clowder:A Deduction Game of kitties
+title: Clowder
+subtitle: A Deduction Game of Cats and Seasons
 id: clowder
 showForm: false
 ---
@@ -118,11 +119,11 @@ Players can protect cards by placing them face-down in hideaways:
 - Move cards between hand and hideaways at end of your turn
 - Use hideaways for strategy: protect builds, bluff opponents, deny key cards
 
-## Hand Size & Card Limits
+## Collection & Minimum Card Limits
 
-### Always Maintain Full Hand Size:
-- 2-3 players: Always have 7 total cards (hand + hideaways combined)
-- 4-5 players: Always have 5 total cards (hand + hideaways combined)
+### Maintain Miminum Collection Size:
+- 2-3 players: Have at least 7 total cards (hand + hideaways combined)
+- 4-5 players:  Have at least 5 total cards (hand + hideaways combined)
 
 **Minimum Hand:** Must always have at least 3 cards in your active hand (not in hideaways)
 
@@ -130,9 +131,7 @@ Players can protect cards by placing them face-down in hideaways:
 - Whenever you have fewer than your full hand size, immediately draw from Stray Kitties until you reach it
 - **Example (2-3 players):** Complete a clowder (play 4 cards) → draw 4 cards to return to 7 total
 
-**If Stray Kitties is empty:**
-- You cannot draw new cards
-- Game continues until an end trigger is met
+
 
 ## Turn Structure
 
@@ -142,21 +141,25 @@ Players can protect cards by placing them face-down in hideaways:
 **Option 1: Ask by Season**
 - Ask: "Do you have any [season] cats?"
 - Target gives you 1 card of that season from their hand (if they have it)
-- If they don't have it, draw 1 card from Stray Kitties
+- If they don't have it, they say **"Go Kitty"** and you draw 1 card from Stray Kitties
 - Does NOT affect hideaways
+- **All cards must be given face up**
 
 **Option 2: Ask by Kitty Name (Requires proof)**
 - Must show one card of that kitty name from your hand
 - Ask: "Give me all your [kitty name] cards"
 - Target gives you ALL cards of that name from their hand (if they have them)
-- If they don't have it, draw 1 card from Stray Kitties
+- If they don't have it, they say **"Go Kitty"** and you draw 1 card from Stray Kitties
 - Does NOT affect hideaways
+- **All cards must be given face up**
 
 #### B) Use a Paw Token (Choose one):
 **Option 1: Forced Ask**
 - Demand any season OR kitty name (no proof needed)
 - Target must give you ALL matching cards from their hand
+- If they don't have it, they say **"Go Kitty"** and you draw 1 card from Stray Kitties
 - Does NOT affect hideaways
+- **All cards must be given face up**
 
 **Option 2: Scout Stray Kitties**
 - Look at top 3 cards from Stray Kitties
@@ -193,7 +196,8 @@ The game ends **IMMEDIATELY** when any of these conditions are met:
 
 ### End Trigger 3: Stray Kitties Depleted
 - The Stray Kitties draw pile is empty
-- Game ends immediately
+- Each player gets one final turn (complete the round)
+- Then game ends
 
 ---
 
@@ -201,7 +205,7 @@ The game ends **IMMEDIATELY** when any of these conditions are met:
 **2-5 Players · 20-30 minutes · Ages 9+ · Cooperative Mode**
 
 ## Objective
-Work together to round up mischievous cats into clowders and reach your point goal before making 3 mistakes or running out of cards!
+Work together to round up mischievous cats into clowders and reach your point goal before losing your detective status or running out of cards!
 
 ## Setup
 **Players:** 2-5 players
@@ -209,19 +213,25 @@ Work together to round up mischievous cats into clowders and reach your point go
 - 48 Cat Cards: 12 different cats, 4 copies each
 - 4 Mice: Wild cards
 
+**Cats by Season:**
+- **Winter:** Cold, Sled, Snug
+- **Spring:** Clover, Rain, Posy
+- **Summer:** Ice-cream, Fan, Firefly
+- **Fall:** Apple, Pumpkin, Leaf Pile
+
 **Deal Cards:**
 - 2 players: 5 cards each
 - 3-5 players: 4 cards each
 
 **IMPORTANT:** Players hold cards facing away from themselves - you can see everyone else's cards but not your own!
 
-**The Meowsters Deck:** Remaining cards form The Meowsters draw deck
+**Stray Kitties:** Remaining cards form the Stray Kitties draw deck
 
 **Starting Paw Tokens:**
-- 2-4 players: 4 paw tokens each
-- 5 players: 3 paw tokens each
+- 2-4 players: 4 paw tokens each (for giving clues)
+- 5 players: 3 paw tokens each (for giving clues)
 
-**Negative Experience Tracker:** Place 3 tokens in the center (start at 0)
+**Detective Status:** Place 3 tokens in the center to track your team's detective reputation (start at 3)
 
 **Set Point Goal:** Choose difficulty
 - 40 points: Challenging
@@ -251,7 +261,7 @@ Work together to round up mischievous cats into clowders and reach your point go
 
 ## Bonus Scoring
 
-### Seasonal Diversity Bonus
+### Diversity Season Bonus
 Applies when completing clowders from different seasons (counts Purrfect and Seasonal only):
 - 1 unique season: +0
 - 2 unique seasons: +1
@@ -291,10 +301,10 @@ Applies when completing clowders from different seasons (counts Purrfect and Sea
 - Once played correctly, cards removed from game (kept visible for scoring)
 
 **After Your Action:**
-- Maintain hand size: If below starting hand size, immediately draw from The Meowsters
+- Maintain hand size: If below starting hand size, immediately draw from Stray Kitties
 - Play passes clockwise
 
-## Mistakes & Negative Experience
+## Mistakes & Detective Status
 
 ### What Counts as a Mistake:
 - Playing wrong cards (cards don't form valid clowder)
@@ -302,13 +312,13 @@ Applies when completing clowders from different seasons (counts Purrfect and Sea
 - Cards don't match what was expected
 
 ### When a Mistake Happens:
-- Wrong cards shuffle back into The Meowsters deck
-- Team gains +1 negative experience point (flip 1 tracker token)
+- Wrong cards shuffle back into Stray Kitties deck
+- Team loses 1 Detective Status token (remove 1 token from center)
 - Paw token already spent is not refunded
 - Players draw back to hand size if needed
 
 ### Game Over - Team Loses:
-- 3 negative experience points accumulated
+- All 3 Detective Status tokens lost (you're fired!)
 
 ## Winning & Losing
 
@@ -316,8 +326,24 @@ Applies when completing clowders from different seasons (counts Purrfect and Sea
 ✓ Reach or exceed your point goal!
 
 ### Team Loses:
-✗ Accumulate 3 negative experience points, OR
-✗ The Meowsters deck is empty, everyone takes one final turn, and you haven't reached the point goal
+✗ Lose all 3 Detective Status tokens (fired for incompetence!), OR
+✗ Stray Kitties deck is empty, everyone takes one final turn, and you haven't reached the point goal
+
+### Detective Rankings:
+- **0-20 Points - "Hardy Boys" Rookie**
+  - "Getting there! Even the greats started somewhere. Time for more training."
+- **21-30 Points - "Father Brown" Shamus**
+  - "A solid case solved! Your intuition is developing nicely."
+- **31-40 Points - True "Nancy Drew" Gumshoe**
+  - "Great detective work! You've got the skills and the sleuthing spirit."
+- **41-50 Points - "Hercule Poirot" Investigator**
+  - "Magnifique! The little grey cells are working perfectly."
+- **51-60 Points - "Miss Marple" Private Eye**
+  - "Exceptional! Nothing escapes your sharp detective mind."
+- **61-70 Points - "Sherlock Holmes" Legend**
+  - "Elementary! A legendary performance worthy of Baker Street."
+- **70+ Points - "The Purrfect Detective"**
+  - "LEGENDARY! You've achieved the impossible. The cats bow to your mastery!"
 
 ## Mouse Wildcard
 - Mice can substitute for any cat
@@ -326,11 +352,12 @@ Applies when completing clowders from different seasons (counts Purrfect and Sea
 
 ## Strategy Tips
 💡 Yearly clowders generate 4 paw tokens for the team - build them early for economy!
-💡 Complete set bonus (+10) and seasonal diversity (+6) are worth +16 total - plan for them!
+💡 Complete set bonus (+10) and diversity season (+6) are worth +16 total - plan for them!
 💡 Coordinate Yearly sequences - agree who plays which season and when
 💡 Be precise with clues - position matters! ("Left to right")
 💡 Track what you've been told - memory is key!
 💡 Mice are your friends - use them strategically to complete difficult clowders
+💡 Guard your detective status - 3 mistakes and you're fired!
 
 ## Quick Reference
 
@@ -341,8 +368,8 @@ Applies when completing clowders from different seasons (counts Purrfect and Sea
 | Yearly | 4 (1 per season, in order) | 3 pts | +4 |
 
 **Bonuses:**
-- Seasonal diversity: +0/+1/+2/+6 (for 1/2/3/4 unique seasons)
-- Complete set: +10 (+5 for 2nd type, +5 for 3rd type)
+- Diversity Season: +0/+1/+2/+6 (for 1/2/3/4 unique seasons)
+- Complete Set: +10 (+5 for 2nd type, +5 for 3rd type)
 
 **Hand Sizes:**
 - 2 players: 5 cards each
@@ -352,8 +379,9 @@ Applies when completing clowders from different seasons (counts Purrfect and Sea
 - 2-4 players: 4 paws each
 - 5 players: 3 paws each
 
-**Mistakes:** Wrong cards return to The Meowsters + 1 negative point
-**Failure:** 3 negative experience points
+**Detective Status:** 3 tokens (lose 1 per mistake, lose all 3 = game over)
+**Mistakes:** Wrong cards return to Stray Kitties + lose 1 Detective Status
+**Failure:** Lose all 3 Detective Status OR don't reach goal before Stray Kitties depletes
 **Max Theoretical Score:** 73 points (with perfect play using all 52 cards)
 
-Good luck, Kitty Detectives! Round up those mischievous Meowsters and organize them into clowders! Remember - you can see their cards, but not your own!
+Good luck, Kitty Detectives! Round up those mischievous Kitties and organize them into clowders! Remember - you can see their cards, but not your own!
