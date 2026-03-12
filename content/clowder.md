@@ -28,79 +28,172 @@ showForm: false
 - **15 Paw Tokens**
 
 # Clowder: Go Kitty
-**2-5 Players · 15-25 minutes · Ages 6+**
+**2-5 Players · 15-25 minutes · Ages 6+ · Competitive Mode**
 
 ## Objective
-Players collect sets of 4 kitty cards (**Clowders**) to earn points. The player with the most points at the end of the game wins. There are 3 different types of clowders:
-- **Clowder of a Kind:** 4 cards with the same Trait. (4 points)
-- **Seasonal Clowder:** 4 cards with the same Season. (1 point)
-- **Year-round Clowder:** 4 cards, each a different Season. (2 points) <br>
-  <span class="season-list">[Winter<span class="suit">(![suit-winter](/images/suits/Winter.png))</span>, Spring<span class="suit">(![suit-spring](/images/suits/Spring.png))</span>, Summer<span class="suit">(![suit-summer](/images/suits/Summer.png))</span>, Fall<span class="suit">(![suit-fall](/images/suits/Fall.png))</span>]</span>
-  -**Bonus** - Enable up to 2 pounce tokens.
-  - **Compounding Bonus** - Earn bonus points for collecting different Seasonal Clowders:
-
-  | Number of distinct Season Clowders | Points      |
-  | -----------------------------------|-------------|
-  | 1 Season Clowder                   | 1           |
-  | 2 Season Clowders                  | 4           |
-  | 3 Season Clowders                  | 10          |
-  | 4 Season Clowders                  | 16          |
+Score the most points by completing clowders. The player with the highest score when the game ends wins!
 
 ## Setup
-1. Remove Mouse cards.
-2. Shuffle the deck, deal 3 cards to each player.
-3. Give each player 3 Paw Tokens.
-4. Add Mouse cards back and reshuffle to form the draw deck.
-5. The player who last saw a kitty goes first, otherwise the player to the left of the dealer.
-6. Turns proceed clockwise.
+**Players:** 2-5 players
+**Deck:** 52 cards total
+- 48 Cat Cards: 12 different cats, 4 copies each
+- 4 Mice: Wild cards
 
-## Gameplay
+**Cats by Season:**
+- **Winter:** Cold, Sled, Snug
+- **Spring:** Clover, Rain, Posy
+- **Summer:** Ice-cream, Fan, Firefly
+- **Fall:** Apple, Pumpkin, Leaf Pile
 
-### On Your Turn
-- At the beginning of your turn put down your Clowder sets face up. If the draw pile is empty, you may build Clowder sets at anytime during your turn.
-- If your hand is empty, draw a card ("**Go Kitty!**").
-- choose one action:
-  - Ask another player for a **Trait** or **Season** card
-  - Use/Reactivate a **Paw Token**.
-If the only cards in your hand are Mouse card, you may ask for any Season.
+**Deal Cards:**
+- 2-3 players: 7 cards each
+- 4-5 players: 5 cards each
 
-### Asking for a Trait Card
-1. You must hold at least one card with the Trait you're asking for.
-2. If the player has it, they give you **all** their cards of that Trait.
-    - Your turn proceeds (refer to ["On Your Turn"](#on-your-turn)).
-3. If not, they say **"Go Kitty"** and you draw a card. Your turn ends.
+**Pre-Game Setup:**
+Before the first turn, players may:
+- Create up to 2 hideaways by placing cards face-down
+- Each hideaway holds 1-3 cards
+- **IMPORTANT:** After creating hideaways, you must have at least 3 cards remaining in your hand
 
-### Asking for a Season Card
-1. You may ask any player for a Season card (Winter, Spring, Summer, or Fall), even if you don't have one in your hand.
-2. If the player has it, they give you **one** card. Your turn ends.
-3. If not, they say **"Go Kitty"** and you draw a card. Your turn ends.
+**Stray Kitties:** Remaining cards form the Stray Kitties draw deck
 
-### Using a Paw Token
-You may only use an active (face-up) Paw Token.
-1. Flip the token face down to mark it as used.
-2. Choose one (your turn ends after either choice):
-   - A. Ask any player for **any card**, including Mouse Cards (Trait/Season rules still apply).
-      + If the player doesn't have the card, they say "No Kitty."
-   - B. Look at the top 3 cards of the draw pile, keep one, and place the rest on the bottom.
+**Starting Paw Tokens:** Each player receives 3 paw tokens
 
-### Reactivate a Paw Token
-1. You may reactivate a Paw Token when you lay down a Clowder.
-2. You may use your turn to reactivate **one** Paw Token.
+**Determine starting player**
 
-### Mouse Card
-- **Reverse a request** if someone asks for a card you have:
-  - If they ask for a **Trait**, they give you all their cards of that Trait.
-  - If they ask for a **Season**, they give you one card of that Season.
-  - Discard the Mouse card after use.
-  - Cannot block a request made with a Paw Token.
+## Clowder Types
 
-- **Wild Card** – Mouse cards may complete any Clowder.
-- Cannot be used to form a set of 4 Mouse cards.
+### Purrfect Clowder (4 identical cats)
+- **Requires:** 4 copies of the same cat
+- **Scoring:** 4 points + 3 paw tokens
+- **With mouse:** 3 points + 3 paw tokens
 
-## End of the Game
-- When the draw pile runs out, each player gets one final turn.
-- The player with the most points wins.
-  1. **Tiebreaker:** Most active Paw Tokens.
+### Seasonal Clowder (4 cats from same season)
+- **Requires:** Any 4 cats from the same season (can repeat)
+- **Example:** Rain + Rain + Clover + Posy (all Spring)
+- **Scoring:** 3 points + 1 paw token
+- **With mouse:** 2 points + 1 paw token
+
+### Yearly Clowder (1 cat from each season)
+- **Requires:** 1 cat from each of the 4 seasons
+- **Example:** Cold + Clover + Fan + Apple
+- **Scoring:** 2 points + 2 paw tokens
+- **With mouse:** 1 point + 2 paw tokens
+
+## Bonus Scoring
+Bonuses are applied as you complete clowders:
+
+### Diversity Season Bonus
+Only applies to Seasonal and Purrfect clowders. Total bonus based on unique seasons covered:
+- 1 unique season: +0
+- 2 unique seasons: +1
+- 3 unique seasons: +2
+- 4 unique seasons: +6
+
+**When applied:** The bonus is awarded when you reach each new season threshold.
+
+**Example:**
+- Complete Spring Purrfect: 4 pts (1 season = +0)
+- Complete Fall Seasonal: 3 pts + +1 bonus (now 2 seasons)
+- Complete Winter Purrfect: 4 pts + +1 more (now 3 seasons, total +2)
+- Complete Summer Seasonal: 3 pts + +4 more (now 4 seasons, total +6)
+- Running total: 4 + 4 + 5 + 7 = 20 points
+
+### Complete Set Bonus (incremental)
+Applies when completing different clowder TYPES:
+- 1st type completed: +0
+- 2nd type completed: +5 to that clowder
+- 3rd type completed: +5 to that clowder
+
+**Example:** Complete Purrfect (4 pts +0), then first Seasonal (3 pts +5), then first Yearly (2 pts +5) = 19 total points
+
+## Hideaways (Protected Storage)
+Players can protect cards by placing them face-down in hideaways:
+
+### Hideaway Rules:
+- Maximum 2 hideaways per player
+- Each hideaway holds 1-3 cards
+- Cards can be any combination (don't have to form a clowder)
+- Hideaways cannot be requested by normal asks
+- Move cards between hand and hideaways at end of your turn
+- Use hideaways for strategy: protect builds, bluff opponents, deny key cards
+
+## Hand Size & Card Limits
+
+### Always Maintain Full Hand Size:
+- 2-3 players: Always have 7 total cards (hand + hideaways combined)
+- 4-5 players: Always have 5 total cards (hand + hideaways combined)
+
+**Minimum Hand:** Must always have at least 3 cards in your active hand (not in hideaways)
+
+### Drawing Cards:
+- Whenever you have fewer than your full hand size, immediately draw from Stray Kitties until you reach it
+- **Example (2-3 players):** Complete a clowder (play 4 cards) → draw 4 cards to return to 7 total
+
+**If Stray Kitties is empty:**
+- You cannot draw new cards
+- Game continues until an end trigger is met
+
+## Turn Structure
+
+### Take an Action (Choose one):
+
+#### A) Ask Another Player for Cards (Free)
+**Option 1: Ask by Season**
+- Ask: "Do you have any [season] cats?"
+- Target gives you 1 card of that season from their hand (if they have it)
+- If they don't have it, draw 1 card from Stray Kitties
+- Does NOT affect hideaways
+
+**Option 2: Ask by Kitty Name (Requires proof)**
+- Must show one card of that kitty name from your hand
+- Ask: "Give me all your [kitty name] cards"
+- Target gives you ALL cards of that name from their hand (if they have them)
+- If they don't have it, draw 1 card from Stray Kitties
+- Does NOT affect hideaways
+
+#### B) Use a Paw Token (Choose one):
+**Option 1: Forced Ask**
+- Demand any season OR kitty name (no proof needed)
+- Target must give you ALL matching cards from their hand
+- Does NOT affect hideaways
+
+**Option 2: Scout Stray Kitties**
+- Look at top 3 cards from Stray Kitties
+- Choose 1 card to keep
+- Put the other 2 at the bottom of the pile
+
+**Option 3: Snoop a Hideaway**
+- Choose 1 of target player's hideaways
+- Randomly reveal 2 cards from that hideaway (only you see them)
+- Must take 1 of the 2 revealed cards
+- Return the other card face-down to the hideaway
+
+### After Your Action (Optional):
+- Complete a clowder: Play 4 cards face-up to score points and gain paw tokens
+- Rearrange hideaways: Move cards between hand and hideaways (max 2 hideaways, 3 cards each)
+- Draw back to full hand size from Stray Kitties
+
+## Mouse Wildcard
+- Mice can substitute for any cat
+- **Penalty:** Clowders containing mice score -1 point
+- Paw tokens still awarded normally
+
+## End Game
+The game ends **IMMEDIATELY** when any of these conditions are met:
+
+### End Trigger 1: Complete Set Master
+- Any player completes all 3 clowder types (at least one Purrfect + one Seasonal + one Yearly)
+- Game ends instantly
+
+### End Trigger 2: Rainbow Collection
+- Any player completes all 4 unique seasons using Purrfect and/or Seasonal clowders
+- Example: Winter Purrfect + Spring Seasonal + Summer Purrfect + Fall Seasonal
+- Game ends instantly
+
+### End Trigger 3: Stray Kitties Depleted
+- The Stray Kitties draw pile is empty
+- Game ends immediately
 
 ---
 
