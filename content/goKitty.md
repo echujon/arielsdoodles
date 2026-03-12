@@ -17,14 +17,14 @@ showForm: false
 
     | Season | Winter <span class="suit">(![suit-winter](/images/suits/Winter.png))</span> | Spring <span class="suit">(![suit-spring](/images/suits/Spring.png))</span> | Summer <span class="suit">(![suit-summer](/images/suits/Summer.png))</span> | Fall <span class="suit">(![suit-fall](/images/suits/Fall.png))</span> |
     | -------- | ------- | ------- | ------- | ------- |
-    | Traits | Light <span class="kitty-card">![Light](/images/suits/Light.png)</span> | Clover <span class="kitty-card">![Clover](/images/suits/Clover.png)</span> | Firefly <span class="kitty-card">![Firefly](/images/suits/Firefly.png)</span> | Apple <span class="kitty-card">![Apple](/images/suits/Apple.png)</span> |
-    |  | Snug <span class="kitty-card">![Snug](/images/suits/Snug.png)</span> | Rain <span class="kitty-card">![Rain](/images/suits/Rain.png)</span> | Fan <span class="kitty-card">![Fan](/images/suits/Fan.png)</span> | Pumpkin <span class="kitty-card">![Pumpkin](/images/suits/Pumpkin.png)</span> |
-    |  | Cold <span class="kitty-card">![Cold](/images/suits/Cold.png)</span> | Posy <span class="kitty-card">![Posy](/images/suits/Posy.png)</span> | Ice Cream <span class="kitty-card">![IceCream](/images/suits/IceCream.png)</span> | Leaf Pile <span class="kitty-card">![LeafPile](/images/suits/LeafPile.png)</span> |
+    | Traits | Light <span class="kitty-card">![Light](/images/goKitty/Light.png)</span> | Clover <span class="kitty-card">![Clover](/images/goKitty/Clover.png)</span> | Firefly <span class="kitty-card">![Firefly](/images/goKitty/Firefly.png)</span> | Apple <span class="kitty-card">![Apple](/images/goKitty/Apple.png)</span> |
+    |  | Snug <span class="kitty-card">![Snug](/images/goKitty/Snug.png)</span> | Rain <span class="kitty-card">![Rain](/images/goKitty/Rain.png)</span> | Fan <span class="kitty-card">![Fan](/images/goKitty/Fan.png)</span> | Pumpkin <span class="kitty-card">![Pumpkin](/images/goKitty/Pumpkin.png)</span> |
+    |  | Cold <span class="kitty-card">![Cold](/images/goKitty/Cold.png)</span> | Posy <span class="kitty-card">![Posy](/images/goKitty/Posy.png)</span> | Ice Cream <span class="kitty-card">![IceCream](/images/goKitty/IceCream.png)</span> | Leaf Pile <span class="kitty-card">![LeafPile](/images/goKitty/LeafPile.png)</span> |
 
 
 
   - 4 Mouse Cards <br>
-    <span class="kitty-card mouse-card">![Mouse](/images/suits/Mouse.png)</span>
+    <span class="kitty-card mouse-card">![Mouse](/images/goKitty/Mouse.png)</span>
 - **15 Pounce Tokens**
 
 # Clowder: Go Kitty
