@@ -174,6 +174,7 @@ Players can protect cards by placing them face-down in hideaways:
 
 ### After Your Action (Optional):
 - Complete a clowder: Play 4 cards face-up to score points and gain paw tokens
+  - **IMPORTANT:** You cannot complete a clowder if you drew cards due to Stray Kitties depletion on this turn
 - Rearrange hideaways: Move cards between hand and hideaways (max 2 hideaways, 3 cards each)
 - Draw back to full hand size from Stray Kitties
 
@@ -183,19 +184,15 @@ Players can protect cards by placing them face-down in hideaways:
 - Paw tokens still awarded normally
 
 ## End Game
-The game ends **IMMEDIATELY** when any of these conditions are met:
+The game ends when any of these conditions are met:
 
-### End Trigger 1: Complete Set Master
-- Any player completes all 3 clowder types (at least one Purrfect + one Seasonal + one Yearly)
-- Game ends instantly
-
-### End Trigger 2: Rainbow Collection
+### End Trigger 1: 4 Season Prowl
 - Any player completes all 4 unique seasons using Purrfect and/or Seasonal clowders
 - Example: Winter Purrfect + Spring Seasonal + Summer Purrfect + Fall Seasonal
-- Game ends instantly
+- Game ends immediately
 
-### End Trigger 3: Stray Kitties Depleted
-- The Stray Kitties draw pile is empty
+### End Trigger 2: Strays Depleted
+- The Strays draw pile is empty
 - Each player gets one final turn (complete the round)
 - Then game ends
 
