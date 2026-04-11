@@ -75,11 +75,18 @@ Before the first turn, players may:
 - **Scoring:** 3 points + 1 paw token
 - **With mouse:** 2 points + 1 paw token
 
-### Yearly Clowder (1 cat from each season)
-- **Requires:** 1 cat from each of the 4 seasons
-- **Example:** Cold + Clover + Fan + Apple
-- **Scoring:** 2 points + 2 paw tokens
-- **With mouse:** 1 point + 2 paw tokens
+### Yearly Clowder (1 cat from each season, in order)
+- **Requires:** 1 cat from each of the 4 seasons, played in consecutive seasonal order
+- **Valid sequences:**
+  - Winter → Spring → Summer → Fall
+  - Spring → Summer → Fall → Winter
+  - Summer → Fall → Winter → Spring
+  - Fall → Winter → Spring → Summer
+- **Example:** Cold (Winter) → Clover (Spring) → Fan (Summer) → Apple (Fall)
+- **Scoring:** 3 points + paw tokens distributed as follows:
+  - **2-3 players:** Maker gets 2 paws, each other player gets 1 paw
+  - **4-5 players:** Everyone gets 1 paw
+- **With mouse:** 2 points + same paw distribution
 
 ## Bonus Scoring
 Bonuses are applied as you complete clowders:
@@ -329,18 +336,32 @@ Applies when completing clowders from different seasons (counts Purrfect and Sea
 ### Detective Rankings:
 - **0-20 Points - "Hardy Boys" Rookie**
   - "Getting there! Even the greats started somewhere. Time for more training."
+  - Path: 4 Seasonal (all different seasons)
+    - 4 × 3 pts = 12 pts, Diversity: +6, Total: 18 pts
 - **21-30 Points - "Father Brown" Shamus**
   - "A solid case solved! Your intuition is developing nicely."
-- **31-40 Points - True "Nancy Drew" Gumshoe**
+  - Path: 6 Seasonal + 1 Purrfect (cover 3 seasons)
+    - Seasonal: 18 pts + 2 (diversity) = 20 pts, Purrfect: 4 pts, Complete Set: +5, Total: 29 pts
+- **31-40 Points - "Nancy Drew" Gumshoe**
   - "Great detective work! You've got the skills and the sleuthing spirit."
+  - Path: 4 Seasonal (all seasons) + 3 Purrfect
+    - Seasonal: 12 + 6 = 18 pts, Purrfect: 12 pts, Complete Set: +5, Total: 35 pts
 - **41-50 Points - "Hercule Poirot" Investigator**
   - "Magnifique! The little grey cells are working perfectly."
+  - Path: 6 Seasonal (all seasons) + 2 Purrfect + 1 Yearly
+    - Seasonal: 18 + 6 = 24 pts, Purrfect: 8 pts, Yearly: 3 pts, Complete Set: +10, Total: 45 pts
 - **51-60 Points - "Miss Marple" Private Eye**
   - "Exceptional! Nothing escapes your sharp detective mind."
+  - Path: 9 Seasonal (all seasons) + 1 Purrfect + 4 Yearly
+    - Seasonal: 27 + 6 = 33 pts, Purrfect: 4 pts, Yearly: 12 pts, Complete Set: +10, Total: 59 pts
 - **61-70 Points - "Sherlock Holmes" Legend**
   - "Elementary! A legendary performance worthy of Baker Street."
+  - Path: 8 Seasonal (all seasons) + 4 Purrfect + 2 Yearly
+    - Seasonal: 24 + 6 = 30 pts, Purrfect: 16 pts, Yearly: 6 pts, Complete Set: +10, Total: 62 pts
 - **70+ Points - "The Purrfect Detective"**
   - "LEGENDARY! You've achieved the impossible. The cats bow to your mastery!"
+  - Path: 8 Seasonal (all seasons) + 6 Purrfect + 1 Yearly
+    - Seasonal: 24 + 6 = 30 pts, Purrfect: 24 pts, Yearly: 3 pts, Complete Set: +10, Total: 67 pts (or aim for max 73!)
 
 ## Mouse Wildcard
 - Mice can substitute for any cat
