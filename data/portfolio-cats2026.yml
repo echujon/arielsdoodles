@@ -1,0 +1,55 @@
+title:
+  text: "2026 Calendar Cats"
+  style: "doodles-font"
+style: "style1 medium lightbox  onscroll-fade-in"
+id: "cats"
+weight: 29
+content: Kitties from my 2026 Cat Calendar. If you are interested in a high quality print of any of my Cat Calendar kitties, <span class='doodles-bold'><a href="/contact">let me know.</a></span>
+pictures:
+  - title: "January Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/January.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/January.png"
+
+  - title: "February Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/February.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/February.png"
+
+  - title: "March Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/March.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/March.png"
+
+  - title: "April Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/April.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/April.png"
+
+  - title: "May Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/May.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/May.png"
+
+  - title: "June Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/June.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/June.png"
+
+  - title: "July Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/July.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/July.png"
+
+  - title: "August Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/August.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/August.png"
+
+  - title: "September Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/September.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/September.png"
+
+  - title: "October Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/October.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/October.png"
+
+  - title: "November Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/November.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/November.png"
+
+  - title: "December Kitty"
+    image: "/images/gallery/fulls/cats/calendar/2026/December.png"
+    thumb: "/images/gallery/fulls/cats/calendar/2026/December.png"

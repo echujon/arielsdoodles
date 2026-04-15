@@ -260,16 +260,10 @@ class ShoppingCart {
           <p class="cart-item-price">${this.formatPrice(item.price)}</p>
           <div class="cart-item-quantity">
             <button class="qty-decrease" data-price-id="${item.priceId}" aria-label="Decrease quantity">−</button>
-            <input type="number" value="${item.quantity}" min="1" class="qty-input" data-price-id="${item.priceId}" aria-label="Quantity">
+            <input type="number" value="${item.quantity}" min="0" class="qty-input" data-price-id="${item.priceId}" aria-label="Quantity">
             <button class="qty-increase" data-price-id="${item.priceId}" aria-label="Increase quantity">+</button>
           </div>
         </div>
-        <div class="cart-item-total">
-          ${this.formatPrice(item.price * item.quantity)}
-        </div>
-        <button class="cart-item-remove" data-price-id="${item.priceId}" title="Remove" aria-label="Remove item">
-          <i class="fas fa-times"></i>
-        </button>
       </div>
     `).join('');
 
@@ -284,8 +278,12 @@ class ShoppingCart {
     // Quantity decrease
     container.querySelectorAll('.qty-decrease').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const priceId = e.target.dataset.priceId;
+        const priceId = e.target.closest('button').dataset.priceId;
         const item = this.cart.find(i => i.priceId === priceId);
+        if (item && item.quantity === 1) {
+          this.removeItem(priceId);
+          return;
+        }
         if (item && item.quantity > 1) {
           this.updateItem(priceId, item.quantity - 1);
         }
@@ -307,8 +305,12 @@ class ShoppingCart {
     container.querySelectorAll('.qty-input').forEach(input => {
       input.addEventListener('change', (e) => {
         const priceId = e.target.dataset.priceId;
-        const quantity = parseInt(e.target.value) || 1;
-        this.updateItem(priceId, quantity);
+        const quantity = parseInt(e.target.value);
+        if (!quantity || quantity <= 0) {
+          this.removeItem(priceId);
+        } else {
+          this.updateItem(priceId, quantity);
+        }
       });
     });
 

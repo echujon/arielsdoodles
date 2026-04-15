@@ -37,7 +37,7 @@ disableKinds = ["taxonomy"]
 ## -----------------------------------------------
 
 [Params]
-  cartWorkerURL = "http://localhost:8787"
+  cartWorkerURL = "https://arielsdoodles-cart.arielsdoodles.workers.dev"
 
 [Params.social]
 

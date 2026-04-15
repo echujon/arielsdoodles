@@ -35,7 +35,7 @@ googleAnalytics = "G-GFWBYJPVXR"
   favicon = true
   turnstileSiteKey = "0x4AAAAAAB_XENp3OdtwuY8i"
   workerURL = "https://arielsdoodles-formhandler.arielsdoodles.workers.dev"
-  #cartWorkerURL = "https://arielsdoodles-cart.YOUR_SUBDOMAIN.workers.dev"
+  cartWorkerURL = "https://arielsdoodles-cart.arielsdoodles.workers.dev"
   enableShop = false
 
 [Params.asset]

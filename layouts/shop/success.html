@@ -1,4 +1,70 @@
-<div class="product-item">
-    You have successfully bought the items:
+{{ define "main" }}
+<section class="wrapper style1">
+  <div class="inner" style="text-align: center; padding: 3rem 1rem;">
+    <h1 style="color: #4CAF50;">&#10003; Order Confirmed!</h1>
+    <p>Thank you for your purchase. You'll receive a confirmation email shortly.</p>
 
-</div>
+    <div id="order-details" style="display:none; max-width: 480px; margin: 2rem auto; text-align: left; background: #f9f9f9; border-radius: 8px; padding: 1.5rem;">
+      <h3 style="margin-bottom: 1rem;">Order Summary</h3>
+      <div id="order-items"></div>
+      <hr style="margin: 1rem 0;">
+      <div style="display:flex; justify-content:space-between; font-weight:600; font-size:1.1rem;">
+        <span>Total</span>
+        <span id="order-total"></span>
+      </div>
+    </div>
+
+    <div id="order-loading" style="color:#999; margin: 2rem 0;">Loading your order...</div>
+    <div id="order-error" style="display:none; color:#999; margin: 2rem 0;">
+      Your order was placed successfully.
+    </div>
+
+    <a href="/shop/" style="display:inline-block; margin-top:1.5rem; padding: 0.75rem 2rem; background:#4CAF50; color:white; border-radius:6px; text-decoration:none; font-weight:600;">Continue Shopping</a>
+  </div>
+</section>
+
+<script>
+// Clear cart immediately on successful purchase
+localStorage.removeItem('arielsdoodles_cart');
+
+(async () => {
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+  const loading = document.getElementById('order-loading');
+  const error = document.getElementById('order-error');
+  const details = document.getElementById('order-details');
+
+  if (!sessionId) {
+    loading.style.display = 'none';
+    error.style.display = 'block';
+    return;
+  }
+
+  try {
+    const workerUrl = window.CART_WORKER_URL || '';
+    const res = await fetch(`${workerUrl}/session?id=${sessionId}`);
+    if (!res.ok) throw new Error('Failed to fetch session');
+    const data = await res.json();
+
+    loading.style.display = 'none';
+
+    const itemsEl = document.getElementById('order-items');
+    itemsEl.innerHTML = data.items.map(item => `
+      <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+        <span>${item.name} × ${item.quantity}</span>
+        <span>$${(item.amount_total / 100).toFixed(2)}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('order-total').textContent = `$${(data.amount_total / 100).toFixed(2)}`;
+    details.style.display = 'block';
+
+    // Clear the cart now that order is confirmed
+    localStorage.removeItem('arielsdoodles_cart');
+  } catch (e) {
+    loading.style.display = 'none';
+    error.style.display = 'block';
+  }
+})();
+</script>
+{{ end }}
