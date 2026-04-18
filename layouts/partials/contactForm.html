@@ -244,7 +244,7 @@
                 <div class="cf-turnstile" data-sitekey="{{ . }}" data-callback="onTurnstileSuccess"></div>
             {{ end }}
         {{ end }}
-        <input class="doodles-font send-button" type="submit" value="{{ .submitText | default "Send" }}" {{ if .skipTurnstile }}{{ else }}disabled{{ end }} id="{{ .formId | default `contactForm` }}-submitBtn" />
+        <input class="doodles-font send-button" type="submit" value="{{ .submitText | default "Send" }}" id="{{ .formId | default `contactForm` }}-submitBtn" />
     </form>
 </div>
 
@@ -260,8 +260,8 @@
     {{ if not ($.skipTurnstile) }}
     function onTurnstileSuccess(token) {
         turnstileVerified = true;
-        document.getElementById('submitBtn').disabled = false;
-        console.log('Turnstile verified');
+        const btn = document.getElementById(FORM_ID + '-submitBtn');
+        if (btn) btn.disabled = false;
     }
     {{ end }}
 
