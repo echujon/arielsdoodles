@@ -58,9 +58,23 @@ weight = 20
   skip = true
 
 [[menu.main]]
+name = "Shop"
+url = "/shop/"
+weight = 19
+[menu.main.params]
+  highlight = true
+
+[[menu.main]]
+name = "Dresses"
+url = "/dress/"
+weight = 20
+[menu.main.params]
+  highlight = true
+
+[[menu.main]]
 name = "Portfolio"
 url = "/portfolio/"
-weight = 20
+weight = 21
 
 [[menu.main]]
 name = "About"

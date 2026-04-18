@@ -68,6 +68,13 @@ weight = 20
   highlight = true
 
 [[menu.main]]
+name = "Dresses"
+url = "/dress/"
+weight = 21
+  [menu.main.params]
+  highlight = true
+
+[[menu.main]]
 name = "Portfolio"
 url = "/portfolio/"
 weight = 25

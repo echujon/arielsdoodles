@@ -171,6 +171,11 @@
             }}
         {{ end }}
 
+        {{/* Always inject formType if provided */}}
+        {{ with .formType }}
+        <input type="hidden" name="formType" value="{{ . }}" />
+        {{ end }}
+
         {{/* Render each custom field */}}
         {{ range $fields }}
             {{ if eq .type "hidden" }}
