@@ -57,12 +57,6 @@ weight = 20
   highlight = true
   skip = true
 
-[[menu.main]]
-name = "Shop"
-url = "/shop/"
-weight = 19
-[menu.main.params]
-  highlight = true
 
 [[menu.main]]
 name = "Dresses"
