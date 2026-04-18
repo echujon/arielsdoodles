@@ -74,6 +74,69 @@
         cursor: not-allowed;
     }
 
+    .radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 15px;
+    }
+
+    .radio-label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.6rem 1rem 0.6rem 0.75rem;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+    .radio-label input[type="radio"] {
+        flex-shrink: 0;
+        margin-left: 0;
+    }
+
+    .radio-label label {
+        margin: 0;
+        cursor: pointer;
+        flex: 1;
+    }
+
+    .radio-label:hover {
+        border-color: #aaa;
+        background: #f9f9f9;
+    }
+
+    .radio-label input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        min-width: 1.3rem;
+        min-height: 1.3rem;
+        width: 1.3rem;
+        height: 1.3rem;
+        border: 2.5px solid #555;
+        border-radius: 50%;
+        background: #fff;
+        margin: 0;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 0.2s;
+        display: inline-block;
+    }
+
+    .radio-label input[type="radio"]:checked {
+        border-color: #2c5f2d;
+        background: radial-gradient(circle, #2c5f2d 40%, #fff 42%, #fff 100%);
+        border-width: 2.5px;
+    }
+
+    .radio-label:has(input:checked) {
+        border-color: #2c5f2d;
+        background: #f0f7f0;
+    }
+
     .error-message, .thank-you {
         padding: 1em;
         margin: 1em;
@@ -93,13 +156,14 @@
 </style>
 
 <div class="form">
-    <form class="doodles-font google-form" id="contactForm">
+    <form class="doodles-font google-form" id="{{ .formId | default "contactForm" }}">
 
         {{/* Custom fields or default fields */}}
         {{ $fields := .fields }}
         {{ if not $fields }}
             {{/* Default fields if none provided */}}
             {{ $fields = slice
+                (dict "name" "formType" "type" "hidden" "value" "contact")
                 (dict "name" "name" "label" "Name" "type" "text" "required" true)
                 (dict "name" "email" "label" "Email" "type" "email" "required" true)
                 (dict "name" "subject" "label" "Subject" "type" "text" "required" true)
@@ -127,6 +191,17 @@
                         {{ if .required }}required{{ end }}
                         {{ with .placeholder }}placeholder="{{ . }}"{{ end }}
                     ></textarea>
+                {{ else if eq .type "radio" }}
+                    {{ $fieldName := .name }}
+                    {{ $required := .required }}
+                    <div class="radio-group">
+                        {{ range $i, $opt := .options }}
+                        <div class="radio-label">
+                            <input type="radio" id="{{ $fieldName }}-{{ $i }}" name="{{ $fieldName }}" value="{{ $opt.value }}" {{ if $required }}required{{ end }}>
+                            <label for="{{ $fieldName }}-{{ $i }}">{{ $opt.label }}</label>
+                        </div>
+                        {{ end }}
+                    </div>
                 {{ else if eq .type "select" }}
                     <select
                         id="{{ .name }}"
@@ -169,7 +244,7 @@
                 <div class="cf-turnstile" data-sitekey="{{ . }}" data-callback="onTurnstileSuccess"></div>
             {{ end }}
         {{ end }}
-        <input class="doodles-font send-button" type="submit" value="{{ .submitText | default "Send" }}" {{ if .skipTurnstile }}{{ else }}disabled{{ end }} id="submitBtn" />
+        <input class="doodles-font send-button" type="submit" value="{{ .submitText | default "Send" }}" {{ if .skipTurnstile }}{{ else }}disabled{{ end }} id="{{ .formId | default "contactForm" }}-submitBtn" />
     </form>
 </div>
 
@@ -180,6 +255,7 @@
 <script type="text/javascript">
     var turnstileVerified = {{ if $.skipTurnstile }}true{{ else }}false{{ end }};
     const WORKER_URL = "{{.}}";
+    const FORM_ID = "{{ $.formId | default `contactForm` }}";
 
     {{ if not ($.skipTurnstile) }}
     function onTurnstileSuccess(token) {
@@ -202,13 +278,13 @@
         form.appendChild(msgDiv);
         
         if (!isError) {
-            document.getElementById('contactForm').style.display = 'none';
+            document.getElementById(FORM_ID).style.display = 'none';
         }
     }
 
-    document.getElementById('contactForm').addEventListener('submit', async function (event) {
+    document.getElementById(FORM_ID).addEventListener('submit', async function (event) {
         event.preventDefault();
-        
+
         // Honeypot check
         var honeypotField = document.getElementById('phone_number').value;
         if (honeypotField.length > 0) {
@@ -223,7 +299,7 @@
         }
 
         // Disable submit button during submission
-        const submitBtn = document.getElementById('submitBtn');
+        const submitBtn = document.getElementById(FORM_ID + '-submitBtn');
         submitBtn.disabled = true;
         submitBtn.value = 'Sending...';
 

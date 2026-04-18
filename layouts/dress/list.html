@@ -1,0 +1,33 @@
+{{ define "main" }}
+<section class="wrapper style1 align-center">
+    <div class="inner">
+        <h1 class="titlebar doodles-font">Cute Cat Dresses</h1>
+        <p>Hi! I'm gauging interest for my new product: Cute Cat Dresses. Let me know which one you like!</p>
+    </div>
+</section>
+
+<section class="wrapper style1 align-center">
+    <div class="inner">
+        <div class="calendar-form-container">
+            {{ $dressFields := slice
+                (dict "name" "formType" "type" "hidden" "value" "dress")
+                (dict "name" "name" "label" "Name" "type" "text" "required" true)
+                (dict "name" "email" "label" "Email" "type" "email" "required" true)
+                (dict "name" "dress" "label" "Which dress do you like?" "type" "radio" "required" true "options" (slice
+                    (dict "value" "Search & Find Kitties" "label" "Search & Find Kitties")
+                    (dict "value" "Black Kitty in Poses" "label" "Black Kitty in Poses")
+                ))
+                (dict "name" "message" "label" "Any other comments?" "type" "textarea" "rows" 3)
+            }}
+
+            {{ partial "contactForm" (dict
+                "fields" $dressFields
+                "submitText" "Submit Interest"
+                "workerURL" site.Params.workerURL
+                "skipTurnstile" true
+                "formId" "dress"
+            ) }}
+        </div>
+    </div>
+</section>
+{{ end }}
