@@ -253,17 +253,9 @@
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {{ end }}
 <script type="text/javascript">
-    var turnstileVerified = {{ if $.skipTurnstile }}true{{ else }}false{{ end }};
+    var turnstileVerified = true; // Turnstile disabled temporarily
     const WORKER_URL = "{{.}}";
     const FORM_ID = "{{ $.formId | default `contactForm` }}";
-
-    {{ if not ($.skipTurnstile) }}
-    function onTurnstileSuccess(token) {
-        turnstileVerified = true;
-        const btn = document.getElementById(FORM_ID + '-submitBtn');
-        if (btn) btn.disabled = false;
-    }
-    {{ end }}
 
     function showMessage(message, isError = false) {
         let form = document.querySelector(".form");
