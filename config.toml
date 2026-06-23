@@ -27,6 +27,14 @@ publishDir = "public"
 ## -----------------------------------------------
 
 disableKinds = ["taxonomy"]
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[outputs]
+  home = ["HTML", "RSS", "SITEMAP"]
 # googleAnalytics = "your-google-analytics-id"
 
 ## -----------------------------------------------
@@ -34,7 +42,9 @@ disableKinds = ["taxonomy"]
 ## -----------------------------------------------
 
 [Params]
-  enableShop = false
+  enableShop = true
+  cartWorkerURL = "https://arielsdoodles-cart.fchujon.workers.dev"
+  stripePublishableKey = "pk_test_51NYiz2GWnDaMybgFD1k2fJbIF0VCuqn7VZoaVRCmbHEqnwgW0ZtFvpxNecZLJhhDnkQkYQ4erWZGd589Df7jx3Cw00oANyO28m"
 
 [Params.social]
   email = "arielchujonart@gmail.com"

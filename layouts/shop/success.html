@@ -2,7 +2,7 @@
 <section class="wrapper style1">
   <div class="inner" style="text-align: center; padding: 3rem 1rem;">
     <h1 style="color: #4CAF50;">&#10003; Order Confirmed!</h1>
-    <p>Thank you for your purchase. You'll receive a confirmation email shortly.</p>
+    <p>Thank you for your purchase. You'll receive a receipt by email shortly.</p>
 
     <div id="order-details" style="display:none; max-width: 480px; margin: 2rem auto; text-align: left; background: #f9f9f9; border-radius: 8px; padding: 1.5rem;">
       <h3 style="margin-bottom: 1rem;">Order Summary</h3>
@@ -24,43 +24,71 @@
 </section>
 
 <script>
-// Clear cart immediately on successful purchase
 localStorage.removeItem('arielsdoodles_cart');
 
 (async () => {
   const params = new URLSearchParams(window.location.search);
-  const sessionId = params.get('session_id');
+  const paymentIntentId = params.get('payment_intent');
+
+  // Strip sensitive values from URL and browser history immediately after reading
+  if (window.history.replaceState) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
   const loading = document.getElementById('order-loading');
   const error = document.getElementById('order-error');
   const details = document.getElementById('order-details');
 
-  if (!sessionId) {
+  if (!paymentIntentId) {
     loading.style.display = 'none';
     error.style.display = 'block';
     return;
   }
 
   try {
-    const workerUrl = window.CART_WORKER_URL || '';
-    const res = await fetch(`${workerUrl}/session?id=${sessionId}`);
-    if (!res.ok) throw new Error('Failed to fetch session');
+    const workerUrl = '{{ .Site.Params.cartWorkerURL }}';
+    const res = await fetch(`${workerUrl}/session?id=${paymentIntentId}&type=payment_intent`);
+    if (!res.ok) throw new Error('Failed to fetch order');
     const data = await res.json();
 
     loading.style.display = 'none';
 
-    const itemsEl = document.getElementById('order-items');
-    itemsEl.innerHTML = data.items.map(item => `
-      <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-        <span>${item.name} × ${item.quantity}</span>
-        <span>$${(item.amount_total / 100).toFixed(2)}</span>
-      </div>
-    `).join('');
+    if (data.items?.length) {
+      const itemsEl = document.getElementById('order-items');
+      let html = data.items.map(item => `
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+          <span>${item.name}${item.quantity > 1 ? ' × ' + item.quantity : ''}</span>
+          <span>$${(item.amount_total / 100).toFixed(2)}</span>
+        </div>
+      `).join('');
 
-    document.getElementById('order-total').textContent = `$${(data.amount_total / 100).toFixed(2)}`;
-    details.style.display = 'block';
+      html += `<hr style="margin:0.75rem 0; border:none; border-top:1px solid #e0e0e0;">`;
 
-    // Clear the cart now that order is confirmed
-    localStorage.removeItem('arielsdoodles_cart');
+      if (data.subtotal != null) {
+        html += `<div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; color:#555;">
+          <span>Subtotal</span>
+          <span>$${(data.subtotal / 100).toFixed(2)}</span>
+        </div>`;
+      }
+
+      if (data.shipping_cents != null) {
+        html += `<div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; color:#555;">
+          <span>Shipping</span>
+          <span>$${(data.shipping_cents / 100).toFixed(2)}</span>
+        </div>`;
+      }
+
+      html += `<div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; border-top:1px solid #e0e0e0; padding-top:0.5rem; margin-top:0.25rem;">
+        <span>Total</span>
+        <span>$${(data.amount_total / 100).toFixed(2)}</span>
+      </div>`;
+
+      itemsEl.innerHTML = html;
+      document.getElementById('order-total').style.display = 'none'; // now rendered inline above
+      details.style.display = 'block';
+    } else {
+      error.style.display = 'block';
+    }
   } catch (e) {
     loading.style.display = 'none';
     error.style.display = 'block';

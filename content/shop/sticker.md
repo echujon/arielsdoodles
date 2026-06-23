@@ -6,6 +6,12 @@ layout: item
 draft: false
 price: 4.00
 image: "/images/gallery/fulls/cats/DnD/Barbarian.png"
+images: []
 productId: prod_TRGPRc8Qht7xR4
 priceId: price_1SUNt0GWnDaMybgFN2s28QDy
+weightOz: 0.5
+dimensions:
+  length: 3
+  width: 3
+  height: 0.1
 ---

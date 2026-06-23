@@ -28,9 +28,10 @@
 
 	{{ if .Site.Params.enableShop }}
 	<!-- Shopping Cart Script -->
+	<script src="https://js.stripe.com/v3/"></script>
 	<script>
-		// Set cart worker URL for the shopping cart
 		window.CART_WORKER_URL = '{{ .Site.Params.cartWorkerURL }}';
+		window.STRIPE_PUBLISHABLE_KEY = '{{ .Site.Params.stripePublishableKey }}';
 	</script>
 	<script src="/js/cart.js"></script>
 	{{ end }}

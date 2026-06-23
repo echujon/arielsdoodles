@@ -1,0 +1,273 @@
+{{ define "main" }}
+<section class="wrapper style1">
+  <div class="inner" style="max-width: 520px; margin: 0 auto; padding: 2rem 1rem;">
+    <h2 style="margin-bottom: 1.5rem;">Checkout</h2>
+
+    <!-- Order summary -->
+    <div style="background:#f9f9f9; border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.5rem;">
+      <div id="checkoutItems" style="margin-bottom:0.75rem;"></div>
+      <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; border-top:1px solid #e0e0e0; padding-top:0.75rem;">
+        <span>Subtotal</span>
+        <span id="checkoutSubtotal" style="color:#2a9d2a;">$0.00</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.95rem; margin-top:0.25rem; color:#555;">
+        <span>Shipping</span>
+        <span id="checkoutShippingDisplay" style="color:#999; font-style:italic;">Enter shipping address</span>
+      </div>
+      <div id="checkoutTotalRow" style="display:none; justify-content:space-between; font-weight:700; font-size:1.1rem; border-top:1px solid #e0e0e0; margin-top:0.5rem; padding-top:0.5rem;">
+        <span>Total</span>
+        <span id="checkoutTotal" style="color:#2a9d2a;">$0.00</span>
+      </div>
+    </div>
+
+    <div id="checkoutError" style="display:none; background:#fff5f5; border:1px solid #ffcdd2; color:#c62828; border-radius:6px; padding:0.75rem 1rem; margin-bottom:1rem; font-size:0.875rem;"></div>
+
+    <div id="checkoutLoading" style="text-align:center; color:#999; padding:3rem 0;">
+      Loading checkout…
+    </div>
+
+    <form id="checkoutForm" style="display:none;">
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAADVHok-lfbF1L9hQ" data-size="flexible"></div>
+
+      <div style="margin-bottom:1.25rem;">
+        <label for="customerEmail" style="display:block; font-weight:600; margin-bottom:0.5rem; font-size:0.875rem;">Email</label>
+        <input
+          type="email"
+          id="customerEmail"
+          placeholder="you@example.com"
+          required
+          style="width:100%; padding:0.75rem; border:1px solid #d0d0d0; border-radius:6px; font-size:0.95rem; box-sizing:border-box;"
+        />
+      </div>
+
+      <div style="margin-bottom:1.25rem;">
+        <label style="display:block; font-weight:600; margin-bottom:0.5rem; font-size:0.875rem;">Shipping Address</label>
+        <div id="address-element"></div>
+        <div id="shippingStatus" style="margin-top:0.5rem; font-size:0.8rem; color:#888;"></div>
+        <div id="shippingRateInline" style="display:none; margin-top:0.75rem; padding:0.75rem 1rem; background:#f0f9f0; border:1px solid #c3e6c3; border-radius:6px; font-size:0.9rem; color:#2a6e2a;">
+          Shipping: <span id="shippingRateInlineDisplay"></span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:block; font-weight:600; margin-bottom:0.5rem; font-size:0.875rem;">Payment</label>
+        <div id="payment-element"></div>
+      </div>
+
+      <button id="submitBtn" type="submit" style="width:100%; padding:0.875rem; background:#4CAF50; color:white !important; border:none; border-radius:6px; font-size:1rem; font-weight:600; cursor:pointer; transition:background 0.2s;">
+        Pay Now
+      </button>
+      <p style="text-align:center; color:#999; font-size:0.8rem; margin-top:0.75rem;">Powered by Stripe · Secure checkout</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    const s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+</script>
+<script>
+(async () => {
+  const workerUrl = '{{ .Site.Params.cartWorkerURL }}';
+  const stripeKey = '{{ .Site.Params.stripePublishableKey }}';
+  const loadingEl = document.getElementById('checkoutLoading');
+  const formEl = document.getElementById('checkoutForm');
+  const errorEl = document.getElementById('checkoutError');
+  const submitBtn = document.getElementById('submitBtn');
+  const shippingStatus = document.getElementById('shippingStatus');
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    errorEl.style.display = 'block';
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Load cart from localStorage
+  const stored = localStorage.getItem('arielsdoodles_cart');
+  const cart = stored ? JSON.parse(stored) : [];
+
+  if (cart.length === 0) {
+    loadingEl.textContent = 'Your cart is empty.';
+    return;
+  }
+
+  // Render order summary
+  const itemsEl = document.getElementById('checkoutItems');
+  let subtotal = 0;
+  itemsEl.innerHTML = cart.map(item => {
+    subtotal += item.price * item.quantity;
+    return `<div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; font-size:0.9rem;">
+      <span>${item.name}${item.quantity > 1 ? ' ×' + item.quantity : ''}</span>
+      <span>$${((item.price * item.quantity) / 100).toFixed(2)}</span>
+    </div>`;
+  }).join('');
+  document.getElementById('checkoutSubtotal').textContent = '$' + (subtotal / 100).toFixed(2);
+
+  // Create PaymentIntent on worker (Turnstile verified on submit instead)
+  const items = cart.map(i => ({ priceId: i.priceId, quantity: i.quantity }));
+  let paymentIntentId, clientSecret;
+  try {
+    const res = await fetch(`${workerUrl}/create-session`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items, subtotal }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to create checkout session');
+    paymentIntentId = data.paymentIntentId;
+    clientSecret = data.clientSecret;
+  } catch (e) {
+    loadingEl.style.display = 'none';
+    showError(e.message);
+    return;
+  }
+
+  // Mount Stripe Elements
+  let stripe, elements, addressEl, paymentEl;
+  try {
+    stripe = Stripe(stripeKey);
+    elements = stripe.elements({ clientSecret });
+
+    addressEl = elements.create('address', {
+      mode: 'shipping',
+      allowedCountries: ['US'],
+      fields: { phone: 'never' },
+    });
+    addressEl.mount('#address-element');
+
+    paymentEl = elements.create('payment', {
+      terms: { card: 'never' },
+    });
+    paymentEl.mount('#payment-element');
+  } catch (e) {
+    console.error('Stripe Elements error:', e);
+    loadingEl.style.display = 'none';
+    showError('Failed to load payment form. Please refresh and try again.');
+    return;
+  }
+
+  loadingEl.style.display = 'none';
+  formEl.style.display = 'block';
+
+  // When address is complete, calculate shipping — only if ZIP changed
+  let shippingDebounce;
+  let lastZip = null;
+  addressEl.on('change', (e) => {
+    if (!e.complete) return;
+    clearTimeout(shippingDebounce);
+    shippingDebounce = setTimeout(async () => {
+      const { value } = await addressEl.getValue();
+      const zip = value?.address?.postal_code;
+      if (!zip || zip === lastZip) return;
+      lastZip = zip;
+
+      const customerEmail = document.getElementById('customerEmail').value || undefined;
+      shippingStatus.textContent = 'Calculating shipping…';
+      try {
+        const res = await fetch(`${workerUrl}/calculate-shipping`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ paymentIntentId, destinationZIPCode: zip, destinationAddress: value.address, shippingName: value.name, customerEmail, items, subtotal }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+
+        const estimate = data.deliveryEstimate ? `(${data.deliveryEstimate})` : '(1–3 business days)';
+
+        // Update order summary at top
+        const shippingEl = document.getElementById('checkoutShippingDisplay');
+        shippingEl.innerHTML = `${data.displayRate} <span style="color:#999; font-size:0.8rem;">${estimate}</span>`;
+        shippingEl.style.color = '#555';
+        shippingEl.style.fontStyle = 'normal';
+        document.getElementById('checkoutTotalRow').style.display = 'flex';
+        document.getElementById('checkoutTotal').textContent = '$' + (data.newTotal / 100).toFixed(2);
+
+        // Show inline rate below address
+        document.getElementById('shippingRateInlineDisplay').textContent = `${data.displayRate} ${estimate}`;
+        document.getElementById('shippingRateInline').style.display = 'block';
+
+        shippingStatus.textContent = '';
+      } catch (err) {
+        shippingStatus.textContent = 'Could not calculate shipping. You can still proceed.';
+      }
+    }, 800);
+  });
+
+  // Submit
+  formEl.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Processing…';
+    errorEl.style.display = 'none';
+
+    // Verify Turnstile token before payment
+    const tsEl = document.querySelector('[name="cf-turnstile-response"]');
+    const turnstileToken = tsEl?.value || null;
+    if (turnstileToken) {
+      try {
+        const tsRes = await fetch(`${workerUrl}/verify-turnstile`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ turnstileToken, paymentIntentId }),
+        });
+        const tsData = await tsRes.json();
+        if (!tsRes.ok) throw new Error(tsData.error);
+      } catch (err) {
+        showError(err.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Pay Now';
+        return;
+      }
+    }
+
+    try {
+      const { value: addrValue } = await addressEl.getValue();
+      const customerEmail = document.getElementById('customerEmail').value || undefined;
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/shop/success`,
+          receipt_email: customerEmail,
+          shipping: addrValue?.address ? {
+            name: addrValue.name || '',
+            address: {
+              line1: addrValue.address.line1 || '',
+              line2: addrValue.address.line2 || '',
+              city: addrValue.address.city || '',
+              state: addrValue.address.state || '',
+              postal_code: addrValue.address.postal_code || '',
+              country: addrValue.address.country || 'US',
+            },
+          } : undefined,
+        },
+      });
+
+      if (error) {
+        showError(error.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Pay Now';
+      }
+      // No else — on success Stripe redirects to return_url automatically
+    } catch (err) {
+      console.error('Payment error:', err);
+      showError('Something went wrong. Please try again.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Pay Now';
+    }
+  });
+})();
+</script>
+{{ end }}

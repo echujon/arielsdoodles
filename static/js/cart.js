@@ -4,11 +4,26 @@
  * Only calls worker for Stripe checkout
  */
 
+/**
+ * Escape a value for safe interpolation into HTML (text or attribute context).
+ */
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 class ShoppingCart {
   constructor(workerUrl) {
     this.workerUrl = workerUrl;
     this.storageKey = 'arielsdoodles_cart';
     this.cart = [];
+    this.shippingCents = null;
+    this._stripeElements = null;
+    this._addressElement = null;
 
     // Initialize cart from localStorage
     this.loadCart();
@@ -57,15 +72,39 @@ class ShoppingCart {
    * @param {number} quantity - Quantity to add
    * @param {string} image - Product image URL
    */
-  addItem(productId, priceId, name, price, quantity = 1, image = null) {
-    // Check if item already exists
+  async addItem(productId, priceId, name, price, quantity = 1, image = null, maxStock = null) {
     const existingIndex = this.cart.findIndex(item => item.priceId === priceId);
+    const currentQty = existingIndex !== -1 ? this.cart[existingIndex].quantity : 0;
+
+    // Fetch stock limit if not provided
+    if (maxStock === null && productId) {
+      try {
+        const res = await fetch(`${this.workerUrl}/stock?productId=${productId}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (!data.available) {
+            this.showNotification(`${name} is sold out`, 'error');
+            return;
+          }
+          if (data.quantity != null) maxStock = data.quantity;
+        }
+      } catch (e) { /* fail open — allow add if stock check fails */ }
+    }
+
+    // Enforce stock limit
+    if (maxStock != null) {
+      const allowedToAdd = maxStock - currentQty;
+      if (allowedToAdd <= 0) {
+        this.showNotification(`You've reached the maximum available for ${name}`, 'error');
+        return;
+      }
+      quantity = Math.min(quantity, allowedToAdd);
+    }
 
     if (existingIndex !== -1) {
-      // Update quantity
       this.cart[existingIndex].quantity += quantity;
+      if (maxStock != null) this.cart[existingIndex].maxStock = maxStock;
     } else {
-      // Add new item
       this.cart.push({
         productId,
         priceId,
@@ -73,6 +112,7 @@ class ShoppingCart {
         price,
         quantity,
         image,
+        maxStock,
         addedAt: Date.now(),
       });
     }
@@ -94,9 +134,13 @@ class ShoppingCart {
     }
 
     if (quantity <= 0) {
-      // Remove item
       this.cart.splice(index, 1);
     } else {
+      const maxStock = this.cart[index].maxStock;
+      if (maxStock != null && quantity > maxStock) {
+        this.showNotification(`Only ${maxStock} available`, 'error');
+        quantity = maxStock;
+      }
       this.cart[index].quantity = quantity;
     }
 
@@ -149,6 +193,128 @@ class ShoppingCart {
     return { itemCount, total };
   }
 
+  renderOrderSummary() {
+    const container = document.getElementById('orderSummaryItems');
+    if (!container) return;
+    container.innerHTML = this.cart.map(item => `
+      <div class="order-summary-item">
+        <span class="order-summary-name">${escapeHtml(item.name)}${item.quantity > 1 ? ` ×${escapeHtml(item.quantity)}` : ''}</span>
+        <span class="order-summary-price">${this.formatPrice(item.price * item.quantity)}</span>
+      </div>
+    `).join('');
+  }
+
+  mountAddressElement() {
+    this.renderOrderSummary();
+    const container = document.getElementById('addressElement');
+    if (!container) { console.warn('addressElement container not found'); return; }
+
+    if (this._addressElement) return; // already mounted
+
+    const stripeKey = window.STRIPE_PUBLISHABLE_KEY;
+    if (!stripeKey) {
+      container.textContent = 'Stripe not configured.';
+      console.warn('STRIPE_PUBLISHABLE_KEY not set');
+      return;
+    }
+
+    if (typeof Stripe === 'undefined') {
+      container.textContent = 'Stripe.js not loaded.';
+      console.warn('Stripe global not available');
+      return;
+    }
+
+    try {
+      const stripe = Stripe(stripeKey);
+      const elements = stripe.elements({ mode: 'payment', currency: 'usd', amount: 9999 });
+      const addressEl = elements.create('address', {
+        mode: 'shipping',
+        allowedCountries: ['US'],
+        fields: { phone: 'never' },
+      });
+
+      addressEl.mount(container);
+      this._stripeElements = elements;
+      this._addressElement = addressEl;
+      console.log('Address element mounted successfully');
+    } catch (e) {
+      console.error('Failed to mount address element:', e);
+      container.textContent = 'Could not load address form.';
+    }
+  }
+
+  unmountAddressElement() {
+    if (this._addressElement) {
+      this._addressElement.unmount();
+      this._addressElement = null;
+      this._stripeElements = null;
+    }
+    const container = document.getElementById('addressElement');
+    if (container) container.innerHTML = '';
+  }
+
+  async getShippingQuoteFromElement() {
+    const resultEl = document.getElementById('shippingQuoteResult');
+    const shippingLine = document.getElementById('shippingLine');
+    const shippingDisplay = document.getElementById('shippingDisplay');
+    const quoteBtn = document.getElementById('quoteBtn');
+
+    if (!this._addressElement) {
+      if (resultEl) {
+        resultEl.textContent = 'Address element not ready. Please try again.';
+        resultEl.className = 'shipping-quote-result shipping-quote-error';
+        resultEl.style.display = 'block';
+      }
+      return;
+    }
+
+    if (quoteBtn) { quoteBtn.disabled = true; quoteBtn.textContent = 'Getting rate…'; }
+
+    try {
+      const { complete, value } = await this._addressElement.getValue();
+      console.log('Address element value:', JSON.stringify(value));
+      if (!complete) {
+        throw new Error('Please fill in your full shipping address.');
+      }
+
+      const address = value.address;
+      const items = this.cart.map(item => ({ priceId: item.priceId, quantity: item.quantity }));
+
+      const response = await fetch(`${this.workerUrl}/shipping-quote`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ destinationZIPCode: address.postal_code, destinationAddress: address, items }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Could not retrieve shipping rate');
+
+      this.shippingCents = data.totalCents;
+      this._shippingAddress = address;
+
+      if (resultEl) {
+        resultEl.textContent = `Shipping: ${data.displayRate} (1–3 business days)`;
+        resultEl.className = 'shipping-quote-result shipping-quote-ok';
+        resultEl.style.display = 'block';
+      }
+      if (shippingLine) { shippingLine.style.display = 'flex'; }
+      if (shippingDisplay) { shippingDisplay.textContent = data.displayRate; }
+
+      const payBtn = document.getElementById('payBtn');
+      if (payBtn) { payBtn.disabled = false; }
+    } catch (error) {
+      console.error('Shipping quote error:', error);
+      this.shippingCents = null;
+      if (resultEl) {
+        resultEl.textContent = error.message || 'Could not retrieve shipping rate. Please try again.';
+        resultEl.className = 'shipping-quote-result shipping-quote-error';
+        resultEl.style.display = 'block';
+      }
+    } finally {
+      if (quoteBtn) { quoteBtn.disabled = false; quoteBtn.textContent = 'Get Rate'; }
+    }
+  }
+
   /**
    * Proceed to Stripe checkout
    */
@@ -158,43 +324,15 @@ class ShoppingCart {
       return;
     }
 
-    // Prepare items for Stripe (only priceId and quantity needed)
-    const items = this.cart.map(item => ({
-      priceId: item.priceId,
-      quantity: item.quantity,
-    }));
-
-    const successUrl = `${window.location.origin}/shop/success`;
-    const cancelUrl = `${window.location.origin}/shop/cancel`;
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) { checkoutBtn.disabled = true; checkoutBtn.textContent = 'Loading…'; }
 
     try {
-      // Show loading state
-      this.showNotification('Redirecting to checkout...', 'info');
-
-      const response = await fetch(`${this.workerUrl}/checkout`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items,
-          successUrl,
-          cancelUrl,
-        }),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to create checkout session');
-      }
-
-      const data = await response.json();
-
-      // Redirect to Stripe Checkout
-      window.location.href = data.url;
+      window.location.href = '/shop/checkout';
     } catch (error) {
       console.error('Checkout error:', error);
-      this.showNotification(error.message || 'Failed to proceed to checkout', 'error');
+      this.showNotification('Failed to proceed to checkout', 'error');
+      if (checkoutBtn) { checkoutBtn.disabled = false; checkoutBtn.textContent = 'Checkout'; }
     }
   }
 
@@ -253,15 +391,15 @@ class ShoppingCart {
     }
 
     container.innerHTML = this.cart.map(item => `
-      <div class="cart-item" data-price-id="${item.priceId}">
-        ${item.image ? `<img src="${item.image}" alt="${item.name}" class="cart-item-image">` : ''}
+      <div class="cart-item" data-price-id="${escapeHtml(item.priceId)}">
+        ${item.image ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" class="cart-item-image">` : ''}
         <div class="cart-item-details">
-          <h4>${item.name}</h4>
+          <h4>${escapeHtml(item.name)}</h4>
           <p class="cart-item-price">${this.formatPrice(item.price)}</p>
           <div class="cart-item-quantity">
-            <button class="qty-decrease" data-price-id="${item.priceId}" aria-label="Decrease quantity">−</button>
-            <input type="number" value="${item.quantity}" min="0" class="qty-input" data-price-id="${item.priceId}" aria-label="Quantity">
-            <button class="qty-increase" data-price-id="${item.priceId}" aria-label="Increase quantity">+</button>
+            <button class="qty-decrease" data-price-id="${escapeHtml(item.priceId)}" aria-label="Decrease quantity">−</button>
+            <input type="number" value="${escapeHtml(item.quantity)}" min="0" class="qty-input" data-price-id="${escapeHtml(item.priceId)}" aria-label="Quantity">
+            <button class="qty-increase" data-price-id="${escapeHtml(item.priceId)}" aria-label="Increase quantity">+</button>
           </div>
         </div>
       </div>

@@ -11,19 +11,18 @@
 
   <div class="cart-body">
     <div class="cart-items" id="cartItemsList">
-      <!-- Cart items will be populated by JavaScript -->
       <p class="empty-cart">Your cart is empty</p>
     </div>
   </div>
 
   <div class="cart-footer">
     <div class="cart-summary">
-      <span>Total:</span>
+      <span>Subtotal:</span>
       <span class="cart-total">$0.00</span>
     </div>
     <div class="cart-actions">
       <button class="checkout-button" onclick="proceedToCheckout()" id="checkoutBtn">
-        Proceed to Checkout
+        Checkout
       </button>
     </div>
   </div>
@@ -46,16 +45,9 @@
   function closeCart() {
     const overlay = document.getElementById('cartOverlay');
     const modal = document.getElementById('cartModal');
-
     overlay.classList.remove('active');
     modal.classList.remove('active');
     document.body.style.overflow = '';
-  }
-
-  function clearCart() {
-    if (window.shoppingCart) {
-      window.shoppingCart.clearCart();
-    }
   }
 
   function proceedToCheckout() {
@@ -64,10 +56,7 @@
     }
   }
 
-  // Close cart when pressing Escape
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeCart();
-    }
+    if (e.key === 'Escape') closeCart();
   });
 </script>

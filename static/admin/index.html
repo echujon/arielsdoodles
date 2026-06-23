@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Ariel's Doodles — Admin</title>
+  <script>
+    // Inject the correct config link before Sveltia loads
+    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    if (isLocal) {
+      const link = document.createElement('link');
+      link.rel = 'cms-config-url';
+      link.type = 'application/yaml';
+      link.href = '/admin/config.local.yml';
+      document.head.appendChild(link);
+    }
+  </script>
+</head>
+<body>
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+</body>
+</html>

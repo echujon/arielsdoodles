@@ -26,6 +26,10 @@
                     {{ if .Params.price }}
                     <p class="product-price">${{ .Params.price }}</p>
                     {{ end }}
+
+                    {{ if .Params.productId }}
+                    <p class="stock-status" data-product-id="{{ .Params.productId }}"></p>
+                    {{ end }}
                 </div>
             </a>
 
@@ -205,6 +209,15 @@
     background-color: #4caf50;
 }
 
+.stock-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0.25rem 0 0 0;
+}
+.stock-in { color: #2a9d2a; }
+.stock-low { color: #e67e00; }
+.stock-out { color: #d32f2f; }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -222,9 +235,41 @@
 </style>
 
 <script>
+    // Fetch stock for all products
+    (async function() {
+        const workerUrl = '{{ .Site.Params.cartWorkerURL }}';
+        const stockEls = document.querySelectorAll('.stock-status[data-product-id]');
+        await Promise.all([...stockEls].map(async (el) => {
+            const productId = el.dataset.productId;
+            const btn = el.closest('.product-item')?.querySelector('.add-to-cart-btn');
+            try {
+                const res = await fetch(`${workerUrl}/stock?productId=${productId}`);
+                if (!res.ok) return;
+                const data = await res.json();
+                if (!data.available || data.quantity === 0) {
+                    el.textContent = 'Sold out';
+                    el.className = 'stock-status stock-out';
+                    if (btn) { btn.disabled = true; btn.textContent = 'Sold Out'; }
+                } else if (data.quantity != null) {
+                    if (data.quantity <= 3) {
+                        el.textContent = `Only ${data.quantity} left!`;
+                        el.className = 'stock-status stock-low';
+                    } else {
+                        el.textContent = 'In stock';
+                        el.className = 'stock-status stock-in';
+                    }
+                    if (btn) btn.dataset.maxStock = data.quantity;
+                } else {
+                    el.textContent = 'In stock';
+                    el.className = 'stock-status stock-in';
+                }
+            } catch (e) { /* fail silently */ }
+        }));
+    })();
+
     // Add to Cart functionality
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', async function(e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -235,7 +280,8 @@
             const image = this.dataset.image || null;
 
             if (window.shoppingCart) {
-                window.shoppingCart.addItem(productId, priceId, name, price, 1, image);
+                const maxStock = parseInt(this.dataset.maxStock) || null;
+                await window.shoppingCart.addItem(productId, priceId, name, price, 1, image, maxStock);
 
                 // Visual feedback
                 this.textContent = 'Added!';

@@ -1,0 +1,61 @@
+backend:
+  name: github
+  repo: echujon/arielsdoodles
+  branch: main
+  base_url: http://localhost:8787
+  site_domain: localhost
+
+# Media uploads go into static/images/gallery
+media_folder: static/images/gallery
+public_folder: /images/gallery
+
+collections:
+  - name: shop
+    label: Shop Items
+    folder: content/shop
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    filter:
+      field: layout
+      value: item
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Date, name: date, widget: datetime }
+      - label: Price (USD)
+        name: price
+        widget: number
+        value_type: float
+        min: 0
+        step: 0.01
+      - { label: Primary Image, name: image, widget: image, required: false }
+      - label: Additional Images
+        name: images
+        widget: list
+        required: false
+        min: 0
+        max: 10
+        field: { label: Image, name: image, widget: image }
+      - { label: Stripe Product ID, name: productId, widget: string, required: false, hint: "prod_… from Stripe dashboard" }
+      - { label: Stripe Price ID, name: priceId, widget: string, required: false, hint: "price_… from Stripe dashboard" }
+      - label: Weight (oz)
+        name: weightOz
+        widget: number
+        value_type: float
+        min: 0
+        step: 0.1
+        required: false
+      - label: Dimensions
+        name: dimensions
+        widget: object
+        required: false
+        fields:
+          - { label: Length (in), name: length, widget: number, value_type: float, min: 0, step: 0.25 }
+          - { label: Width (in), name: width, widget: number, value_type: float, min: 0, step: 0.25 }
+          - { label: Height / Thickness (in), name: height, widget: number, value_type: float, min: 0, step: 0.01 }
+      - { label: Description, name: body, widget: markdown, required: false }
+      - { label: Layout, name: layout, widget: hidden, default: item }
+      - { label: ID, name: id, widget: string, required: false, hint: "Slug used internally (e.g. sticker, nov-2024-kitty-print)" }

@@ -9,7 +9,15 @@
     <div class="product-detail-inner">
         {{ if .Params.image }}
         <div class="product-detail-image">
-            <img src="{{ .Params.image }}" alt="{{ .Title }}" />
+            <img id="productMainImage" src="{{ .Params.image }}" alt="{{ .Title }}" />
+            {{ if .Params.images }}
+            <div class="product-detail-thumbnails">
+                <img src="{{ .Params.image }}" alt="{{ .Title }}" class="thumbnail active" onclick="setMainImage(this)" />
+                {{ range .Params.images }}
+                <img src="{{ . }}" alt="{{ $.Title }}" class="thumbnail" onclick="setMainImage(this)" />
+                {{ end }}
+            </div>
+            {{ end }}
         </div>
         {{ end }}
 
@@ -20,9 +28,24 @@
             <p class="product-detail-price">${{ .Params.price }}</p>
             {{ end }}
 
+            {{ if .Params.productId }}
+            <p id="stockStatus" class="stock-status"></p>
+            {{ end }}
+
             <div class="product-detail-description">
                 {{ .Content }}
             </div>
+
+            {{ if or .Params.weightOz .Params.dimensions }}
+            <ul class="product-detail-specs">
+                {{ with .Params.dimensions }}
+                <li><strong>Size:</strong> {{ .length }} × {{ .width }} × {{ .height }} in</li>
+                {{ end }}
+                {{ with .Params.weightOz }}
+                <li><strong>Weight:</strong> {{ . }} oz</li>
+                {{ end }}
+            </ul>
+            {{ end }}
 
             {{ if and .Params.productId .Params.priceId }}
             <div class="product-detail-actions">
@@ -73,11 +96,38 @@
     }
 }
 
-.product-detail-image img {
+.product-detail-image img#productMainImage {
     width: 100%;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail-thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.product-detail-thumbnails .thumbnail {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s, border-color 0.2s;
+}
+
+.product-detail-thumbnails .thumbnail:hover {
+    opacity: 1;
+}
+
+.product-detail-thumbnails .thumbnail.active {
+    border-color: #2c5f2d;
+    opacity: 1;
 }
 
 .product-detail-info h1 {
@@ -95,6 +145,18 @@
 .product-detail-description {
     margin-bottom: 2rem;
     line-height: 1.6;
+}
+
+.product-detail-specs {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.product-detail-specs li {
+    margin-bottom: 0.25rem;
 }
 
 .product-detail-actions {
@@ -151,7 +213,7 @@
 
 .add-to-cart-btn {
     background-color: #2c5f2d;
-    color: white;
+    color: white !important;
     border: none;
     padding: 0.75rem 2rem;
     font-size: 1rem;
@@ -179,9 +241,62 @@
     background-color: #ffebee;
     border-radius: 4px;
 }
+
+.stock-status {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.stock-in { color: #2a9d2a; }
+.stock-low { color: #e67e00; }
+.stock-out { color: #d32f2f; }
 </style>
 
 <script>
+// Fetch stock status
+(async function() {
+    const productId = '{{ .Params.productId }}';
+    const workerUrl = '{{ .Site.Params.cartWorkerURL }}';
+    const statusEl = document.getElementById('stockStatus');
+    const addToCartBtn = document.querySelector('.add-to-cart-btn');
+    const qtyInput = document.querySelector('.qty-input');
+    const qtyIncrease = document.querySelector('.qty-increase');
+    if (!productId || !statusEl) return;
+
+    try {
+        const res = await fetch(`${workerUrl}/stock?productId=${productId}`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (!data.available || data.quantity === 0) {
+            statusEl.textContent = 'Sold out';
+            statusEl.className = 'stock-status stock-out';
+            if (addToCartBtn) { addToCartBtn.disabled = true; addToCartBtn.textContent = 'Sold Out'; }
+            if (qtyInput) qtyInput.disabled = true;
+            if (qtyIncrease) qtyIncrease.disabled = true;
+        } else if (data.quantity != null) {
+            if (data.quantity <= 3) {
+                statusEl.textContent = `Only ${data.quantity} left!`;
+                statusEl.className = 'stock-status stock-low';
+            } else {
+                statusEl.textContent = 'In stock';
+                statusEl.className = 'stock-status stock-in';
+            }
+            // Cap quantity at available stock
+            if (qtyInput) {
+                qtyInput.max = data.quantity;
+                qtyInput.dataset.maxStock = data.quantity;
+            }
+        } else {
+            statusEl.textContent = 'In stock';
+            statusEl.className = 'stock-status stock-in';
+        }
+    } catch (e) {
+        // Silently fail — don't block the page if stock check fails
+    }
+})();
+
 (function() {
     const qtyInput = document.querySelector('.qty-input');
     const qtyDecrease = document.querySelector('.qty-decrease');
@@ -203,19 +318,25 @@
     // Handle quantity increase
     qtyIncrease.addEventListener('click', function() {
         let currentValue = parseInt(qtyInput.value) || 1;
-        qtyInput.value = currentValue + 1;
+        const maxStock = parseInt(qtyInput.dataset.maxStock) || Infinity;
+        if (currentValue < maxStock) {
+            qtyInput.value = currentValue + 1;
+        }
     });
 
     // Validate quantity input
     qtyInput.addEventListener('input', function() {
         let value = parseInt(this.value);
+        const maxStock = parseInt(this.dataset.maxStock) || Infinity;
         if (isNaN(value) || value < 1) {
             this.value = 1;
+        } else if (value > maxStock) {
+            this.value = maxStock;
         }
     });
 
     // Handle Add to Cart
-    addToCartBtn.addEventListener('click', function() {
+    addToCartBtn.addEventListener('click', async function() {
         const productId = this.dataset.productId;
         const priceId = this.dataset.priceId;
         const name = this.dataset.name;
@@ -224,7 +345,8 @@
         const quantity = parseInt(qtyInput.value) || 1;
 
         if (window.shoppingCart) {
-            window.shoppingCart.addItem(productId, priceId, name, price, quantity, image);
+            const maxStock = parseInt(qtyInput?.dataset.maxStock) || null;
+            await window.shoppingCart.addItem(productId, priceId, name, price, quantity, image, maxStock);
 
             // Visual feedback
             addToCartBtn.textContent = 'Added!';
@@ -242,5 +364,11 @@
         }
     });
 })();
+
+function setMainImage(el) {
+    document.getElementById('productMainImage').src = el.src;
+    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+}
 </script>
 {{ end }}
