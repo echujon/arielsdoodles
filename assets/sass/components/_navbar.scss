@@ -158,7 +158,7 @@
     #navbar {
         display: flex;
         padding: 0 .5rem;
-        height: 6vh;
+        height: 7vh;
 
         a,
         a.active,
@@ -168,7 +168,7 @@
     }
 
     .nav-title {
-        font-size: 20px;
+        font-size: 26px;
     }
 
     /* Show mobile cart, hide desktop cart */
@@ -192,6 +192,8 @@
 
     .logo img {
         top: 0rem;
+        width: 2.8rem;
+        height: 2.8rem;
     }
 
     .nav-text {
