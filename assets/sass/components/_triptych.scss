@@ -59,18 +59,17 @@
             display: block;
             margin-bottom: 1rem;
             width: 100%;
-            //height: 200px; // Fixed height for the image container. Adjust as needed!
-            // This makes the image area consistent across all triptych items.
-            overflow: hidden; // Crucial to crop images to this fixed height
-            border-radius: _border-radius(); // Apply border-radius to the image container
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: _border-radius();
 
             img {
                 display: block;
                 width: 100%;
-                height: 100%; // Make image fill its container
-                object-fit: contain; // Crop image to fit without distortion
-                object-position: center; // Center the image within its fixed height
-                border-radius: _border-radius(); // Ensure image itself also has radius if container has it
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+                border-radius: _border-radius();
             }
         }
 
