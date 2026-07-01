@@ -73,6 +73,7 @@ url = "/dress/"
 weight = 21
   [menu.main.params]
   highlight = true
+  skip = true
 
 [[menu.main]]
 name = "Portfolio"
