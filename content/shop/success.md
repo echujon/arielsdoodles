@@ -2,7 +2,7 @@
 title: "Order Confirmed"
 id: shop
 layout: success
-_build:
+build:
   list: never
   render: always
 ---

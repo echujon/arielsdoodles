@@ -2,7 +2,7 @@
 title: "Checkout"
 id: shop
 layout: checkout
-_build:
+build:
   list: never
   render: always
 ---

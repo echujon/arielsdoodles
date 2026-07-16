@@ -2,7 +2,7 @@
 title: "Order Cancelled"
 id: shop
 layout: cancel
-_build:
+build:
   list: never
   render: always
 ---
