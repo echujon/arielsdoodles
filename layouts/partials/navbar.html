@@ -1,10 +1,12 @@
-<nav class="doodles-font topnav" id="navbar">
+{{ $isCheckout := eq .Layout "checkout" }}
+<nav class="doodles-font topnav{{ if $isCheckout }} navbar-minimal{{ end }}" id="navbar">
     <a class="nav-title" href="/">
         {{ $logo := resources.Get "images/ad-logo.png" }}
         {{ $logoResized := $logo.Resize "100x100 webp" }}
         <span class="logo"><img src="{{ $logoResized.RelPermalink }}" width="50" height="50"></img> </span>
         <span class="nav-text">Ariel's Doodles</span>
     </a>
+    {{ if not $isCheckout }}
     <!-- Shopping Cart Widget (Mobile - Always Visible) -->
     {{ if site.Params.enableShop }}
     <div class="cart-widget-mobile">
@@ -16,7 +18,9 @@
         <div class="bar"></div>
         <div class="bar"></div>
     </div>
+    {{ end }}
     {{$currentPage := .}}
+    {{ if not $isCheckout }}
     <ul class="nav-menu">
 
         {{range .Site.Menus.main}}
@@ -43,6 +47,7 @@
         <li class="cart-widget-desktop">{{ partial "cartWidget" . }}</li>
         {{ end }}
     </ul>
+    {{ end }}
 </nav>
 
 <script>
@@ -66,18 +71,20 @@
 
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-menu");
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
-    });
+    if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+    }
 
     window.onresize = function () {
         if (dropdownContent)
             dropdownContent.style.display = "none";
 
-        navMenu.classList.remove("active");
-        hamburger.classList.remove("active");
-        let iEl = dropdown.querySelector('i.fa');
+        if (navMenu) navMenu.classList.remove("active");
+        if (hamburger) hamburger.classList.remove("active");
+        let iEl = dropdown ? dropdown.querySelector('i.fa') : null;
         if (iEl != null) {
             iEl.classList.remove("fa-caret-up");
             iEl.classList.add("fa-caret-down")
@@ -166,13 +173,14 @@
         navItems[i].addEventListener('click', function (e) {
             activateNavItem(this);
             toggleDropdown(true);
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
+            if (hamburger) hamburger.classList.remove("active");
+            if (navMenu) navMenu.classList.remove("active");
             hasNavClick = true;
         })
     }
 
     function toggleDropdown(forceDisplay = false) {
+        if (!dropdown || !dropdownContent) return;
         /*let dropdownContent = document.getElementById("dropdown-content");*/
         let iEl = dropdown.querySelector('i.fa');
         if (forceDisplay || dropdownContent.style.display === "block") {

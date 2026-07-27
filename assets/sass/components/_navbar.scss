@@ -40,6 +40,16 @@
     position: relative;
 }
 
+#navbar.navbar-minimal {
+    display: flex;
+    justify-content: center;
+
+    .nav-title {
+        float: none;
+        margin-left: 0;
+    }
+}
+
 .sticky {
     position: fixed;
     top: 0;
