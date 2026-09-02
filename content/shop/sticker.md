@@ -1,7 +1,7 @@
 ---
 title: Barbarian Kitty Sticker
 draft: false
-date: 2023-09-12T23:14
+date: 2023-09-12T23:14:32-06:00
 price: 4
 image: /images/gallery/fulls/cats/DnD/Barbarian.png
 images: []
