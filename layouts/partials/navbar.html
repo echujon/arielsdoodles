@@ -1,9 +1,9 @@
 {{ $isCheckout := eq .Layout "checkout" }}
 <nav class="doodles-font topnav{{ if $isCheckout }} navbar-minimal{{ end }}" id="navbar">
     <a class="nav-title" href="/">
-        {{ $logo := resources.Get "images/ad-logo.png" }}
-        {{ $logoResized := $logo.Resize "100x100 webp" }}
-        <span class="logo"><img src="{{ $logoResized.RelPermalink }}" width="50" height="50"></img> </span>
+        {{ $logo := resources.Get "images/AD_Logo_with_doodle.png" }}
+        {{ $logoResized := $logo.Resize "200x200 webp" }}
+        <span class="logo"><img src="{{ $logoResized.RelPermalink }}" width="100" height="100"></img> </span>
         <span class="nav-text">Ariel's Doodles</span>
     </a>
     {{ if not $isCheckout }}
