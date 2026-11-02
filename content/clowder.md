@@ -32,6 +32,8 @@ Clowder can be played two ways: **Versus** or **Co-op**.
 
 In Clowder you have 3 cats per season:
 
+<div class="kitty-grid">
+
 | Summer | Fall | Winter | Spring |
 |--------|------|--------|--------|
 | Fan <span class="kitty-card">![Fan](/images/clowder/Summer_Fan.png)</span> | Apple <span class="kitty-card">![Apple](/images/clowder/Fall_Apple.png)</span> | Snug <span class="kitty-card">![Snug](/images/clowder/Winter_Snug.png)</span> | Clover <span class="kitty-card">![Clover](/images/clowder/Spring_Clover.png)</span> |
@@ -39,6 +41,8 @@ In Clowder you have 3 cats per season:
 | Ice Cream <span class="kitty-card">![IceCream](/images/clowder/Summer_IceCream.png)</span> | Leaf Pile <span class="kitty-card">![LeafPile](/images/clowder/Fall_LeafPile.png)</span> | Sled <span class="kitty-card">![Sled](/images/clowder/Winter_Sled.png)</span> | Rain <span class="kitty-card">![Rain](/images/clowder/Spring_Rain.png)</span> |
 
 Mouse <span class="kitty-card mouse-card">![Mouse](/images/clowder/Mouse.png)</span> acts as a wildcard connecting all seasons.
+
+</div>
 
 ## Clowder Types
 
@@ -80,7 +84,17 @@ A group of multiple clowders. Completing one or more grants bonus points and a s
 
 ## Minimum Hand Size
 
-You must keep at least 4 cards in hand (2p) or 3 cards in hand (3–4p).
+You must keep at least 4 cards in hand (2p) or 3 cards in hand (3–4p). The minimum hand size is enforced until the end of game is triggered.
+
+---
+
+# Clowder: Versus (Go Kitty)
+
+**Objective:** Form clowders to earn experience points. The sleuth with the most points at the end of the game wins!
+
+**Setup:** Each player takes 3 paw tokens. Remove the Mouse cards and shuffle the 48 Kitty cards. Deal face down: 7 per player (2p) or 5 per player (3–4p). Shuffle the Mouse cards back into the remaining deck, place it in the middle as the Lost Kitties draw deck, and set the 3 magnifying glass tokens beside it.
+
+**Turn Order:** The person who most recently saw a cat in real life (or left of the dealer) goes first.
 
 ## Paw Tokens
 
@@ -95,16 +109,6 @@ When you complete a clowder, you may take one magnifying glass token instead of 
 They act as wild cards and can help complete a clowder of any kind.
 
 **Nope:** Discard a Mouse card to "nope" an Ask action made against you — the asker gets nothing, and you may immediately take an Ask action against that player. That counter-Ask can be noped the same way, chaining until someone doesn't. Each nope discards one Mouse card. You can't nope paw-token actions.
-
----
-
-# Clowder: Versus (Go Kitty)
-
-**Objective:** Form clowders to earn experience points. The sleuth with the most points at the end of the game wins!
-
-**Setup:** Each player takes 3 paw tokens. Remove the Mouse cards and shuffle the 48 Kitty cards. Deal face down: 7 per player (2p) or 5 per player (3–4p). Shuffle the Mouse cards back into the remaining deck, place it in the middle as the Lost Kitties draw deck, and set the 3 magnifying glass tokens beside it.
-
-**Turn Order:** The person who most recently saw a cat in real life (or left of the dealer) goes first.
 
 ## On Your Turn
 
@@ -154,6 +158,18 @@ The end game is triggered when the Lost Kitties deck runs out or when a player c
 **Setup:** Deal cards face down — 5 per player (2p) or 4 per player (3–4p) — from the shuffled 52-card deck. Place the rest in the middle as the Lost Kitties draw deck. Each player takes 4 paw tokens (2p) or 3 (3–4p), face up. Set 3 magnifying glass tokens face up by the deck.
 
 **IMPORTANT:** Pick up your cards without seeing the fronts. Hold them facing outward — you see everyone's cards but your own.
+
+## Paw Tokens
+
+Spent to give clues or ask for cards. Disable (flip face down) when used.
+
+## Magnifying Glass Tokens
+
+These are your team's sleuth status. You start with 3, face up. If all 3 are flipped, the game ends and the team loses.
+
+## Mouse Cards
+
+They act as wild cards and can help complete a clowder of any kind.
 
 ## On Your Turn (Choose one)
 

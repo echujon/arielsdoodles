@@ -36,9 +36,14 @@
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
-        margin: 1em 0;
+        margin: 1em auto;
         border-collapse: collapse;
-        width: 100%;
+        width: fit-content;
+        max-width: 100%;
+    }
+
+    #clowder table:not(:has(.kitty-card)) {
+        white-space: normal;
     }
 
     #clowder table th,
@@ -50,6 +55,13 @@
 
     #clowder table th {
         font-weight: bold;
+    }
+
+    #clowder .kitty-grid {
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     #clowder table:has(.kitty-card, .mouse-card) th,
@@ -84,7 +96,7 @@
     }
 
     .kitty-card img {
-        width: 6em;
+        width: 7.5em;
         display: block;
         margin: 0 auto .1em auto;
         cursor: pointer;
@@ -190,12 +202,18 @@
 
     @media only screen and (max-width: 768px) {
         .kitty-card img {
-            width: 4em;
+            width: 5em;
         }
 
         #clowder {
             padding-left: 1rem;
             padding-right: 1rem;
+        }
+    }
+
+    @media only screen and (max-width: 360px) {
+        .kitty-card img {
+            width: 4.5em;
         }
     }
 
@@ -210,25 +228,24 @@
     }
 
     #clowder .collapsible-section h1 {
-        text-align: left;
+        text-align: center;
         cursor: pointer;
-        position: relative;
-        padding-left: 2rem;
         user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
     }
 
     #clowder .collapsible-section h1::after {
         content: '▼';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        order: -1;
         transition: transform 0.3s ease;
         font-size: 0.5em;
     }
 
     #clowder .collapsible-section h1.collapsed::after {
-        transform: translateY(-50%) rotate(-90deg);
+        transform: rotate(-90deg);
     }
 
     #clowder .collapsible-content {

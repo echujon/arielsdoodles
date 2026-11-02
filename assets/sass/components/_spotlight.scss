@@ -380,7 +380,8 @@ position: relative;
 overflow-x: hidden;
 text-align: left;
 
-.content {
+.content,
+.actual-content {
 	width: $content-size;
 	max-width: 100%;
 	min-width: 0;
@@ -442,7 +443,8 @@ text-align: left;
 	@include vendor('flex-direction', 'column-reverse');
 	text-align: center !important;
 
-	.content {
+	.content,
+	.actual-content {
 		width: 34rem;
 		max-width: 100%;
 		min-width: 0;

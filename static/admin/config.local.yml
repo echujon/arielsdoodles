@@ -39,8 +39,16 @@ collections:
         min: 0
         max: 10
         field: { label: Image, name: image, widget: image }
-      - { label: Stripe Product ID, name: productId, widget: string, required: false, hint: "prod_… from Stripe dashboard" }
-      - { label: Stripe Price ID, name: priceId, widget: string, required: false, hint: "price_… from Stripe dashboard" }
+      - { label: Stripe Product ID, name: productId, widget: string, required: false, hint: "Filled in automatically a few seconds after saving — leave blank." }
+      - { label: Stripe Price ID, name: priceId, widget: string, required: false, hint: "Filled in automatically a few seconds after saving — leave blank." }
+      - label: Initial Stock
+        name: initialStock
+        widget: number
+        value_type: int
+        min: 0
+        default: 0
+        required: false
+        hint: "Used once, when Stripe IDs are first created. Editing this afterward does nothing — use the stock admin endpoint to restock."
       - label: Weight (oz)
         name: weightOz
         widget: number

@@ -85,6 +85,14 @@ section#pets {
 
 .mailinglist {
     display: inline-block;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+#subscribe,
+.formkit-background {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 /* Media Queries should be flat, not nested */
@@ -128,6 +136,8 @@ section#pets {
 .formkit-form {
     border: none !important;
     margin: auto;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .formkit-submit span {
