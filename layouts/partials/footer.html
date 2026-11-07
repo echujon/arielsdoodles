@@ -28,11 +28,11 @@
 
 <!-- FontAwesome JS -->
 {{ range .Site.Params.asset.fontawesome_js -}}
-<script type="text/javascript" src="{{ . | absURL }}"></script>
+<script type="text/javascript" src="{{ . | relURL }}"></script>
 {{- end }}
 
 {{range .Site.Params.asset.main_js -}}
-<script type="text/javascript" src="{{ . | absURL }}"></script>
+<script type="text/javascript" src="{{ . | relURL }}"></script>
 {{- end }}
 {{ $script := resources.Get "js/triptych-randomizer.js" }}
 {{ if $script }}
