@@ -6,6 +6,6 @@ layout: portfolio
 draft: false
 soldOut: false
 images:
-    image_1: "images/Cover.png"
-    image_2: "images/Back_Cover.png"
+    image_1: "images/2027_Front_Cover.png"
+    #image_2: "images/Back_Cover.png"
 ---

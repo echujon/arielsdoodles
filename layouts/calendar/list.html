@@ -28,6 +28,14 @@
         flex: 1;
     }
 
+    /* A single image (front cover only) shouldn't fill the whole width */
+    .calendar-image:only-child {
+        flex: 0 1 auto;
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
     .calendar-form-container {
         max-width: 500px;
         margin: 0 auto;
@@ -73,9 +81,9 @@
             <p><b>Thanks for your support! We have sold out of our 2026 Cat Calendars!!!</b></p>
             <p>Please subscribe to our <a href="#subscribe">mailing list</a> to get notified about our new products and upcoming events!</p>
             {{ else }}
-            <p>Reserve your pre-order 2027 Cat Calendar! Fill out the form below to reserve one or more calendars.</p>
-            <p>Each calendar will be 12" x 12" and cost $35 (not including shipping).</p>
-            <p><b>Reserve now to get your calendars for just $30 each — save $5 per calendar!</b></p>
+            <p><b>Reserve your 2027 Cat Calendar — no payment needed today!</b> Just fill out the form below to hold one or more calendars.</p>
+            <p>Each calendar will be 12" x 12" and cost $40 (not including shipping).</p>
+            <p><b>Reserve now to get your calendars for just $32 each — save $8 per calendar!</b></p>
             {{ end }}
         </div>
         {{ if not .Params.soldOut }}
