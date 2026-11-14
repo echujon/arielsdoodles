@@ -16,6 +16,7 @@
     - class (optional): CSS class(es) to apply to the <img> element
     - quality (optional): WebP quality (default: 85)
     - loading (optional): Loading attribute (default: "lazy")
+    - maxWidth (optional): Shrink the image to at most this many pixels wide (default: keep original width)
 */}}
 
 {{ $imagePath := .image }}
@@ -23,12 +24,15 @@
 {{ $class := .class | default "" }}
 {{ $quality := .quality | default 85 }}
 {{ $loading := .loading | default "lazy" }}
+{{ $maxWidth := .maxWidth | default 0 }}
 
 {{ if $imagePath }}
   {{ $img := resources.Get $imagePath }}
 
   {{ if $img }}
-    {{ $imgWebp := $img.Resize (printf "%dx webp q%d" $img.Width $quality) }}
+    {{ $width := $img.Width }}
+    {{ if and (gt $maxWidth 0) (gt $width $maxWidth) }}{{ $width = $maxWidth }}{{ end }}
+    {{ $imgWebp := $img.Resize (printf "%dx webp q%d" $width $quality) }}
     <picture>
       {{/* WebP source */}}
       <source srcset="{{ $imgWebp.RelPermalink }}" type="image/webp">
