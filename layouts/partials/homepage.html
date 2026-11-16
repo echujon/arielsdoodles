@@ -5,9 +5,10 @@
             {{ range .section_items }}
                 {{ $originalImage := resources.Get .image }}
                 {{ if $originalImage }}
-                    {{ $webpImage := $originalImage.Resize (printf "%dx webp q85" $originalImage.Width) }}
+                    {{ $webpImage := partial "capped-image.html" (dict "img" $originalImage "max" 1200 "format" "webp q85") }}
+                    {{ $fallbackImage := partial "capped-image.html" (dict "img" $originalImage "max" 1200) }}
                     {{ $processedItem := dict
-                        "image" $originalImage.RelPermalink
+                        "image" $fallbackImage.RelPermalink
                         "webp" $webpImage.RelPermalink
                         "link" .link
                         "itemTitle" .title 

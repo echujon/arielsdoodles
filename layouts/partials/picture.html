@@ -8,7 +8,8 @@
 {{ $isCarousel := .isCarousel | default false }}
 
 {{ if and $image $thumb }}
-{{ $imageWebp := $image.Resize (printf "%dx webp q85" $image.Width) }}
+{{/* Full-size view is capped so print-quality originals aren't published */}}
+{{ $imageWebp := partial "capped-image.html" (dict "img" $image "max" 1600 "format" "webp q85") }}
 {{if $isCarousel}}
 <img class="carousel-slide" src="{{ $imageWebp.RelPermalink }}" alt="Image">
 {{else}}
@@ -18,6 +19,7 @@
             "image" $thumbPath
             "alt" .title
             "quality" 85
+            "maxWidth" 1200
         ) }}
     </a>
     <div class="caption doodles-font">

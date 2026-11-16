@@ -10,17 +10,18 @@
 {{- if $image -}}
   <!-- DEBUG: Image found! -->
   {{- /* Convert the image to WebP */ -}}
-  {{- $webp := $image.Process "webp" -}}
+  {{- $webp := partial "capped-image.html" (dict "img" $image "max" 1000 "format" "webp") -}}
+  {{- $fallback := partial "capped-image.html" (dict "img" $image "max" 1000) -}}
 
   <picture>
     {{- /* Offer the WebP version first to modern browsers */ -}}
     <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
 
     {{- /* Offer the original format as a fallback for older browsers */ -}}
-    <source srcset="{{ $image.RelPermalink }}" type="{{ $image.MediaType }}" />
+    <source srcset="{{ $fallback.RelPermalink }}" type="{{ $fallback.MediaType }}" />
 
     {{- /* The img tag is the ultimate fallback and is required for accessibility */ -}}
-    <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}" />
+    <img src="{{ $fallback.RelPermalink }}" alt="{{ $alt }}" />
   </picture>
 {{- else -}}
   <!-- DEBUG: Image NOT found! -->

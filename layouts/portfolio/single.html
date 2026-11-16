@@ -1,0 +1,39 @@
+{{ define "main" }}
+<style>
+    .portfolio-back {
+        text-align: center;
+        margin: 0.5rem 0 0;
+        font-size: 1.4rem;
+    }
+
+    .portfolio-cta {
+        text-align: center;
+        margin: 2.5rem auto 3rem;
+    }
+</style>
+<section class="aling-center">
+    <div class="inner">
+        <h1 class="titlebar doodles-font">{{ .Title }}</h1>
+        <p class="portfolio-back doodles-font"><a href="{{ "portfolio/" | relURL }}">See All Work</a></p>
+    </div>
+</section>
+
+{{/* Each name in "galleries" matches a data/portfolio-<name>.yml file */}}
+{{ $multiple := gt (len .Params.galleries) 1 }}
+{{ range .Params.galleries }}
+  {{ with index site.Data (printf "portfolio-%s" .) }}
+    {{ $gallery := . }}
+    {{/* With one gallery, the page title already says what it is */}}
+    {{ if not $multiple }}{{ $gallery = merge . (dict "title" nil) }}{{ end }}
+    {{ partial "portfolio" $gallery }}
+  {{ else }}
+    <p style="color: red;">Missing data/portfolio-{{ . }}.yml</p>
+  {{ end }}
+{{ end }}
+
+{{ if .Params.commissionLink }}
+<div class="portfolio-cta">
+    <a href="{{ "commissions/" | relURL }}" class="button primary doodles-font">Get a portrait of your pet</a>
+</div>
+{{ end }}
+{{ end }}

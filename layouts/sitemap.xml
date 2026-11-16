@@ -1,9 +1,13 @@
+{{- /* Google needs full addresses, but baseURL is "/" so links stay relative.
+       Build them from the real domain instead. */ -}}
+{{- $siteURL := strings.TrimSuffix "/" (site.Params.siteURL | default "https://arielsdoodles.com") -}}
+{{- $skipLayouts := slice "checkout" "cancel" "success" -}}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {{- range .Data.Pages }}
-  {{- if not .Params.noindex }}
+  {{- range site.Pages }}
+  {{- if and (in (slice "home" "section" "page") .Kind) (not .Params.noindex) (not (in $skipLayouts .Layout)) }}
   <url>
-    <loc>{{ .Permalink }}</loc>
+    <loc>{{ $siteURL }}{{ .RelPermalink }}</loc>
     {{- if not .Lastmod.IsZero }}
     <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>
     {{- end }}

@@ -1,4 +1,5 @@
 ---
+description: "Get in touch with Ariel's Doodles about commissions, prints, calendars, or anything else."
 date: 2023-07-23T01:10:09-06:00
 draft: false
 ####################### Spotlight #########################

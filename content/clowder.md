@@ -1,4 +1,5 @@
 ---
+description: "Clowder: a deduction card game of cats, mice, and seasons for 2–4 players, with Versus and Co-op rules."
 date: 2025-08-02T01:10:09-06:00
 draft: false
 style: "style2 orient-right content-align-left image-position-center onscroll-image-fade-in"

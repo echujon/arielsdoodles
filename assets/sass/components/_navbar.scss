@@ -54,7 +54,8 @@
     position: fixed;
     top: 0;
     width: 100%;
-    + #wrapper {
+    /* "~" not "+": a <script> sits between the navbar and #wrapper */
+    ~ #wrapper {
         padding-top: var(--navbar-height, 60px);
     }
 }
@@ -419,5 +420,62 @@
     html:has(#navbar .nav-menu.active),
     html:has(#navbar .nav-menu.active) body {
         overflow: hidden;
+    }
+}
+
+/* ---------- Navbar while scrolling ---------- */
+
+@media (min-width: 851px) {
+    /* Desktop: shrink smoothly once the page is scrolled */
+    #navbar:not(.navbar-minimal) {
+        .logo,
+        .logo img,
+        .nav-banner,
+        .nav-text,
+        .cart-widget-desktop {
+            transition: all 0.25s ease;
+        }
+
+        &.nav-compact {
+            .logo {
+                padding-top: 0.35rem;
+            }
+
+            .logo img {
+                width: 3rem;
+                height: 3rem;
+                top: 0;
+            }
+
+            .nav-text {
+                padding-top: 0.2rem;
+            }
+
+            .nav-banner {
+                height: 2.4rem;
+            }
+
+            .cart-widget-desktop {
+                top: 1.85rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    /* Phones: slide away when scrolling down, back when scrolling up */
+    #navbar {
+        transition: transform 0.25s ease;
+    }
+
+    #navbar.nav-hidden {
+        transform: translateY(calc(-100% - 6px));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #navbar,
+    #navbar * {
+        transition: none !important;
     }
 }

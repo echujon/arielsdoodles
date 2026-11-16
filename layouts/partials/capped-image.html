@@ -1,0 +1,18 @@
+{{/*
+  Returns a copy of an image that is at most "max" pixels wide, so the
+  full-resolution original is never published on the site.
+
+  Usage:
+    {{ $small := partial "capped-image.html" (dict "img" $img "max" 1600 "format" "webp q85") }}
+
+  - img (required): image resource (from resources.Get)
+  - max (optional): maximum width in pixels (default 1600)
+  - format (optional): e.g. "webp q85"; leave empty to keep the original format
+*/}}
+{{ $img := .img }}
+{{ $max := .max | default 1600 }}
+{{ $width := $img.Width }}
+{{ if gt $width $max }}{{ $width = $max }}{{ end }}
+{{ $spec := printf "%dx" $width }}
+{{ with .format }}{{ $spec = printf "%s %s" $spec . }}{{ end }}
+{{ return $img.Resize $spec }}

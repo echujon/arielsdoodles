@@ -1,0 +1,19 @@
+# Search engines and AI search assistants are welcome.
+User-agent: *
+Disallow: /admin/
+Disallow: /shop/checkout/
+
+# AI training crawlers: please don't use this site's art to train AI models.
+# (AI *search* bots like OAI-SearchBot, ChatGPT-User, Claude-SearchBot,
+# Claude-User and PerplexityBot are still allowed by the rule above.)
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: meta-externalagent
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+Sitemap: https://arielsdoodles.com/sitemap.xml

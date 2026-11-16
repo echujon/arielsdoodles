@@ -3,11 +3,11 @@ triptych_sections:
   - title: "Gallery"
     section_items: 
        - image: "/images/gallery/fulls/chalkart/Chalk_Fairy.png"
-         link: "/portfolio/#chalkArt"
+         link: "/portfolio/chalk-art/"
        - image: "/images/gallery/fulls/commissions/pets/Rango_and_Flynn.png"
-         link: "/portfolio/#pets"
+         link: "/portfolio/pet-portraits/"
        - image: "/images/gallery/fulls/commissions/pets/Bentley_and_Beau.png"
-         link: "/portfolio/#pets"
+         link: "/portfolio/pet-portraits/"
   - title: "Commissions"
     section_items:
        - image: "/images/gallery/fulls/commissions/pets/Murphy_LittleRed_Topol.png"
@@ -22,8 +22,8 @@ triptych_sections:
   - title: "Other Cute Stuff"
     section_items:
        - image: "/images/gallery/fulls/cats/DnD/Barbarian.png"
-         link: "/portfolio/#dndCats" # Link to a specific page or filtered gallery
+         link: "/portfolio/dnd-kitties/" # Link to a specific page or filtered gallery
        - image: "/images/gallery/fulls/cats/DnD/Bard.png"
-         link: "/portfolio/#dndCats"
+         link: "/portfolio/dnd-kitties/"
        - image: "/images/gallery/fulls/coasters/calico.png"
-         link: "/portfolio/#catsInBoxes"
+         link: "/portfolio/cats-in-boxes/"

@@ -1,10 +1,11 @@
 <head>
-	<title>{{ .Site.Title }}</title>
+	{{/* Each page gets its own title and description for search results */}}
+	<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	{{ with .Site.Params.description}}
-	<meta name="description" content="{{.}}">
-	{{end}}
+	{{ with .Description | default .Site.Params.description }}
+	<meta name="description" content="{{ . }}">
+	{{ end }}
 	<meta name="author" content="">
 	{{ if .Site.Params.favicon }}
 	{{ partial "favicon" }}

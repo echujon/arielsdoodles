@@ -1,4 +1,5 @@
 ---
+description: "Commission a custom pet portrait from Ariel's Doodles: an 8\" × 8\" print plus a digital copy of your cat or dog."
 date: 2023-07-23T01:10:09-06:00
 draft: false
 style: "style2 orient-right content-align-left image-position-center onscroll-image-fade-in"

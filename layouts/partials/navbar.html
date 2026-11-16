@@ -34,14 +34,26 @@
         <li><a class="{{if .Params.highlight}}highlight{{ end }} {{if or (eq $currentPage.RelPermalink .URL) (eq $currentPage.CurrentSection.RelPermalink .URL)}}active{{ end }}" href="{{.URL}}">{{.Name}}</a>
         </li>
         {{else}}
-        <li class="dropdown-parent"><span class="dropdown" onclick="toggleDropdown()">Portfolio <i
+        {{/* Every other top-level item gets its "active" class from this
+             same check (current page, or current section, matches the
+             link's own URL) - the Portfolio dropdown never did, so it
+             (and whichever sub-page is open) never underlined on a
+             fresh page load, only after a click (see activateNavItem
+             in the script below). */}}
+        {{$portfolioActive := or (eq $currentPage.RelPermalink .URL) (eq $currentPage.CurrentSection.RelPermalink .URL)}}
+        <li class="dropdown-parent"><span class="dropdown{{if $portfolioActive}} active{{end}}" onclick="toggleDropdown()">Portfolio <i
                     class="fa fa-caret-down"></i></span>
             <ul class="dropdown-chooser" id="dropdown-content">
-                <li><a href="/portfolio/#pets">Pet Portraits</a></li>
-                <li><a href="/portfolio/#catsInBoxes">Cats in Boxes</a></li>
-                <li> <a href="/portfolio/#cats">Calendar Cats</a></li>
-                <li><a href="/portfolio/#dndCats">DnD Cats</a></li>
-                <li><a href="/portfolio/#chalkArt">Chalk Art</a></li>
+                {{$petPortraits := "/portfolio/pet-portraits/"}}
+                {{$catsInBoxes := "/portfolio/cats-in-boxes/"}}
+                {{$calendarCats := "/portfolio/calendar-cats/"}}
+                {{$dndKitties := "/portfolio/dnd-kitties/"}}
+                {{$chalkArt := "/portfolio/chalk-art/"}}
+                <li><a class="{{if eq $currentPage.RelPermalink $petPortraits}}active{{end}}" href="{{$petPortraits}}">Pet Portraits</a></li>
+                <li><a class="{{if eq $currentPage.RelPermalink $catsInBoxes}}active{{end}}" href="{{$catsInBoxes}}">Cats in Boxes</a></li>
+                <li> <a class="{{if eq $currentPage.RelPermalink $calendarCats}}active{{end}}" href="{{$calendarCats}}">Calendar Cats</a></li>
+                <li><a class="{{if eq $currentPage.RelPermalink $dndKitties}}active{{end}}" href="{{$dndKitties}}">DnD Cats</a></li>
+                <li><a class="{{if eq $currentPage.RelPermalink $chalkArt}}active{{end}}" href="{{$chalkArt}}">Chalk Art</a></li>
             </ul>
         </li>
         {{end}}
@@ -78,6 +90,8 @@
     const navMenu = document.querySelector(".nav-menu");
     if (hamburger && navMenu) {
         hamburger.addEventListener("click", () => {
+            // Make sure the navbar isn't slid away, so the menu lines up with the screen
+            navbar.classList.remove("nav-hidden");
             hamburger.classList.toggle("active");
             navMenu.classList.toggle("active");
         });
@@ -102,14 +116,38 @@
 
     };
 
+    let lastScrollY = window.pageYOffset;
+
     function stickyNav() {
-        // Keep page content from jumping when the navbar becomes fixed
-        document.documentElement.style.setProperty('--navbar-height', navbar.offsetHeight + 'px');
-        if (window.pageYOffset > sticky) {
+        const y = window.pageYOffset;
+
+        // Remember the FULL navbar height (before it shrinks) so the page
+        // content doesn't jump when the navbar becomes fixed.
+        if (!navbar.classList.contains("nav-compact")) {
+            document.documentElement.style.setProperty('--navbar-height', navbar.offsetHeight + 'px');
+        }
+
+        if (y > sticky) {
             navbar.classList.add("sticky");
         } else {
             navbar.classList.remove("sticky");
         }
+
+        // Desktop: shrink the navbar once the page is scrolled
+        navbar.classList.toggle("nav-compact", y > 10);
+
+        // Phones: hide when scrolling down, show again when scrolling up.
+        // Never hide while the hamburger menu is open.
+        const menuOpen = navMenu && navMenu.classList.contains("active");
+        const delta = y - lastScrollY;
+        if (menuOpen || y <= navbar.offsetHeight) {
+            navbar.classList.remove("nav-hidden");
+        } else if (delta > 5) {
+            navbar.classList.add("nav-hidden");
+        } else if (delta < -5) {
+            navbar.classList.remove("nav-hidden");
+        }
+        lastScrollY = y;
     }
 
     function selectNavItemByHash(hash) {

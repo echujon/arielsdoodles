@@ -1,0 +1,98 @@
+{{ define "main" }}
+<script>
+    // Old links like /portfolio/#pets now live on their own pages
+    (function () {
+        var moved = {
+            pets: "pet-portraits/",
+            catsInBoxes: "cats-in-boxes/",
+            cats: "calendar-cats/",
+            dndCats: "dnd-kitties/",
+            chalkArt: "chalk-art/"
+        };
+        var target = moved[location.hash.slice(1)];
+        if (target) location.replace("{{ "portfolio/" | relURL }}" + target);
+    })();
+</script>
+<style>
+    .portfolio-categories {
+        /* Centered rows, so a short last row sits in the middle */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        max-width: 64rem;
+        margin: 0 auto 4rem;
+        padding: 0 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .portfolio-card {
+        display: block;
+        flex: 0 1 17rem;
+        text-decoration: none;
+        border-bottom: none;
+        color: inherit;
+        text-align: center;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background: #fff;
+    }
+
+    /* Phones: one card per row, using the screen width */
+    @media (max-width: 600px) {
+        .portfolio-card {
+            flex-basis: 100%;
+            max-width: 22rem;
+        }
+    }
+
+    .portfolio-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    .portfolio-card img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+
+    .portfolio-card h2 {
+        margin: 1rem 0 0.25rem;
+        font-size: 1.4rem;
+    }
+
+    .portfolio-card p {
+        margin: 0 1rem 1.25rem;
+        font-size: 0.9rem;
+        color: #666;
+    }
+</style>
+<section class="aling-center">
+    <div class="inner">
+        <h1 class="titlebar doodles-font">{{ .Title }}</h1>
+    </div>
+</section>
+
+<div class="portfolio-categories">
+    {{ range .Pages.ByWeight }}
+    {{/* Cover = first picture of the page's first gallery */}}
+    {{ $cover := "" }}
+    {{ with index .Params.galleries 0 }}
+      {{ with index site.Data (printf "portfolio-%s" .) }}
+        {{ with index .pictures 0 }}{{ $cover = .thumb | default .image }}{{ end }}
+      {{ end }}
+    {{ end }}
+    <a class="portfolio-card" href="{{ .RelPermalink }}">
+        {{ with $cover }}
+        {{ partial "webpImage.html" (dict "image" . "alt" "" "quality" 85 "maxWidth" 800) }}
+        {{ end }}
+        <h2 class="doodles-font">{{ .Title }}</h2>
+        {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </a>
+    {{ end }}
+</div>
+{{ end }}
