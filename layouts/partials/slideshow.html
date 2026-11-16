@@ -50,6 +50,28 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
+    /* Smaller slider on laptops/tablets so the text beside it has room */
+    @media (max-width: 1300px) {
+        section.spotlight .slideshow-container,
+        .slideshow-container {
+            max-width: 30rem;
+            min-height: 30rem;
+        }
+
+        .slideshow-image-wrapper {
+            height: 30rem;
+            padding: 1.5rem;
+        }
+    }
+
+    /* When the page stacks (portrait), keep the slider centered */
+    @media (orientation: portrait) {
+        section.spotlight .slideshow-container {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+    }
+
     @media (max-width: 768px) {
         .slideshow-container {
             min-height: 400px;

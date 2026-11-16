@@ -47,6 +47,28 @@
         margin: 0 auto;
     }
 
+    /* 900px and narrower: slider on top, text + form underneath */
+    @media screen and (max-width: 900px) {
+        #commissions.spotlight {
+            -webkit-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        #commissions .content,
+        #commissions .actual-content {
+            width: 34rem;
+            max-width: 100%;
+            min-width: 0;
+        }
+
+        #commissions .slideshow-container {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+    }
+
     @media screen and (orientation:portrait) {
         #contact .image {
             top: 0rem;
