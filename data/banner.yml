@@ -15,7 +15,7 @@ button:
   label: "Check it out!"
   style: "doodles-font"
   link: "/portfolio"
-#landingBanner: "/images/CatBanner.png"
+landingBanner: "images/Reserve_Banner.png"
 link: "/calendar"
 id: "banner"
 image: "images/background.png"

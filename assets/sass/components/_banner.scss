@@ -992,4 +992,17 @@ section.calendar-banner {
 	margin-bottom: 8rem;
 }
 
+// Reserve banner: full width, edge to edge, no white border
+section.calendar-banner:has(.kickstarter-banner) {
+	padding: 0;
+
+	> a,
+	picture,
+	.kickstarter-banner {
+		display: block;
+		width: 100%;
+		max-width: none;
+	}
+}
+
 @include color-banner;

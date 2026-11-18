@@ -22,11 +22,12 @@
 	{{ if hugo.IsServer }}
 	{{ $style := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "scss/main.scss" . | toCSS (dict
 	"targetPath" "css/main.css" "outputStyle" "compressed" "enableSourceMap" false) }}
-	<link rel="stylesheet" href="{{ ($style).RelPermalink }}">
+	{{/* fingerprint = the file name changes whenever the CSS changes, so browsers never use a stale copy */}}
+	<link rel="stylesheet" href="{{ ($style | fingerprint).RelPermalink }}">
 	{{ else }}
 	{{ $style := resources.Get "sass/main.scss" | resources.ExecuteAsTemplate "scss/main.scss" . | toCSS (dict
 	"targetPath" "css/main.css" "enableSourceMap" false) }}
-	<link rel="stylesheet" href="{{ ($style | minify).RelPermalink }}">
+	<link rel="stylesheet" href="{{ ($style | minify | fingerprint).RelPermalink }}">
 	{{ end }}
 	{{ if hugo.IsServer }}
 	{{ $noscript := resources.Get "sass/noscript.scss" | resources.ExecuteAsTemplate "noscript.scss" . | toCSS (dict
