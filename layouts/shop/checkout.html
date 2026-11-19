@@ -44,9 +44,10 @@
         <label style="display:block; font-weight:600; margin-bottom:0.5rem; font-size:0.875rem;">Delivery</label>
         <div id="address-element"></div>
         <div id="shippingStatus" style="margin-top:0.5rem; font-size:0.8rem; color:#888;"></div>
-        <div id="shippingRateInline" style="display:none; margin-top:0.75rem; padding:0.75rem 1rem; background:#f0f9f0; border:1px solid #c3e6c3; border-radius:6px; font-size:0.9rem; color:#2a6e2a;">
-          Shipping: <span id="shippingRateInlineDisplay"></span>
-        </div>
+        <fieldset id="shippingRateInline" style="display:none; margin:0.75rem 0 0; padding:0.75rem 1rem; background:#f0f9f0; border:1px solid #c3e6c3; border-radius:6px; font-size:0.9rem; color:#2a6e2a;">
+          <legend style="font-weight:600; padding:0 0.25rem;">Shipping</legend>
+          <div id="shippingOptions"></div>
+        </fieldset>
       </div>
 
       <div style="margin-bottom:1.5rem;">
@@ -162,9 +163,103 @@
   loadingEl.style.display = 'none';
   formEl.style.display = 'block';
 
-  // When address is complete, calculate shipping — only if ZIP changed
+  // Shipping: the worker offers up to two options (cheapest, fastest). It
+  // re-quotes and sets the PaymentIntent amount for whichever id we send, so
+  // the price shown here always comes from the server.
   let shippingDebounce;
   let lastZip = null;
+  let lastAddress = null;
+  let selectedShippingId = 'cheapest';
+  let shippingRequestSeq = 0;
+
+  function renderShipping(data) {
+    const option = (data.options || []).find(o => o.id === data.selectedOptionId);
+    const estimate = data.deliveryEstimate || option?.deliveryEstimate || '';
+
+    // Order summary at top
+    const shippingEl = document.getElementById('checkoutShippingDisplay');
+    shippingEl.textContent = data.displayRate + ' ';
+    const note = document.createElement('span');
+    note.style.cssText = 'color:#999; font-size:0.8rem;';
+    note.textContent = [option?.service, estimate].filter(Boolean).join(' — ');
+    shippingEl.appendChild(note);
+    shippingEl.style.color = '#555';
+    shippingEl.style.fontStyle = 'normal';
+    document.getElementById('checkoutTotalRow').style.display = 'flex';
+    document.getElementById('checkoutTotal').textContent = '$' + (data.newTotal / 100).toFixed(2);
+
+    // Option picker below the address
+    const list = document.getElementById('shippingOptions');
+    list.replaceChildren();
+    for (const opt of data.options || []) {
+      const label = document.createElement('label');
+      label.style.cssText = 'display:flex; gap:0.5rem; align-items:flex-start; padding:0.35rem 0; cursor:pointer;';
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = 'shippingOption';
+      radio.value = opt.id;
+      radio.checked = opt.id === data.selectedOptionId;
+      radio.style.marginTop = '0.2rem';
+      radio.addEventListener('change', () => {
+        selectedShippingId = opt.id;
+        calculateShipping();
+      });
+      const text = document.createElement('span');
+      const tag = opt.cheapest && opt.fastest ? 'Cheapest & fastest' : opt.cheapest ? 'Cheapest' : 'Fastest';
+      const title = document.createElement('strong');
+      title.textContent = `${tag}: ${opt.displayRate}`;
+      const detail = document.createElement('span');
+      detail.style.cssText = 'display:block; font-size:0.8rem; color:#4a7a4a;';
+      detail.textContent = [opt.service, opt.deliveryEstimate].filter(Boolean).join(' — ');
+      text.append(title, detail);
+      label.append(radio, text);
+      list.appendChild(label);
+    }
+    document.getElementById('shippingRateInline').style.display = 'block';
+  }
+
+  async function calculateShipping() {
+    if (!lastAddress) return;
+    const seq = ++shippingRequestSeq;
+    const customerEmail = document.getElementById('customerEmail').value || undefined;
+    shippingStatus.textContent = 'Calculating shipping…';
+    // Don't let the customer pay while the amount is being changed.
+    submitBtn.disabled = true;
+    try {
+      const res = await fetch(`${workerUrl}/calculate-shipping`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          paymentIntentId,
+          destinationZIPCode: lastAddress.address.postal_code,
+          destinationAddress: lastAddress.address,
+          shippingName: lastAddress.name,
+          customerEmail,
+          shippingOptionId: selectedShippingId,
+        }),
+      });
+      const data = await res.json();
+      if (seq !== shippingRequestSeq) return; // a newer request superseded this one
+
+      if (res.status === 409 && selectedShippingId !== 'cheapest') {
+        // The chosen option isn't offered for this quote any more.
+        selectedShippingId = 'cheapest';
+        shippingStatus.textContent = '';
+        return calculateShipping();
+      }
+      if (!res.ok) throw new Error(data.error);
+
+      renderShipping(data);
+      shippingStatus.textContent = '';
+    } catch (err) {
+      if (seq !== shippingRequestSeq) return;
+      shippingStatus.textContent = 'Could not calculate shipping. You can still proceed.';
+    } finally {
+      if (seq === shippingRequestSeq) submitBtn.disabled = false;
+    }
+  }
+
+  // When address is complete, calculate shipping — only if ZIP changed
   addressEl.on('change', (e) => {
     if (!e.complete) return;
     clearTimeout(shippingDebounce);
@@ -173,36 +268,8 @@
       const zip = value?.address?.postal_code;
       if (!zip || zip === lastZip) return;
       lastZip = zip;
-
-      const customerEmail = document.getElementById('customerEmail').value || undefined;
-      shippingStatus.textContent = 'Calculating shipping…';
-      try {
-        const res = await fetch(`${workerUrl}/calculate-shipping`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ paymentIntentId, destinationZIPCode: zip, destinationAddress: value.address, shippingName: value.name, customerEmail, items, subtotal }),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error);
-
-        const estimate = data.deliveryEstimate ? `(${data.deliveryEstimate})` : '(1–3 business days)';
-
-        // Update order summary at top
-        const shippingEl = document.getElementById('checkoutShippingDisplay');
-        shippingEl.innerHTML = `${data.displayRate} <span style="color:#999; font-size:0.8rem;">${estimate}</span>`;
-        shippingEl.style.color = '#555';
-        shippingEl.style.fontStyle = 'normal';
-        document.getElementById('checkoutTotalRow').style.display = 'flex';
-        document.getElementById('checkoutTotal').textContent = '$' + (data.newTotal / 100).toFixed(2);
-
-        // Show inline rate below address
-        document.getElementById('shippingRateInlineDisplay').textContent = `${data.displayRate} ${estimate}`;
-        document.getElementById('shippingRateInline').style.display = 'block';
-
-        shippingStatus.textContent = '';
-      } catch (err) {
-        shippingStatus.textContent = 'Could not calculate shipping. You can still proceed.';
-      }
+      lastAddress = value;
+      calculateShipping();
     }, 800);
   });
 
