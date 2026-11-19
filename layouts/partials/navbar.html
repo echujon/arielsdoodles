@@ -11,6 +11,12 @@
         {{ $bannerImg := ($banner.Crop (printf "%dx%d Center" (int $cropW) (int $cropH))).Resize "720x webp q90" }}
         <span class="nav-text"><img class="nav-banner" src="{{ $bannerImg.RelPermalink }}" width="{{ $bannerImg.Width }}" height="{{ $bannerImg.Height }}" alt="Ariel's Doodles"></span>
     </a>
+    {{ if and $isCheckout site.Params.enableShop }}
+    <!-- Checkout: cart icon goes to the cart page -->
+    <div class="cart-widget-checkout">
+        {{ partial "cartWidget" . }}
+    </div>
+    {{ end }}
     {{ if not $isCheckout }}
     <!-- Shopping Cart Widget (Mobile - Always Visible) -->
     {{ if site.Params.enableShop }}
@@ -118,6 +124,21 @@
 
     let lastScrollY = window.pageYOffset;
 
+    // True when the cart badge shows one or more items
+    function cartHasItems() {
+        const badge = document.querySelector(".cart-widget-mobile .cart-count");
+        return !!badge && parseInt(badge.textContent, 10) > 0;
+    }
+
+    // If something is added to the cart while the navbar is hidden, bring it back
+    (function () {
+        const badge = document.querySelector(".cart-widget-mobile .cart-count");
+        if (!badge || !window.MutationObserver) return;
+        new MutationObserver(function () {
+            if (cartHasItems()) navbar.classList.remove("nav-hidden");
+        }).observe(badge, { childList: true, characterData: true, subtree: true });
+    })();
+
     function stickyNav() {
         const y = window.pageYOffset;
 
@@ -137,10 +158,11 @@
         navbar.classList.toggle("nav-compact", y > 10);
 
         // Phones: hide when scrolling down, show again when scrolling up.
-        // Never hide while the hamburger menu is open.
+        // Never hide while the hamburger menu is open, or while the cart
+        // has something in it (so the cart is always one tap away).
         const menuOpen = navMenu && navMenu.classList.contains("active");
         const delta = y - lastScrollY;
-        if (menuOpen || y <= navbar.offsetHeight) {
+        if (menuOpen || cartHasItems() || y <= navbar.offsetHeight) {
             navbar.classList.remove("nav-hidden");
         } else if (delta > 5) {
             navbar.classList.add("nav-hidden");

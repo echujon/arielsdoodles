@@ -1,7 +1,167 @@
 {{ define "main" }}
+<style>
+  .checkout-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .checkout-header h2 {
+    margin: 0;
+  }
+
+  /* Opens the cart so items/quantities can be changed */
+  .checkout-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: auto;
+    line-height: 1.2;
+    padding: 0.45rem 0.9rem;
+    background: #fff;
+    color: #2a6e2a !important;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    box-shadow: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: normal;
+    text-transform: none;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .checkout-edit:hover {
+    background: #f0f9f0;
+  }
+
+  /* Phones only: total with an expandable item list above Pay Now */
+  .checkout-mobile-total {
+    display: none;
+  }
+
+  @media (max-width: 850px) {
+    .checkout-mobile-total {
+      display: block;
+      margin: 0 0 1rem;
+      background: #f9f9f9;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .checkout-mobile-total summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      list-style: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .checkout-mobile-total summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .checkout-mobile-total .mt-amount {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #2a9d2a;
+    }
+
+    /* Dropdown arrow next to the price; flips when open */
+    .checkout-mobile-total .mt-caret {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: #2a6e2a;
+      transition: transform 0.2s ease;
+    }
+
+    .checkout-mobile-total[open] .mt-caret {
+      transform: rotate(180deg);
+    }
+
+    .checkout-mobile-total .mt-body {
+      padding: 0 1rem 0.85rem;
+    }
+
+    .checkout-mobile-total .mt-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    .checkout-mobile-total .mt-sep {
+      border-top: 1px solid #e0e0e0;
+      padding-top: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .checkout-mobile-total .mt-muted {
+      color: #999;
+      font-style: italic;
+    }
+  }
+
+  /* Shipping choices: the theme hides radio buttons, so draw a visible
+     check box. Still works as "pick one" (choosing one unticks the other). */
+  #shippingOptions input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    float: none;
+    opacity: 1;
+    z-index: auto;
+    flex: 0 0 auto;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin: 0.15rem 0 0;
+    border: 2px solid #4a7a4a;
+    border-radius: 4px;
+    background: #fff;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+  }
+
+  #shippingOptions input[type="radio"]::after {
+    content: "";
+    width: 0.35rem;
+    height: 0.65rem;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: translateY(-1px) rotate(45deg);
+    opacity: 0;
+  }
+
+  #shippingOptions input[type="radio"]:checked {
+    background: #4CAF50;
+    border-color: #4CAF50;
+  }
+
+  #shippingOptions input[type="radio"]:checked::after {
+    opacity: 1;
+  }
+
+  #shippingOptions input[type="radio"]:focus-visible {
+    outline: 2px solid #2a6e2a;
+    outline-offset: 2px;
+  }
+</style>
 <section class="wrapper style1">
   <div class="inner" style="width: 100%; max-width: 520px; margin: 0 auto; padding: 2rem 1rem; box-sizing: border-box;">
-    <h2 style="margin-bottom: 1.5rem;">Checkout</h2>
+    <div class="checkout-header">
+      <h2>Checkout</h2>
+      <a class="checkout-edit" href="/shop/cart/">
+        <i class="fas fa-pen" aria-hidden="true"></i> Edit
+      </a>
+    </div>
 
     <!-- Order summary -->
     <div style="background:#f9f9f9; border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.5rem;">
@@ -55,7 +215,20 @@
         <div id="payment-element"></div>
       </div>
 
-      <button id="submitBtn" type="submit" style="width:100%; padding:0.875rem; background:#4CAF50; color:white !important; border:none; border-radius:6px; font-size:1rem; font-weight:600; cursor:pointer; transition:background 0.2s;">
+      <!-- Phones: total + expandable item list right above Pay Now -->
+      <details class="checkout-mobile-total" id="mobileTotal">
+        <summary>
+          <span class="mt-label">Order Overview</span>
+          <span class="mt-amount"><span id="mobileTotalAmount">$0.00</span><span class="mt-caret" aria-hidden="true">▼</span></span>
+        </summary>
+        <div class="mt-body">
+          <div id="mobileTotalItems"></div>
+          <div class="mt-row mt-sep"><span>Subtotal</span><span id="mobileSubtotal">$0.00</span></div>
+          <div class="mt-row"><span>Shipping</span><span id="mobileShipping" class="mt-muted">Enter shipping address</span></div>
+        </div>
+      </details>
+
+      <button id="submitBtn" type="submit" style="display:block; width:100%; max-width:none; height:auto; line-height:1.2; margin:0 auto; padding:0.875rem; text-align:center; background:#4CAF50; color:white !important; border:none; border-radius:6px; font-size:1rem; font-weight:600; cursor:pointer; transition:background 0.2s;">
         Pay Now
       </button>
       <p style="text-align:center; color:#999; font-size:0.8rem; margin-top:0.75rem;">Powered by Stripe · Secure checkout</p>
@@ -100,6 +273,15 @@
   const stored = localStorage.getItem('arielsdoodles_cart');
   const cart = stored ? JSON.parse(stored) : [];
 
+  // Coming back with the browser's Back button (e.g. after editing on the
+  // cart page) can show a saved copy of this page. If the cart changed,
+  // reload so the summary and the payment amount match.
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted && localStorage.getItem('arielsdoodles_cart') !== stored) {
+      location.reload();
+    }
+  });
+
   if (cart.length === 0) {
     loadingEl.textContent = 'Your cart is empty.';
     return;
@@ -111,11 +293,20 @@
   itemsEl.innerHTML = cart.map(item => {
     subtotal += item.price * item.quantity;
     return `<div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; font-size:0.9rem;">
-      <span>${item.name}${item.quantity > 1 ? ' ×' + item.quantity : ''}</span>
+      <span>${escapeHtml(item.name)}${item.quantity > 1 ? ' ×' + escapeHtml(item.quantity) : ''}</span>
       <span>$${((item.price * item.quantity) / 100).toFixed(2)}</span>
     </div>`;
   }).join('');
-  document.getElementById('checkoutSubtotal').textContent = '$' + (subtotal / 100).toFixed(2);
+  const subtotalText = '$' + (subtotal / 100).toFixed(2);
+  document.getElementById('checkoutSubtotal').textContent = subtotalText;
+
+  // Phone total above Pay Now: same items, subtotal until shipping is known
+  document.getElementById('mobileTotalItems').innerHTML = cart.map(item =>
+    `<div class="mt-row"><span>${escapeHtml(item.name)}${item.quantity > 1 ? ' ×' + escapeHtml(item.quantity) : ''}</span>` +
+    `<span>$${((item.price * item.quantity) / 100).toFixed(2)}</span></div>`
+  ).join('');
+  document.getElementById('mobileSubtotal').textContent = subtotalText;
+  document.getElementById('mobileTotalAmount').textContent = subtotalText;
 
   // Create PaymentIntent on worker (Turnstile verified on submit instead)
   const items = cart.map(i => ({ priceId: i.priceId, quantity: i.quantity }));
@@ -188,6 +379,12 @@
     document.getElementById('checkoutTotalRow').style.display = 'flex';
     document.getElementById('checkoutTotal').textContent = '$' + (data.newTotal / 100).toFixed(2);
 
+    // Phone total above Pay Now
+    const mobileShipping = document.getElementById('mobileShipping');
+    mobileShipping.textContent = data.displayRate;
+    mobileShipping.classList.remove('mt-muted');
+    document.getElementById('mobileTotalAmount').textContent = '$' + (data.newTotal / 100).toFixed(2);
+
     // Option picker below the address
     const list = document.getElementById('shippingOptions');
     list.replaceChildren();
@@ -199,7 +396,6 @@
       radio.name = 'shippingOption';
       radio.value = opt.id;
       radio.checked = opt.id === data.selectedOptionId;
-      radio.style.marginTop = '0.2rem';
       radio.addEventListener('change', () => {
         selectedShippingId = opt.id;
         calculateShipping();

@@ -1,0 +1,85 @@
+{{ define "main" }}
+<style>
+  section.wrapper .inner.cart-page {
+    width: 100%;
+    max-width: 520px !important;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+  }
+
+  .cart-page h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .cart-page .cart-footer {
+    margin-top: 1.5rem;
+    border: none;
+    border-radius: 8px;
+  }
+
+  .cart-page .cart-actions .checkout-button {
+    width: 100% !important;
+    max-width: none;
+    height: auto;
+    line-height: 1.2;
+    padding: 0.875rem;
+    font-size: 1rem;
+  }
+
+  /* Bigger item pictures than the pop-up cart (60px there) */
+  .cart-page .cart-item {
+    grid-template-columns: 96px 1fr;
+    align-items: center;
+  }
+
+  .cart-page .cart-item-image {
+    width: 96px;
+    height: 96px;
+  }
+
+  /* Center the item info (name, price, quantity); the picture stays left */
+  .cart-page .cart-item-details {
+    align-items: center;
+    text-align: center;
+  }
+
+  .cart-page .cart-item-quantity {
+    align-self: center;
+  }
+
+  /* Items without a picture: let the info use the whole row */
+  .cart-page .cart-item:not(:has(.cart-item-image)) .cart-item-details {
+    grid-column: 1 / -1;
+  }
+
+  .cart-page-continue {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+</style>
+<section class="wrapper style1">
+  <div class="inner cart-page">
+    <h2>Your Cart</h2>
+
+    {{/* cart.js fills every ".cart-items" box and ".cart-total" on the page */}}
+    <div class="cart-items" id="cartPageItems">
+      <p class="empty-cart">Your cart is empty</p>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span>Subtotal:</span>
+        <span class="cart-total">$0.00</span>
+      </div>
+      <div class="cart-actions">
+        <button class="checkout-button" onclick="proceedToCheckout()">Checkout</button>
+      </div>
+    </div>
+
+    <a class="cart-page-continue" href="/shop/">Continue shopping</a>
+  </div>
+</section>
+{{ end }}

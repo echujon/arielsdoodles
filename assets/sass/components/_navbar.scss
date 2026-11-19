@@ -43,6 +43,25 @@
 #navbar.navbar-minimal {
     display: flex;
     justify-content: center;
+    align-items: center;
+
+    /* Checkout: cart icon on the right, level with the logo */
+    .cart-widget-checkout {
+        position: absolute;
+        right: calc(.55rem + .53rem + 3px);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+/* On the checkout and cart pages the cart icon is a link: keep it black
+   (phone menu links are white) and don't float it like menu links */
+#navbar a.cart-widget,
+#navbar a.cart-widget:hover {
+    float: none;
+    color: #000 !important;
+    border-bottom: none;
+    text-decoration: none;
 
     .nav-title {
         float: none;

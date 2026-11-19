@@ -1,7 +1,7 @@
 {{- /* Google needs full addresses, but baseURL is "/" so links stay relative.
        Build them from the real domain instead. */ -}}
 {{- $siteURL := strings.TrimSuffix "/" (site.Params.siteURL | default "https://arielsdoodles.com") -}}
-{{- $skipLayouts := slice "checkout" "cancel" "success" -}}
+{{- $skipLayouts := slice "checkout" "cancel" "success" "cart" -}}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {{- range site.Pages }}

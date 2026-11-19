@@ -1,7 +1,14 @@
-{{- /* Shopping Cart Widget */ -}}
+{{- /* Shopping Cart Widget
+     On the checkout and cart pages the icon goes to the cart page;
+     everywhere else it opens the cart pop-up. */ -}}
+{{- $toCartPage := in (slice "checkout" "cart") .Layout -}}
+{{- if $toCartPage }}
+<a class="cart-widget" id="cartWidget" href="/shop/cart/" aria-label="View cart">
+{{- else }}
 <div class="cart-widget" id="cartWidget" onclick="toggleCart()">
+{{- end }}
   <div class="cart-icon">
     <i class="fas fa-shopping-cart"></i>
     <span class="cart-count" id="cartCount">0</span>
   </div>
-</div>
+{{ if $toCartPage }}</a>{{ else }}</div>{{ end }}
