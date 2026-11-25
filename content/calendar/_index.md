@@ -8,5 +8,5 @@ draft: false
 soldOut: false
 images:
     image_1: "images/2027_Front_Cover.png"
-    #image_2: "images/Back_Cover.png"
+    image_2: "images/Back_Cover_2027.png"
 ---
