@@ -156,7 +156,7 @@
 </style>
 
 <div class="form">
-    <form class="doodles-font google-form" id="{{ .formId | default `contactForm` }}">
+    <form class="doodles-font google-form" id="{{ .formId | default `contactForm` }}" data-success-message="{{ .successMessage | default `Thank you for your submission!` }}">
 
         {{/* Custom fields or default fields */}}
         {{ $fields := .fields }}
@@ -233,6 +233,7 @@
                         {{ with .max }}max="{{ . }}"{{ end }}
                         {{ with .pattern }}pattern="{{ . }}"{{ end }}
                         {{ with .value }}value="{{ . }}"{{ end }}
+                        {{ if eq .type "number" }}step="1" inputmode="numeric"{{ end }}
                     />
                 {{ end }}
             {{ end }}
@@ -261,6 +262,8 @@
     var turnstileVerified = true; // Turnstile disabled temporarily
     const WORKER_URL = "{{.}}";
     const FORM_ID = "{{ $.formId | default `contactForm` }}";
+    // Shown after a successful send; pages set it with "successMessage" (data-success-message on the form)
+    const SUCCESS_MESSAGE = document.getElementById(FORM_ID).dataset.successMessage;
 
     function showMessage(message, isError = false) {
         let form = document.querySelector(".form");
@@ -278,6 +281,18 @@
             document.getElementById(FORM_ID).style.display = 'none';
         }
     }
+
+    // Number fields (e.g. "How many calendars?") take whole numbers only:
+    // block the minus sign, plus sign, decimal point and "e"
+    document.querySelectorAll('#' + FORM_ID + ' input[type="number"]').forEach(function (input) {
+        input.addEventListener('keydown', function (e) {
+            if (['-', '+', 'e', 'E', '.', ','].includes(e.key)) e.preventDefault();
+        });
+        input.addEventListener('paste', function (e) {
+            const text = (e.clipboardData || window.clipboardData).getData('text');
+            if (!/^\d+$/.test(text.trim())) e.preventDefault();
+        });
+    });
 
     document.getElementById(FORM_ID).addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -311,7 +326,7 @@
             const result = await response.json();
 
             if (result.success) {
-                showMessage('Thank you for your submission!');
+                showMessage(SUCCESS_MESSAGE);
             } else {
                 showMessage(result.error || 'Submission failed. Please try again.', true);
                 submitBtn.disabled = false;

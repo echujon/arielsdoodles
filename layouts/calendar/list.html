@@ -1,4 +1,6 @@
 {{ define "main" }}
+{{- /* Calendar year, set by "year" in content/calendar/_index.md */ -}}
+{{- $year := .Params.year -}}
 <style>
 .calendar-images-container {
     display: flex;
@@ -56,7 +58,7 @@
             <div class="calendar-image">
                 {{ partial "webpImage.html" (dict
                     "image" .
-                    "alt" "2027 Cat Calendar Cover"
+                    "alt" (printf "%v Cat Calendar Cover" $year)
                     "class" "cat-calendar-preorder-image"
                     "quality" 90
                     "maxWidth" 1280
@@ -67,7 +69,7 @@
             <div class="calendar-image">
                 {{ partial "webpImage.html" (dict
                     "image" .
-                    "alt" "2027 Cat Calendar Back Cover"
+                    "alt" (printf "%v Cat Calendar Back Cover" $year)
                     "class" "cat-calendar-preorder-image"
                     "quality" 90
                     "maxWidth" 1280
@@ -80,12 +82,15 @@
         {{ end }}
         <div class="calendar-description">
             {{ if .Params.soldOut }}
-            <p><b>Thanks for your support! We have sold out of our 2026 Cat Calendars!!!</b></p>
+            <p><b>Thanks for your support! We have sold out of our {{ $year }} Cat Calendars!!!</b></p>
             <p>Please subscribe to our <a href="#subscribe">mailing list</a> to get notified about our new products and upcoming events!</p>
             {{ else }}
-            <p><b>Reserve your 2027 Cat Calendar — no payment needed today!</b> Just fill out the form below to hold one or more calendars.</p>
+            <p><b>Reserve your {{ $year }} Cat Calendar — no payment needed today!</b> Just fill out the form below to hold one or more calendars.</p>
             <p>Each calendar will be 12" x 12" and cost $40 (not including shipping).</p>
             <p><b>Reserve now to get your calendars for just $32 each — save $8 per calendar!</b></p>
+            {{ with .Params.reservationEnds }}{{ $ends := time.AsTime . }}
+            <p><b>Reservations end {{ $ends.Format "January" }} {{ humanize $ends.Day }}.</b></p>
+            {{ end }}
             {{ end }}
         </div>
         {{ if not .Params.soldOut }}
@@ -100,9 +105,10 @@
         }}
 
         {{/* Call contact form partial with custom configuration */}}
-        {{ partial "contactForm" (dict
+        {{ partial "form" (dict
             "fields" $calendarFields
             "submitText" "Reserve Calendar(s)"
+            "successMessage" .Params.confirmationMessage
             "workerURL" site.Params.workerURL
             "skipTurnstile" true
         ) }}

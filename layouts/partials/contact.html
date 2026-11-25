@@ -96,7 +96,7 @@
             {{ $formContent := dict "id" .id}}
             {{$formContent = merge $formContent .}}
             {{if .showForm}}
-            {{partial "contactForm" $formContent}}
+            {{partial "form" $formContent}}
             {{end}}
         </div>
         {{ with .image }}

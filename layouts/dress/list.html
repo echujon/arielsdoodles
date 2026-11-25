@@ -20,7 +20,7 @@
                 (dict "name" "message" "label" "Any other comments?" "type" "textarea" "rows" 3)
             }}
 
-            {{ partial "contactForm" (dict
+            {{ partial "form" (dict
                 "fields" $dressFields
                 "submitText" "Submit Interest"
                 "workerURL" site.Params.workerURL
